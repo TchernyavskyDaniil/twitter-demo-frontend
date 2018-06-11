@@ -1,2 +1,3 @@
 # twitter-demo-frontend
-erodionov course
+
+Something cool  
