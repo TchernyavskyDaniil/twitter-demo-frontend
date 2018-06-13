@@ -1,11 +1,6 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import styled from "styled-components";
-
-const Des = styled.button`
-  width: 80px;
-`;
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 class App extends Component {
   render() {
