@@ -13,8 +13,6 @@ const Nav = styled.nav`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 11%;
-  padding-right: 11%;
   padding-top: 10px;
   padding-bottom: 10px;
 `;
@@ -113,38 +111,40 @@ const Tweet = styled.button`
 
 export default () => {
   return (
-    <Nav>
-      <BreadCrumbs>
-        <Home>
-          <CrumbSvg alt="Home" src={home} />
-          <CrumbText>Home</CrumbText>
-        </Home>
-        <Moments>
-          <CrumbSvg alt="Moments" src={moments} />
-          <CrumbText>Moments</CrumbText>
-        </Moments>
-        <Notifications>
-          <CrumbSvg alt="Notifications" src={notifications} />
-          <CrumbText>Notifications</CrumbText>
-        </Notifications>
-        <Messages>
-          <CrumbSvg alt="Messages" src={messages} />
-          <CrumbText>Messages</CrumbText>
-        </Messages>
-      </BreadCrumbs>
-      <TwitterSvg alt="Twitter logo" src={twitterLogo} />
-      <ActionsContainer>
-        <SearchContainer>
-          <SearchInput
-            type="text"
-            id="search-input"
-            placeholder="Search Twitter"
-          />
-          <Search />
-        </SearchContainer>
-        <Avatar />
-        <Tweet>Tweet</Tweet>
-      </ActionsContainer>
-    </Nav>
+    <div className="container">
+      <Nav>
+        <BreadCrumbs>
+          <Home>
+            <CrumbSvg alt="Home" src={home} />
+            <CrumbText>Home</CrumbText>
+          </Home>
+          <Moments>
+            <CrumbSvg alt="Moments" src={moments} />
+            <CrumbText>Moments</CrumbText>
+          </Moments>
+          <Notifications>
+            <CrumbSvg alt="Notifications" src={notifications} />
+            <CrumbText>Notifications</CrumbText>
+          </Notifications>
+          <Messages>
+            <CrumbSvg alt="Messages" src={messages} />
+            <CrumbText>Messages</CrumbText>
+          </Messages>
+        </BreadCrumbs>
+        <TwitterSvg alt="Twitter logo" src={twitterLogo} />
+        <ActionsContainer>
+          <SearchContainer>
+            <SearchInput
+              type="text"
+              id="search-input"
+              placeholder="Search Twitter"
+            />
+            <Search />
+          </SearchContainer>
+          <Avatar />
+          <Tweet>Tweet</Tweet>
+        </ActionsContainer>
+      </Nav>
+    </div>
   );
 };

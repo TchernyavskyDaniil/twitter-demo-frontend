@@ -8,10 +8,8 @@ class App extends Component {
       <BrowserRouter>
         <div>
           {/*TODO Переделать?*/}
-          <Switch>
-            <Route exact path="/EveryInteract" component={Profile} />
-            <Redirect from="/" to="/EveryInteract"/>
-          </Switch>
+          <Redirect from="/" to="/EveryInteract"/>
+          <Route exact path="/EveryInteract" component={Profile} />
         </div>
       </BrowserRouter>
     );

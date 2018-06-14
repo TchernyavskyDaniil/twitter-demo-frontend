@@ -13,7 +13,7 @@ const ProfileCanopy = styled.img`
 
 const ProfileInfoContainer = styled.div`
   display: grid;
-  grid-template-columns: 300px 1fr 1fr;
+  grid-template-columns: 265px 1fr 1fr;
   min-height: 59px;
   position: relative;
   align-items: center;
@@ -39,6 +39,7 @@ const ProfileInfo = styled.div`
   flex-direction: row;
   min-width: 200px;
   justify-content: space-between;
+  padding-left: 18px;
 `;
 
 const Info = styled.div`
@@ -47,6 +48,7 @@ const Info = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 44px;
+  min-width: 75px;
 `;
 
 const Text = styled.span`
@@ -95,7 +97,7 @@ const Dropdown = styled.div`
 
 export default () => {
   return (
-    <div>
+    <header>
       <Nav />
       <ProfileCanopy alt="Profile Image" src={bitmap} />
       <div className="container">
@@ -153,6 +155,6 @@ export default () => {
           </UserActions>
         </ProfileInfoContainer>
       </div>
-    </div>
+    </header>
   );
 }
