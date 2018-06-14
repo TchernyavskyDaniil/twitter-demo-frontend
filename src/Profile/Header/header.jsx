@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Nav from "./Nav/nav";
 import bitmap from "./bitmap.jpg";
-import avatar from "./Nav/avatar.svg";
 import dotted from "./dotted.svg";
 
 const ProfileCanopy = styled.img`
@@ -23,8 +22,8 @@ const AvatarContainer = styled.div``;
 
 const Avatar = styled.button`
   position: absolute;
-  background-image: url(${avatar});
-  border-radius: 100px; 
+  background-image: url(${"/avatar.svg"});
+  border-radius: 100px;
   width: 207px;
   height: 207px;
   background-repeat: no-repeat;
@@ -56,7 +55,7 @@ const Text = styled.span`
   font-weight: bold;
   line-height: 21px;
   letter-spacing: 0.01px;
-  color: #707E88;
+  color: #707e88;
 `;
 
 const SubText = Text.extend`
@@ -73,8 +72,8 @@ const UserActions = styled.div`
 const Follow = styled.button`
   padding: 9px 27px;
   border-radius: 100px;
-  border: 1px solid #1DA1F2;
-  color: #1DA1F2;
+  border: 1px solid #1da1f2;
+  color: #1da1f2;
 `;
 
 const Dropdown = styled.div`
@@ -84,7 +83,7 @@ const Dropdown = styled.div`
   font-weight: bold;
   font-size: 14px;
   line-height: 16px;
-  
+
   &:before {
     content: "";
     background-image: url(${dotted});
@@ -107,54 +106,32 @@ export default () => {
           </AvatarContainer>
           <ProfileInfo>
             <Info>
-              <Text>
-                Tweets
-              </Text>
-              <SubText>
-                8,058
-              </SubText>
+              <Text>Tweets</Text>
+              <SubText>8,058</SubText>
             </Info>
             <Info>
-              <Text>
-                Following
-              </Text>
-              <SubText>
-                721
-              </SubText>
+              <Text>Following</Text>
+              <SubText>721</SubText>
             </Info>
             <Info>
-              <Text>
-                Followers
-              </Text>
-              <SubText>
-                1,815
-              </SubText>
+              <Text>Followers</Text>
+              <SubText>1,815</SubText>
             </Info>
             <Info>
-              <Text>
-                Likes
-              </Text>
-              <SubText>
-                460
-              </SubText>
+              <Text>Likes</Text>
+              <SubText>460</SubText>
             </Info>
             <Info>
-              <Text>
-                Lists
-              </Text>
-              <SubText>
-                2
-              </SubText>
+              <Text>Lists</Text>
+              <SubText>2</SubText>
             </Info>
           </ProfileInfo>
           <UserActions>
-            <Follow>
-              Follow
-            </Follow>
+            <Follow>Follow</Follow>
             <Dropdown />
           </UserActions>
         </ProfileInfoContainer>
       </div>
     </header>
   );
-}
+};

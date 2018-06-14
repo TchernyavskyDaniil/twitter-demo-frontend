@@ -8,7 +8,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           {/*TODO Переделать?*/}
-          <Redirect from="/" to="/EveryInteract"/>
+          <Redirect from="/" to="/EveryInteract" />
           <Route exact path="/EveryInteract" component={Profile} />
         </div>
       </BrowserRouter>

@@ -1,10 +1,10 @@
 import React from "react";
 import InfoPerson from "./InfoPerson/information";
-import Posts from "./Posts/posts"
+import Posts from "./Posts/posts";
 import styled from "styled-components";
 
 const Container = styled.div`
-  background-color: #E6ECF0;
+  background-color: #e6ecf0;
   width: 100%;
 `;
 
@@ -26,5 +26,5 @@ export default () => {
         </div>
       </Container>
     </div>
-  )
-}
+  );
+};

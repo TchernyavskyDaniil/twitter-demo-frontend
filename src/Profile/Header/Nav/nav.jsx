@@ -6,7 +6,6 @@ import notifications from "./notifications.svg";
 import messages from "./messages.svg";
 import twitterLogo from "./twitter.svg";
 import search from "./search.svg";
-import avatar from "./avatar.svg";
 
 const Nav = styled.nav`
   display: flex;
@@ -88,7 +87,7 @@ const Search = styled.button`
 `;
 
 const Avatar = styled.button`
-  background-image: url(${avatar});
+  background-image: url(${"/avatar.svg"});
   width: 26px;
   height: 26px;
   background-repeat: no-repeat;

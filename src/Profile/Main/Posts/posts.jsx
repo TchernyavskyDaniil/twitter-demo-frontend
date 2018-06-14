@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import avatar from "../../Header/Nav/avatar.svg";
 import pinned from "./pinned.svg";
 import contentImg from "./post-img.jpg";
-import comments from "./comment.svg";
+import comment from "./comment.svg";
 import retweet from "./retweet.svg";
-import likes from "./like.svg";
+import like from "./like.svg";
 import message from "./message.svg";
 
 const Container = styled.div`
   background-color: white;
   min-width: 591px;
+  width: 600px;
   margin-left: 18px;
 `;
 
@@ -21,120 +21,244 @@ const ProfileHeading = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  border-bottom: 1px solid #E6ECF0;
+  border-bottom: 1px solid #e6ecf0;
 `;
 
-const HeadingLink = styled.li`
+const Heading = styled.li`
   font-size: 18px;
   line-height: 20px;
   letter-spacing: 0.01px;
   padding-right: 35px;
   font-weight: bold;
-  
-  & .heading-link {
-    text-decoration: none;
-    color: #1DA1F2;
-    
-    &:hover {
-      text-decoration: underline;
-    }
+`;
+
+const HeadingLink = styled(Link)`
+  text-decoration: none;
+  color: #1da1f2;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
+const Post = styled.div`
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: row;
+`;
 
+const AvatarContainer = styled.div`
+  padding-right: 10px;
+`;
+
+const Avatar = styled(Link)`
+  background-image: url(${"/avatar.svg"});
+  width: 45px;
+  height: 45px;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50px;
+  padding-top: 35px;
+`;
+
+const ContentContainer = styled.div``;
+
+const Pinned = styled.p`
+  margin: 0;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.18px;
+  color: #707e88;
+  position: relative;
+
+  &:before {
+    content: "";
+    background-image: url(${pinned});
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: -3%;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 2px;
+  }
+`;
+
+const Title = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 57%;
+  justify-content: space-between;
+  margin-top: 5px;
+`;
+
+const Person = styled.div``;
+
+const PersonLink = styled(Link)`
+  font-size: 16px;
+  line-height: 16px;
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const Nickname = styled.div``;
+
+const NicknameLink = styled(Link)`
+  font-size: 14px;
+  line-height: 16px;
+  color: #697787;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const DateLink = NicknameLink.extend``;
+
+const Day = styled.span`
+  padding-right: 2px;
+`;
+
+const Month = Day.extend``;
+
+const Year = Month.extend``;
+
+const PostMessage = styled.p`
+  font-size: 25px;
+  font-weight: lighter;
+  line-height: 30px;
+  color: black;
+  margin: 2px 0 15px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+`;
+
+const Hashtag = styled(Link)`
+  color: #1da1f2;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const LinkWebSite = styled.a`
+  color: #1da1f2;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const Image = styled.img``;
+
+const Actions = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 60%;
+  justify-content: space-between;
+  margin-top: 12px;
+`;
+
+const Action = styled.div`
+  min-height: 22px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const ActionImage = styled.img``;
+
+const Count = styled.span`
+  margin-left: 11px;
+  min-width: 18px;
+  width: 18px;
+  display: inline-block;
+  height: 18px;
+`;
 
 export default () => {
   return (
     <Container>
       <ProfileHeading>
-        <HeadingLink>
-          <Link to="/EveryInteract" className="heading-link">
+        <Heading>
+          <HeadingLink to="/EveryInteract" className="heading-link">
             Tweets
-          </Link>
-        </HeadingLink>
-        <HeadingLink>
-          <Link to="/EveryInteract/with_replies" className="heading-link">
+          </HeadingLink>
+        </Heading>
+        <Heading>
+          <HeadingLink
+            to="/EveryInteract/with_replies"
+            className="heading-link"
+          >
             Tweets & replies
-          </Link>
-        </HeadingLink>
-        <HeadingLink>
-          <Link to="/EveryInteract/media" className="heading-link">
+          </HeadingLink>
+        </Heading>
+        <Heading>
+          <HeadingLink to="/EveryInteract/media" className="heading-link">
             Media
-          </Link>
-        </HeadingLink>
+          </HeadingLink>
+        </Heading>
       </ProfileHeading>
       <Post>
         <AvatarContainer>
-          <Avatar alt="avatar"/>
+          <Avatar alt="avatar" to="/EveryInteract" />
         </AvatarContainer>
         <ContentContainer>
-          <Pinned>
-            Pinned Tweet
-          </Pinned>
+          <Pinned>Pinned Tweet</Pinned>
           <Title>
             <Person>
-              Every Interaction
+              <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
             </Person>
             <Nickname>
-              @EveryInteract
+              <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
             </Nickname>
-            <Date>
-              <Day>
-                2
-              </Day>
-              <Month>
-                Mar
-              </Month>
-              <Year>
-                2015
-              </Year>
-            </Date>
+            <DateLink to="/status/777">
+              <Day>2</Day>
+              <Month>Mar</Month>
+              <Year>2015</Year>
+            </DateLink>
           </Title>
           <PostMessage>
             We've made some more resources for all you wonderful
-            <Hashtag>
-              #design
-            </Hashtag>
+            <Hashtag to="/hashtag/design"> #design </Hashtag>
             folk
-            <LinkWebSite>
-              everyinteraction.com/resources/
+            <LinkWebSite href="https://everyinteraction.com/resources/">
+              {" "}
+              everyinteraction.com/resources/{" "}
             </LinkWebSite>
-            <Hashtag>
-              #webdesign
-            </Hashtag>
-            <Hashtag>
-              #UI
-            </Hashtag>
+            <Hashtag to="/hashtag/webdesign"> #webdesign </Hashtag>
+            <Hashtag to="/hashtag/ui"> #UI </Hashtag>
           </PostMessage>
           <Image alt="post image" src={contentImg} />
           <Actions>
-            <CommentContainer>
-              <Comment alt="comments" />
-              <Comments>
-
-              </Comments>
-            </CommentContainer>
-            <RetweetContainer>
-              <Retweet alt="retweet" />
-              <Retweets>
-                17
-              </Retweets>
-            </RetweetContainer>
-            <LikesContainer>
-              <Like alt="like" />
-              <Likes>
-                47
-              </Likes>
-            </LikesContainer>
-            <MessageContainer>
-              <Message alt="message" />
-              <Messages>
-
-              </Messages>
-            </MessageContainer>
+            <Action>
+              <ActionImage alt="comment" src={comment} />
+              <Count />
+            </Action>
+            <Action>
+              <ActionImage alt="retweet" src={retweet} />
+              <Count>17</Count>
+            </Action>
+            <Action>
+              <ActionImage alt="like" src={like} />
+              <Count>47</Count>
+            </Action>
+            <Action>
+              <ActionImage alt="message" src={message} />
+              <Count />
+            </Action>
           </Actions>
         </ContentContainer>
       </Post>
     </Container>
-  )
-}
+  );
+};
