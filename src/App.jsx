@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Profile from "./Profile/index";
 
 class App extends Component {
@@ -8,8 +8,10 @@ class App extends Component {
       <BrowserRouter>
         <div>
           {/*TODO Переделать?*/}
-          <Route exact path="/" render={() => <Redirect to="/EveryInteract" />} />
-          <Profile/>
+          <Switch>
+            <Route exact path="/EveryInteract" component={Profile} />
+            <Redirect from="/" to="/EveryInteract"/>
+          </Switch>
         </div>
       </BrowserRouter>
     );

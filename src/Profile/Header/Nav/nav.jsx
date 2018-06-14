@@ -35,6 +35,11 @@ const Home = styled.div`
 
 const CrumbText = styled.span`
   padding-left: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 15px;
+  letter-spacing: 0.01px;
+  color: #667580;
 `;
 
 const Moments = Home.extend``;
@@ -43,9 +48,7 @@ const Notifications = Home.extend``;
 
 const Messages = Home.extend``;
 
-const CrumbSvg = styled.img`
-
-`;
+const CrumbSvg = styled.img``;
 
 const TwitterSvg = styled.img`
   min-height: 17px;
@@ -64,8 +67,8 @@ const SearchContainer = styled.div`
 
 const SearchInput = styled.input`
   border-radius: 100px;
-  border: 1px solid #E6ECF0;
-  background-color: #F5F8FA;
+  border: 1px solid #e6ecf0;
+  background-color: #f5f8fa;
   padding-left: 11px;
   padding-right: 11px;
   padding-top: 9px;
@@ -99,9 +102,13 @@ const Avatar = styled.button`
 const Tweet = styled.button`
   padding: 9px 14px;
   border-radius: 100px;
-  border-color: #1DA1F2;
-  background-color: #1DA1F2;
+  border-color: #1da1f2;
+  background-color: #1da1f2;
   color: white;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.01px;
+  font-weight: bold;
 `;
 
 export default () => {
@@ -110,27 +117,19 @@ export default () => {
       <BreadCrumbs>
         <Home>
           <CrumbSvg alt="Home" src={home} />
-          <CrumbText>
-            Home
-          </CrumbText>
+          <CrumbText>Home</CrumbText>
         </Home>
         <Moments>
           <CrumbSvg alt="Moments" src={moments} />
-          <CrumbText>
-            Moments
-          </CrumbText>
+          <CrumbText>Moments</CrumbText>
         </Moments>
         <Notifications>
           <CrumbSvg alt="Notifications" src={notifications} />
-          <CrumbText>
-            Notifications
-          </CrumbText>
+          <CrumbText>Notifications</CrumbText>
         </Notifications>
         <Messages>
           <CrumbSvg alt="Messages" src={messages} />
-          <CrumbText>
-            Messages
-          </CrumbText>
+          <CrumbText>Messages</CrumbText>
         </Messages>
       </BreadCrumbs>
       <TwitterSvg alt="Twitter logo" src={twitterLogo} />
@@ -144,10 +143,8 @@ export default () => {
           <Search />
         </SearchContainer>
         <Avatar />
-        <Tweet>
-          Tweet
-        </Tweet>
+        <Tweet>Tweet</Tweet>
       </ActionsContainer>
     </Nav>
   );
-}
+};

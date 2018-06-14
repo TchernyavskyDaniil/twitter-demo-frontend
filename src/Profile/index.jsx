@@ -1,16 +1,16 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Nav from "./Header/Nav"
+import Header from "./Header/header";
+import MainInformation from "./MainInformation/information";
 
 export default () => {
   return (
     <div>
       <Helmet>
-        <title>
-          Profile Page
-        </title>
+        <title>Profile Page</title>
       </Helmet>
-      <Nav />
+      <Header />
+      <MainInformation />
     </div>
-  )
-}
+  );
+};
