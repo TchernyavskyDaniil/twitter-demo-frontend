@@ -21,7 +21,6 @@ const ProfileHeading = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  border-bottom: 1px solid #e6ecf0;
 `;
 
 const Heading = styled.li`
@@ -45,6 +44,7 @@ const Post = styled.div`
   padding: 12px 16px;
   display: flex;
   flex-direction: row;
+  border-top: 1px solid #e6ecf0;
 `;
 
 const AvatarContainer = styled.div`
@@ -78,7 +78,7 @@ const Pinned = styled.p`
     position: absolute;
     width: 12px;
     height: 12px;
-    left: -3%;
+    left: -4%;
     background-repeat: no-repeat;
     background-position: center;
     top: 2px;
@@ -173,6 +173,7 @@ const Action = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 `;
 
 const ActionImage = styled.img``;
@@ -182,7 +183,12 @@ const Count = styled.span`
   min-width: 18px;
   width: 18px;
   display: inline-block;
-  height: 18px;
+  min-height: 16px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 15px;
+  letter-spacing: -0.19px;
+  color: #667580;
 `;
 
 export default () => {
@@ -228,15 +234,13 @@ export default () => {
             </DateLink>
           </Title>
           <PostMessage>
-            We've made some more resources for all you wonderful
-            <Hashtag to="/hashtag/design"> #design </Hashtag>
-            folk
+            We've made some more resources for all you wonderful{" "}
+            <Hashtag to="/hashtag/design">#design</Hashtag> folk{" "}
             <LinkWebSite href="https://everyinteraction.com/resources/">
-              {" "}
-              everyinteraction.com/resources/{" "}
-            </LinkWebSite>
-            <Hashtag to="/hashtag/webdesign"> #webdesign </Hashtag>
-            <Hashtag to="/hashtag/ui"> #UI </Hashtag>
+              everyinteraction.com/resources/
+            </LinkWebSite>{" "}
+            <Hashtag to="/hashtag/webdesign">#webdesign</Hashtag>{" "}
+            <Hashtag to="/hashtag/ui">#UI</Hashtag>{" "}
           </PostMessage>
           <Image alt="post image" src={contentImg} />
           <Actions>
