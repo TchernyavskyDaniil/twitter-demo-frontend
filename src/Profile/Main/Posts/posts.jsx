@@ -88,12 +88,13 @@ const Pinned = styled.p`
 const Title = styled.div`
   display: flex;
   flex-direction: row;
-  width: 57%;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 5px;
 `;
 
-const Person = styled.div``;
+const Person = styled.div`
+  margin-right: 4px;
+`;
 
 const PersonLink = styled(Link)`
   font-size: 16px;
@@ -106,7 +107,7 @@ const PersonLink = styled(Link)`
   }
 `;
 
-const Nickname = styled.div``;
+const Nickname = Person.extend``;
 
 const NicknameLink = styled(Link)`
   font-size: 14px;
@@ -127,12 +128,24 @@ const Day = styled.span`
 
 const Month = Day.extend``;
 
-const Year = Month.extend``;
+const Year = Day.extend``;
+
+const Hour = Day.extend``;
 
 const PostMessage = styled.p`
   font-size: 25px;
   font-weight: lighter;
   line-height: 30px;
+  color: black;
+  margin: 2px 0 15px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+`;
+
+const PostMessageLink = styled.p`
+  font-size: 16px;
+  line-height: 22px;
+  font-weletter-spacing: -0.22px;
   color: black;
   margin: 2px 0 15px 0;
   white-space: pre-wrap;
@@ -228,6 +241,7 @@ export default () => {
               <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
             </Nickname>
             <DateLink to="/status/777">
+              {" • "}
               <Day>2</Day>
               <Month>Mar</Month>
               <Year>2015</Year>
@@ -255,6 +269,95 @@ export default () => {
             <Action>
               <ActionImage alt="like" src={like} />
               <Count>47</Count>
+            </Action>
+            <Action>
+              <ActionImage alt="message" src={message} />
+              <Count />
+            </Action>
+          </Actions>
+        </ContentContainer>
+      </Post>
+      <Post>
+        <AvatarContainer>
+          <Avatar alt="avatar" to="/EveryInteract" />
+        </AvatarContainer>
+        <ContentContainer>
+          <Title>
+            <Person>
+              <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
+            </Person>
+            <Nickname>
+              <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
+            </Nickname>
+            <DateLink to="/status/777">
+              {" • "}
+              <Hour>23h</Hour>
+              <Day>2</Day>
+              <Month>Mar</Month>
+              <Year>2015</Year>
+            </DateLink>
+          </Title>
+          <PostMessage>
+            Our new website concept; Taking you from ... @ Every Interaction{" "}
+            <LinkWebSite href="https://instagram.com/p/BNFGrfhBP3M/">
+              instagram.com/p/BNFGrfhBP3M/
+            </LinkWebSite>{" "}
+          </PostMessage>
+          <Actions>
+            <Action>
+              <ActionImage alt="comment" src={comment} />
+              <Count>1</Count>
+            </Action>
+            <Action>
+              <ActionImage alt="retweet" src={retweet} />
+              <Count>4</Count>
+            </Action>
+            <Action>
+              <ActionImage alt="like" src={like} />
+              <Count>2</Count>
+            </Action>
+            <Action>
+              <ActionImage alt="message" src={message} />
+              <Count />
+            </Action>
+          </Actions>
+        </ContentContainer>
+      </Post>
+      <Post>
+        <AvatarContainer>
+          <Avatar alt="avatar" to="/EveryInteract" />
+        </AvatarContainer>
+        <ContentContainer>
+          <Title>
+            <Person>
+              <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
+            </Person>
+            <Nickname>
+              <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
+            </Nickname>
+            <DateLink to="/status/777">
+              {" • "}
+              <Month>Nov</Month>
+              <Day>18</Day>
+            </DateLink>
+          </Title>
+          <PostMessageLink>
+            Variable web fonts are coming, and will open a world of
+            opportunities for weight use online
+          </PostMessageLink>
+          <Image alt="post image" src={contentImg} />
+          <Actions>
+            <Action>
+              <ActionImage alt="comment" src={comment} />
+              <Count />
+            </Action>
+            <Action>
+              <ActionImage alt="retweet" src={retweet} />
+              <Count />
+            </Action>
+            <Action>
+              <ActionImage alt="like" src={like} />
+              <Count />
             </Action>
             <Action>
               <ActionImage alt="message" src={message} />
