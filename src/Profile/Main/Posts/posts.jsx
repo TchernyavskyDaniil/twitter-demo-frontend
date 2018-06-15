@@ -134,12 +134,21 @@ const Hour = Day.extend``;
 
 const PostMessage = styled.p`
   font-size: 25px;
-  font-weight: lighter;
+  font-weight: 200;
   line-height: 30px;
   color: black;
-  margin: 2px 0 15px 0;
+  margin: 2px 0 8px 0;
   white-space: pre-wrap;
   word-wrap: break-word;
+`;
+
+const LinkProfile = styled(Link)`
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const PostMessageLink = styled.p`
@@ -170,22 +179,46 @@ const LinkWebSite = styled.a`
   }
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+  backface-visibility: hidden;
+  will-change: transform;
+  max-width: 100%;
+`;
 
 const InfoContainer = styled.div`
   font-size: 15px;
-  line-height: 22px;
+  line-height: 18px;
+  letter-spacing: 0.01px;
+  border: 1px solid #e1e8ed;
+  border-left: none;
+  padding: 6px 2px 4px 9px;
 `;
 
 const InfoTitle = styled.span`
-  
+  font-weight: bold;
 `;
 
-const InfoText = styled.p``;
+const InfoText = styled.p`
+  margin: 0;
+  padding-bottom: 2px;
+`;
 
-const InfoLink = styled.a``;
+const InfoLink = styled.a`
+  font-weight: normal;
+  color: #697787;
+  text-decoration: none;
+  opacity: 0.8;
 
-const PostLinkContainer = styled.div``;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const PostLinkContainer = styled.div`
+  display: grid;
+  grid-template-columns: ${props => (props.imgWidth ? "1fr" : "126px 1fr")};
+`;
 
 const Actions = styled.div`
   display: flex;
@@ -271,7 +304,7 @@ export default () => {
             <Hashtag to="/hashtag/webdesign">#webdesign</Hashtag>{" "}
             <Hashtag to="/hashtag/ui">#UI</Hashtag>{" "}
           </PostMessage>
-          <PostLinkContainer>
+          <PostLinkContainer imgWidth>
             <Image alt="post image" src={contentImg} />
           </PostLinkContainer>
           <Actions>
@@ -315,14 +348,13 @@ export default () => {
             </DateLink>
           </Title>
           <PostMessage>
-            Our new website concept; Taking you from ... @ Every Interaction{" "}
+            Our new website concept; Taking you from ...{" "}
+            <LinkProfile to="/EveryInteract">@ Every Interaction</LinkProfile>{" "}
             <LinkWebSite href="https://instagram.com/p/BNFGrfhBP3M/">
               instagram.com/p/BNFGrfhBP3M/
             </LinkWebSite>{" "}
           </PostMessage>
-          <PostLinkContainer>
-
-          </PostLinkContainer>
+          <PostLinkContainer />
           <Actions>
             <Action>
               <ActionImage alt="comment" src={comment} />
@@ -368,18 +400,13 @@ export default () => {
           <PostLinkContainer>
             <Image alt="Promo website" src={"/promo.png"} />
             <InfoContainer>
-              <InfoTitle>
-                The Future of Web Fonts
-              </InfoTitle>
+              <InfoTitle>The Future of Web Fonts</InfoTitle>
               <InfoText>
-                We love typefaces.
-                They give our sites and applications personalized feel.
-                They convey the information and tell a story.
+                We love typefaces. They give our sites and applications
+                personalized feel. They convey the information and tell a story.
                 They establish information hierarchy. But they’re…
               </InfoText>
-              <InfoLink href="https://vilijamis.com">
-                vilijamis.com
-              </InfoLink>
+              <InfoLink href="https://vilijamis.com">vilijamis.com</InfoLink>
             </InfoContainer>
           </PostLinkContainer>
           <Actions>

@@ -16,10 +16,19 @@ const ProfileTitle = styled.div``;
 const Nickname = styled.div`
   display: flex;
   flex-direction: row;
+`;
 
-  & .link-profile {
-    text-decoration: none;
-    color: black;
+const NicknameLink = styled(Link)`
+  margin: 0;
+  font-size: 22px;
+  line-height: 22px;
+  font-weight: bold;
+  letter-spacing: 0.02px;
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -44,7 +53,7 @@ const FollowContainer = styled.div`
   padding-top: 6px;
 `;
 
-const StatusFollow = styled.button`
+const FollowLink = styled(Link)`
   background: transparent;
   padding-left: 0;
   border: none;
@@ -53,6 +62,7 @@ const StatusFollow = styled.button`
   line-height: 21px;
   letter-spacing: 0.01px;
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;
@@ -64,6 +74,7 @@ const TextFollow = styled.span`
   line-height: 12px;
   letter-spacing: 0.01px;
   color: #697787;
+  padding-left: 6px;
 `;
 
 const ProfileBio = styled.p`
@@ -157,15 +168,11 @@ export default () => {
     <ProfileContainer>
       <ProfileTitle>
         <Nickname>
-          <Link to="/EveryInteract" className="link-profile">
-            <Text>Every Interaction</Text>
-          </Link>
+          <NicknameLink to="/EveryInteract">Every Interaction</NicknameLink>
           <Verified alt="Verified user" src={check} />
         </Nickname>
         <FollowContainer>
-          <Link to="/EveryInteract">
-            <StatusFollow>@EveryInteract</StatusFollow>
-          </Link>
+          <FollowLink to="/EveryInteract">@EveryInteract</FollowLink>
           <TextFollow>Follows you</TextFollow>
         </FollowContainer>
       </ProfileTitle>
