@@ -145,7 +145,7 @@ const PostMessage = styled.p`
 const PostMessageLink = styled.p`
   font-size: 16px;
   line-height: 22px;
-  font-weletter-spacing: -0.22px;
+  letter-spacing: -0.22px;
   color: black;
   margin: 2px 0 15px 0;
   white-space: pre-wrap;
@@ -171,6 +171,21 @@ const LinkWebSite = styled.a`
 `;
 
 const Image = styled.img``;
+
+const InfoContainer = styled.div`
+  font-size: 15px;
+  line-height: 22px;
+`;
+
+const InfoTitle = styled.span`
+  
+`;
+
+const InfoText = styled.p``;
+
+const InfoLink = styled.a``;
+
+const PostLinkContainer = styled.div``;
 
 const Actions = styled.div`
   display: flex;
@@ -256,7 +271,9 @@ export default () => {
             <Hashtag to="/hashtag/webdesign">#webdesign</Hashtag>{" "}
             <Hashtag to="/hashtag/ui">#UI</Hashtag>{" "}
           </PostMessage>
-          <Image alt="post image" src={contentImg} />
+          <PostLinkContainer>
+            <Image alt="post image" src={contentImg} />
+          </PostLinkContainer>
           <Actions>
             <Action>
               <ActionImage alt="comment" src={comment} />
@@ -303,6 +320,9 @@ export default () => {
               instagram.com/p/BNFGrfhBP3M/
             </LinkWebSite>{" "}
           </PostMessage>
+          <PostLinkContainer>
+
+          </PostLinkContainer>
           <Actions>
             <Action>
               <ActionImage alt="comment" src={comment} />
@@ -345,7 +365,23 @@ export default () => {
             Variable web fonts are coming, and will open a world of
             opportunities for weight use online
           </PostMessageLink>
-          <Image alt="post image" src={contentImg} />
+          <PostLinkContainer>
+            <Image alt="Promo website" src={"/promo.png"} />
+            <InfoContainer>
+              <InfoTitle>
+                The Future of Web Fonts
+              </InfoTitle>
+              <InfoText>
+                We love typefaces.
+                They give our sites and applications personalized feel.
+                They convey the information and tell a story.
+                They establish information hierarchy. But they’re…
+              </InfoText>
+              <InfoLink href="https://vilijamis.com">
+                vilijamis.com
+              </InfoLink>
+            </InfoContainer>
+          </PostLinkContainer>
           <Actions>
             <Action>
               <ActionImage alt="comment" src={comment} />
