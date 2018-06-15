@@ -88,6 +88,8 @@ const ProfileBio = styled.p`
   margin-right: 10px;
 `;
 
+const MainInfo = styled.div``;
+
 const Location = styled.div`
   flex-direction: row;
   display: flex;
@@ -106,11 +108,11 @@ const Place = styled.div`
 
 const City = styled.span``;
 
-const Country = City.extend`
+const Country = styled(City)`
   padding-left: 4px;
 `;
 
-const WebSite = Location.extend`
+const WebSite = styled.div`
   padding-top: 0;
 `;
 
@@ -129,17 +131,17 @@ const Source = styled.a`
   }
 `;
 
-const DateReg = Location.extend`
+const DateReg = styled(Location)`
   padding-top: 0;
 `;
 
 const DateIcon = styled.img``;
 
-const Date = Place.extend``;
+const Date = styled(Place)``;
 
-const Month = Country.extend``;
+const Month = styled(Country)``;
 
-const Year = Month.extend``;
+const Year = styled(Month)``;
 
 const Actions = styled.div`
   padding-top: 17px;
@@ -161,7 +163,7 @@ const Tweet = styled.button`
   }
 `;
 
-const Message = Tweet.extend``;
+const Message = styled(Tweet)``;
 
 export default () => {
   return (
@@ -180,29 +182,31 @@ export default () => {
         UX Design studio focussed problem solving creativity. Design to us is
         how can we make things *work* amazing.
       </ProfileBio>
-      <Location>
-        <LocationIcon alt="location" src={location} />
-        <Place>
-          <City>London</City>,
-          <Country>UK</Country>
-        </Place>
-      </Location>
-      <WebSite>
-        <WebSiteIcon alt="website" src={web} />
-        <Source href="everyinteraction.com">everyinteraction.com</Source>
-      </WebSite>
-      <DateReg>
-        <DateIcon alt="date registration" src={reg} />
-        <Date>
-          Joined
-          <Month>May</Month>
-          <Year>2008</Year>
-        </Date>
-      </DateReg>
-      <Actions>
-        <Tweet>Tweet to</Tweet>
-        <Message>Message</Message>
-      </Actions>
+      <MainInfo>
+        <Location>
+          <LocationIcon alt="location" src={location} />
+          <Place>
+            <City>London</City>,
+            <Country>UK</Country>
+          </Place>
+        </Location>
+        <WebSite>
+          <WebSiteIcon alt="website" src={web} />
+          <Source href="https://everyinteraction.com">everyinteraction.com</Source>
+        </WebSite>
+        <DateReg>
+          <DateIcon alt="date registration" src={reg} />
+          <Date>
+            Joined
+            <Month>May</Month>
+            <Year>2008</Year>
+          </Date>
+        </DateReg>
+        <Actions>
+          <Tweet>Tweet to</Tweet>
+          <Message>Message</Message>
+        </Actions>
+      </MainInfo>
     </ProfileContainer>
   );
 };

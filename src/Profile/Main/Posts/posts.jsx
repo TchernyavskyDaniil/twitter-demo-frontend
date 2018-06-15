@@ -28,7 +28,7 @@ const Heading = styled.li`
   line-height: 20px;
   letter-spacing: 0.01px;
   padding-right: 35px;
-  font-weight: bold;
+  font-weight: 500;
 `;
 
 const HeadingLink = styled(Link)`
@@ -45,6 +45,11 @@ const Post = styled.div`
   display: flex;
   flex-direction: row;
   border-top: 1px solid #e6ecf0;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: #f5f8fa;
+  }
 `;
 
 const AvatarContainer = styled.div`
@@ -52,7 +57,7 @@ const AvatarContainer = styled.div`
 `;
 
 const Avatar = styled(Link)`
-  background-image: url(${"/avatar.svg"});
+  background-image: url(${"/img/small-avatar.png"});
   width: 45px;
   height: 45px;
   display: block;
@@ -89,6 +94,7 @@ const Title = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
   margin-top: 5px;
 `;
 
@@ -101,36 +107,40 @@ const PersonLink = styled(Link)`
   line-height: 16px;
   color: black;
   text-decoration: none;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
   }
 `;
 
-const Nickname = Person.extend``;
+const Nickname = styled(Person)``;
 
 const NicknameLink = styled(Link)`
   font-size: 14px;
   line-height: 16px;
   color: #697787;
   text-decoration: none;
+  padding-left: 2px;
 
   &:hover {
     text-decoration: underline;
   }
 `;
 
-const DateLink = NicknameLink.extend``;
-
-const Day = styled.span`
-  padding-right: 2px;
+const Date = styled.div`
+  padding-left: 2px;
+  
+  &:before {
+    content: "•";
+    color: #697787;
+  }
 `;
 
-const Month = Day.extend``;
-
-const Year = Day.extend``;
-
-const Hour = Day.extend``;
+const DateLink = styled(NicknameLink)`
+  padding-left: 2px;
+  cursor: pointer;
+`;
 
 const PostMessage = styled.p`
   font-size: 25px;
@@ -196,7 +206,7 @@ const InfoContainer = styled.div`
 `;
 
 const InfoTitle = styled.span`
-  font-weight: bold;
+  font-weight: 500;
 `;
 
 const InfoText = styled.p`
@@ -246,7 +256,7 @@ const Count = styled.span`
   display: inline-block;
   min-height: 16px;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 15px;
   letter-spacing: -0.19px;
   color: #667580;
@@ -257,20 +267,17 @@ export default () => {
     <Container>
       <ProfileHeading>
         <Heading>
-          <HeadingLink to="/EveryInteract" className="heading-link">
+          <HeadingLink to="/EveryInteract">
             Tweets
           </HeadingLink>
         </Heading>
         <Heading>
-          <HeadingLink
-            to="/EveryInteract/with_replies"
-            className="heading-link"
-          >
+          <HeadingLink to="/EveryInteract/with_replies">
             Tweets & replies
           </HeadingLink>
         </Heading>
         <Heading>
-          <HeadingLink to="/EveryInteract/media" className="heading-link">
+          <HeadingLink to="/EveryInteract/media">
             Media
           </HeadingLink>
         </Heading>
@@ -288,19 +295,23 @@ export default () => {
             <Nickname>
               <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
             </Nickname>
-            <DateLink to="/status/777">
-              {" • "}
-              <Day>2</Day>
-              <Month>Mar</Month>
-              <Year>2015</Year>
-            </DateLink>
+            <Date>
+              <DateLink to="/status/777">
+                2 Mar 2015
+              </DateLink>
+            </Date>
           </Title>
           <PostMessage>
-            We've made some more resources for all you wonderful{" "}
-            <Hashtag to="/hashtag/design">#design</Hashtag> folk{" "}
+            We've made some more resources for all you wonderful
+            {" "}
+            <Hashtag to="/hashtag/design">#design</Hashtag>
+            {" "}
+            folk
+            {" "}
             <LinkWebSite href="https://everyinteraction.com/resources/">
               everyinteraction.com/resources/
-            </LinkWebSite>{" "}
+            </LinkWebSite>
+            {" "}
             <Hashtag to="/hashtag/webdesign">#webdesign</Hashtag>{" "}
             <Hashtag to="/hashtag/ui">#UI</Hashtag>{" "}
           </PostMessage>
@@ -339,20 +350,21 @@ export default () => {
             <Nickname>
               <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
             </Nickname>
-            <DateLink to="/status/777">
-              {" • "}
-              <Hour>23h</Hour>
-              <Day>2</Day>
-              <Month>Mar</Month>
-              <Year>2015</Year>
-            </DateLink>
+            <Date>
+              <DateLink to="/status/777">
+                23h
+              </DateLink>
+            </Date>
           </Title>
           <PostMessage>
-            Our new website concept; Taking you from ...{" "}
-            <LinkProfile to="/EveryInteract">@ Every Interaction</LinkProfile>{" "}
+            Our new website concept; Taking you from ...
+            {" "}
+            <LinkProfile to="/EveryInteract">@ Every Interaction</LinkProfile>
+            {" "}
             <LinkWebSite href="https://instagram.com/p/BNFGrfhBP3M/">
               instagram.com/p/BNFGrfhBP3M/
-            </LinkWebSite>{" "}
+            </LinkWebSite>
+            {" "}
           </PostMessage>
           <PostLinkContainer />
           <Actions>
@@ -387,18 +399,18 @@ export default () => {
             <Nickname>
               <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
             </Nickname>
-            <DateLink to="/status/777">
-              {" • "}
-              <Month>Nov</Month>
-              <Day>18</Day>
-            </DateLink>
+            <Date>
+              <DateLink to="/status/777">
+                Nov 18
+              </DateLink>
+            </Date>
           </Title>
           <PostMessageLink>
             Variable web fonts are coming, and will open a world of
             opportunities for weight use online
           </PostMessageLink>
           <PostLinkContainer>
-            <Image alt="Promo website" src={"/promo.png"} />
+            <Image alt="Promo website" src={"/img/promo.png"} />
             <InfoContainer>
               <InfoTitle>The Future of Web Fonts</InfoTitle>
               <InfoText>
