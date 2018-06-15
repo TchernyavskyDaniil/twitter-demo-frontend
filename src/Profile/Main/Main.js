@@ -1,6 +1,6 @@
 import React from "react";
-import InfoPerson from "./InfoPerson/information";
-import Posts from "./Posts/posts";
+import InfoPerson from "./InfoPerson/Information";
+import Posts from "./Posts/Posts";
 import styled from "styled-components";
 
 const Container = styled.div`

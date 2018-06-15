@@ -24,6 +24,7 @@ const BreadCrumbs = styled.ul`
   justify-content: space-between;
   padding: 0;
   margin: 0;
+  list-style: none;
 `;
 
 const Crumb = styled.li`
@@ -55,7 +56,6 @@ const CrumbText = styled.span`
   font-size: 13px;
   font-weight: 500;
   line-height: 15px;
-  letter-spacing: 0.01px;
 `;
 
 const CrumbSvg = styled.img``;
@@ -87,7 +87,6 @@ const SearchInput = styled.input`
   font-weight: normal;
   line-height: 14px;
   font-size: 12px;
-  letter-spacing: 0.01px;
   
   &:focus {
     border: 1px solid black;
@@ -134,7 +133,6 @@ const Tweet = styled.button`
   color: white;
   font-size: 14px;
   line-height: 14px;
-  letter-spacing: 0.01px;
   font-weight: 500;
   cursor: pointer;
   

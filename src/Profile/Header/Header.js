@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Nav from "./Nav/nav";
+import Nav from "./Nav/Nav";
 import dotted from "./dotted.svg";
 
 const ProfileCanopy = styled.img`
@@ -47,6 +47,7 @@ const ProfileInfo = styled.ul`
   min-width: 200px;
   justify-content: space-between;
   padding-left: 18px;
+  list-style: none;
 `;
 
 const Info = styled.li`
@@ -74,7 +75,6 @@ const Text = styled.span`
   font-size: 12px;
   font-weight: 500;
   line-height: 21px;
-  letter-spacing: 0.01px;
   color: #707e88;
 `;
 

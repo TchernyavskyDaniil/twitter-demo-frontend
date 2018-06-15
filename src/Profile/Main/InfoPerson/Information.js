@@ -23,7 +23,6 @@ const NicknameLink = styled(Link)`
   font-size: 22px;
   line-height: 22px;
   font-weight: bold;
-  letter-spacing: 0.02px;
   text-decoration: none;
   color: black;
 
@@ -37,7 +36,6 @@ const Text = styled.h1`
   font-size: 22px;
   line-height: 22px;
   font-weight: bold;
-  letter-spacing: 0.02px;
 
   &:hover {
     text-decoration: underline;
@@ -60,7 +58,6 @@ const FollowLink = styled(Link)`
   color: #697787;
   font-size: 14px;
   line-height: 21px;
-  letter-spacing: 0.01px;
   cursor: pointer;
   text-decoration: none;
 
@@ -72,7 +69,6 @@ const FollowLink = styled(Link)`
 const TextFollow = styled.span`
   font-size: 12px;
   line-height: 12px;
-  letter-spacing: 0.01px;
   color: #697787;
   padding-left: 6px;
 `;
@@ -83,7 +79,6 @@ const ProfileBio = styled.p`
   font-size: 14px;
   line-height: 20px;
   color: #14171a;
-  letter-spacing: 0.01px;
   padding-bottom: 2px;
   margin-right: 10px;
 `;
@@ -102,7 +97,6 @@ const Place = styled.div`
   padding-left: 13px;
   font-size: 14px;
   line-height: 28px;
-  letter-spacing: 0.01px;
   color: #697787;
 `;
 
@@ -122,7 +116,6 @@ const Source = styled.a`
   padding-left: 13px;
   font-size: 14px;
   line-height: 28px;
-  letter-spacing: 0.01px;
   text-decoration: none;
   color: #1da1f2;
 

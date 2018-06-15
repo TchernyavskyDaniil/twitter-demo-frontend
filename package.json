@@ -28,6 +28,6 @@
     "lint": "eslint --ext .jsx,.js src/",
     "precommit": "yarn run lint",
     "prepush": "yarn run lint",
-    "prettier": "prettier --write 'src/**/*.jsx'"
+    "prettier": "prettier --write 'src/**/*.js'"
   }
 }

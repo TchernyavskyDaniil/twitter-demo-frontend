@@ -21,12 +21,12 @@ const ProfileHeading = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  list-style: none;
 `;
 
 const Heading = styled.li`
   font-size: 18px;
   line-height: 20px;
-  letter-spacing: 0.01px;
   padding-right: 35px;
   font-weight: 500;
 `;
@@ -73,7 +73,6 @@ const Pinned = styled.p`
   margin: 0;
   font-size: 12px;
   line-height: 14px;
-  letter-spacing: -0.18px;
   color: #707e88;
   position: relative;
 
@@ -164,7 +163,6 @@ const LinkProfile = styled(Link)`
 const PostMessageLink = styled.p`
   font-size: 16px;
   line-height: 22px;
-  letter-spacing: -0.22px;
   color: black;
   margin: 2px 0 15px 0;
   white-space: pre-wrap;
@@ -199,7 +197,6 @@ const Image = styled.img`
 const InfoContainer = styled.div`
   font-size: 15px;
   line-height: 18px;
-  letter-spacing: 0.01px;
   border: 1px solid #e1e8ed;
   border-left: none;
   padding: 6px 2px 4px 9px;
@@ -258,7 +255,6 @@ const Count = styled.span`
   font-size: 13px;
   font-weight: 500;
   line-height: 15px;
-  letter-spacing: -0.19px;
   color: #667580;
 `;
 
