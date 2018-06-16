@@ -131,13 +131,13 @@ const Avatar = styled.img`
 const Tweet = styled.button`
   padding: 9px 14px;
   border-radius: 100px;
-  border-color: #1da1f2;
   background-color: #1da1f2;
   color: white;
   font-size: 14px;
   line-height: 14px;
   font-weight: 500;
   cursor: pointer;
+  border: none;
 
   &:hover {
     opacity: 0.9;

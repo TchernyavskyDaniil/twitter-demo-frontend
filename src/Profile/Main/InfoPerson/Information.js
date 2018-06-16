@@ -117,6 +117,7 @@ const Action = styled.button`
   background-color: #1da1f2;
   min-width: 128px;
   cursor: pointer;
+  border: none;
 
   &:hover {
     opacity: 0.8;

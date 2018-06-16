@@ -124,6 +124,7 @@ const Follow = styled.button`
   border: 1px solid #1da1f2;
   color: #1da1f2;
   cursor: pointer;
+  background-color: transparent;
 
   &:hover {
     color: white;
