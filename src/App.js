@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import Profile from "./Profile/index";
 
 export default () => {
@@ -12,4 +12,4 @@ export default () => {
       </div>
     </BrowserRouter>
   );
-}
+};

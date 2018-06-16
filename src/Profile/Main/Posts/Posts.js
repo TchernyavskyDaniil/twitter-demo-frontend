@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import ProfileHeading from "./ProfileHeading";
+import ProfileHeading from "./Tabs/ProfileHeading";
 import pinned from "./pinned.svg";
-import contentImg from "./post.png";
 import comment from "./comment.svg";
 import retweet from "./retweet.svg";
 import like from "./like.svg";
 import message from "./message.svg";
+import likeActive from "./like-active.svg";
 
 const Container = styled.div`
   background-color: white;
@@ -16,54 +16,52 @@ const Container = styled.div`
   margin-left: 18px;
 `;
 
-const Post = styled.div`
+const Post = styled.section`
   padding: 12px 16px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border-top: 1px solid #e6ecf0;
   cursor: pointer;
-  
+
   &:hover {
     background-color: #f5f8fa;
   }
+`;
+
+const PostContent = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 const AvatarContainer = styled.div`
   padding-right: 10px;
 `;
 
-const Avatar = styled(Link)`
-  background-image: url(${"/img/small-avatar.png"});
+const Avatar = styled.img`
   width: 45px;
   height: 45px;
   display: block;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 50px;
-  padding-top: 35px;
+  margin-top: 10px;
+  border-radius: 50%;
 `;
 
 const ContentContainer = styled.div``;
 
-const Pinned = styled.p`
+const Pinned = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 0 38px;
+`;
+
+const PinnedText = styled.p`
   margin: 0;
   font-size: 12px;
   line-height: 14px;
   color: #707e88;
-  position: relative;
-
-  &:before {
-    content: "";
-    background-image: url(${pinned});
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    left: -4%;
-    background-repeat: no-repeat;
-    background-position: center;
-    top: 2px;
-  }
+  padding-left: 6px;
 `;
+
+const PinnedIcon = styled.img``;
 
 const Title = styled.div`
   display: flex;
@@ -105,7 +103,7 @@ const NicknameLink = styled(Link)`
 
 const Date = styled.div`
   padding-left: 2px;
-  
+
   &:before {
     content: "•";
     color: #697787;
@@ -118,29 +116,11 @@ const DateLink = styled(NicknameLink)`
 `;
 
 const PostMessage = styled.p`
-  font-size: 25px;
+  font-size: ${props => (props.short ? "16px" : "25px")};
   font-weight: 200;
-  line-height: 30px;
+  line-height: ${props => (props.short ? "22px" : "30px")};
   color: black;
   margin: 2px 0 8px 0;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-`;
-
-const LinkProfile = styled(Link)`
-  color: black;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const PostMessageLink = styled.p`
-  font-size: 16px;
-  line-height: 22px;
-  color: black;
-  margin: 2px 0 15px 0;
   white-space: pre-wrap;
   word-wrap: break-word;
 `;
@@ -164,13 +144,14 @@ const LinkWebSite = styled.a`
 `;
 
 const Image = styled.img`
-  width: 100%;
+  width: ${props => (props.shortImg ? "126px" : "100%")};
+  height: ${props => (props.shortImg ? "126px" : "100%")};
   backface-visibility: hidden;
   will-change: transform;
   max-width: 100%;
 `;
 
-const InfoContainer = styled.div`
+const Info = styled.div`
   font-size: 15px;
   line-height: 18px;
   border: 1px solid #e1e8ed;
@@ -198,9 +179,15 @@ const InfoLink = styled.a`
   }
 `;
 
-const PostLinkContainer = styled.div`
-  display: grid;
-  grid-template-columns: ${props => (props.imgWidth ? "1fr" : "126px 1fr")};
+const ShortInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  &:hover {
+    border: 1px solid #e1e8ed;
+  }
 `;
 
 const Actions = styled.div`
@@ -212,15 +199,24 @@ const Actions = styled.div`
   margin-top: 12px;
 `;
 
+const ActionImage = styled.img`
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+`;
+
 const Action = styled.div`
   min-height: 22px;
   display: flex;
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+  
+  &:hover {
+    ${ActionImage} {
+      border-bottom: 1px solid black;
+    }
+  }
 `;
-
-const ActionImage = styled.img``;
 
 const Count = styled.span`
   margin-left: 11px;
@@ -233,6 +229,9 @@ const Count = styled.span`
   line-height: 15px;
   color: #667580;
 `;
+
+// Я понимаю, что рано лезу, но не пизди сильно за этот код.
+// Если что конечно пределаю в следующем этапе (Если пройду)
 
 class Posts extends Component {
   state = {
@@ -249,13 +248,22 @@ class Posts extends Component {
         nickname: "@EveryInteract",
         dateLink: "/status/777",
         date: "2 Mar 2015",
-        postText: "We've made some more resources for all you wonderful " +
-        "#design folk everyinteraction.com/resources/ #webdesign #UI",
+        postText:
+          "We've made some more resources for all you wonderful " +
+          "#design folk everyinteraction.com/resources/ #webdesign #UI",
         alt: "Post image",
         src: "/img/post.png",
-        promoLink: false,
+        promo: false,
         promoTitle: null,
-        promoText: null
+        promoText: null,
+        promoLink: null,
+        shortMessage: true,
+        actionPost: {
+          comments: null,
+          retweets: 17,
+          likes: 47,
+          messages: null
+        }
       },
       {
         key: 2,
@@ -267,10 +275,21 @@ class Posts extends Component {
         nickname: "@EveryInteract",
         dateLink: "/status/776",
         date: "23h",
-        postText: "Our new website concept; Taking you from ... @EveryInteraction instagram.com/p/BNFGrfhBP3M/",
+        postText:
+          "Our new website concept; Taking you from ... @ Every Interaction instagram.com/p/BNFGrfhBP3M/",
         alt: "post image",
         src: null,
-        promoLink: false
+        promo: false,
+        promoTitle: null,
+        promoText: null,
+        promoLink: null,
+        shortMessage: true,
+        actionPost: {
+          comments: 1,
+          retweets: 4,
+          likes: 2,
+          messages: null
+        }
       },
       {
         key: 3,
@@ -282,207 +301,174 @@ class Posts extends Component {
         nickname: "@EveryInteract",
         dateLink: "/status/775",
         date: "Nov 18",
-        postText: "Variable web fonts are coming, " +
-        "and will open a world of opportunities for weight use online",
+        postText:
+          "Variable web fonts are coming, " +
+          "and will open a world of opportunities for weight use online",
         alt: "Promo website",
         src: "/img/promo.png",
-        promoLink: true,
+        promo: true,
         promoTitle: "The Future of Web Fonts",
-        promoText: "We love typefaces. They give our sites and applications " +
-        "personalized feel. They convey the information and tell a story. " +
-        "They establish information hierarchy. But they’re…"
+        promoText:
+          "We love typefaces. They give our sites and applications " +
+          "personalized feel. They convey the information and tell a story. " +
+          "They establish information hierarchy. But they’re…",
+        promoLink: "vilijamis.com",
+        shortMessage: true,
+        actionPost: {
+          comments: null,
+          retweets: null,
+          likes: null,
+          messages: null
+        }
       }
     ],
     actions: [
       {
         key: 1,
-        alt: "Comment",
+        alt: "comments",
         src: comment,
         count: null
       },
       {
         key: 2,
-        alt: "Retweet",
+        alt: "retweets",
         src: retweet,
         count: null
       },
       {
         key: 3,
-        alt: "Like",
+        alt: "likes",
         src: like,
-        count: null,
+        count: null
       },
       {
-        key: 4
+        key: 4,
+        alt: "messages",
+        src: message,
+        count: null
       }
-    ]
+    ],
+    activeIndex: 0
+  };
+
+  postMessage = text => {
+    let newText = [];
+    let textArr = text.split(" ");
+    let element;
+
+    for (let i = 0; i < textArr.length; i++) {
+      if (textArr[i][0] === "#") {
+        element = (
+          <span>
+            <Hashtag to={"/" + textArr[i]}>{textArr[i]}</Hashtag>{" "}
+          </span>
+        );
+        // Пока только с com, раз сам сказал, что слишком рано лезу
+      } else if (textArr[i].includes(".com")) {
+        element = (
+          <span>
+            <LinkWebSite href={"https://" + textArr[i]}>
+              {textArr[i]}
+            </LinkWebSite>{" "}
+          </span>
+        );
+      } else {
+        element = textArr[i] + " ";
+      }
+
+      newText.push(element);
+    }
+
+    return newText;
   };
 
   render() {
     return (
       <Container>
         <ProfileHeading />
-        <Post>
-          <AvatarContainer>
-            <Avatar alt="avatar" to="/EveryInteract" />
-          </AvatarContainer>
-          <ContentContainer>
-            <Pinned>Pinned Tweet</Pinned>
-            <Title>
-              <Person>
-                <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
-              </Person>
-              <Nickname>
-                <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
-              </Nickname>
-              <Date>
-                <DateLink to="/status/777">
-                  2 Mar 2015
-                </DateLink>
-              </Date>
-            </Title>
-            <PostMessage>
-              We've made some more resources for all you wonderful
-              {" "}
-              <Hashtag to="/hashtag/design">#design</Hashtag>
-              {" "}
-              folk
-              {" "}
-              <LinkWebSite href="https://everyinteraction.com/resources/">
-                everyinteraction.com/resources/
-              </LinkWebSite>
-              {" "}
-              <Hashtag to="/hashtag/webdesign">#webdesign</Hashtag>{" "}
-              <Hashtag to="/hashtag/ui">#UI</Hashtag>{" "}
-            </PostMessage>
-            <PostLinkContainer imgWidth>
-              <Image alt="post image" src={contentImg} />
-            </PostLinkContainer>
-            <Actions>
-              <Action>
-                <ActionImage alt="comment" src={comment} />
-                <Count />
-              </Action>
-              <Action>
-                <ActionImage alt="retweet" src={retweet} />
-                <Count>17</Count>
-              </Action>
-              <Action>
-                <ActionImage alt="like" src={like} />
-                <Count>47</Count>
-              </Action>
-              <Action>
-                <ActionImage alt="message" src={message} />
-                <Count />
-              </Action>
-            </Actions>
-          </ContentContainer>
-        </Post>
-        <Post>
-          <AvatarContainer>
-            <Avatar alt="avatar" to="/EveryInteract" />
-          </AvatarContainer>
-          <ContentContainer>
-            <Title>
-              <Person>
-                <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
-              </Person>
-              <Nickname>
-                <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
-              </Nickname>
-              <Date>
-                <DateLink to="/status/777">
-                  23h
-                </DateLink>
-              </Date>
-            </Title>
-            <PostMessage>
-              Our new website concept; Taking you from ...
-              {" "}
-              <LinkProfile to="/EveryInteract">@ Every Interaction</LinkProfile>
-              {" "}
-              <LinkWebSite href="https://instagram.com/p/BNFGrfhBP3M/">
-                instagram.com/p/BNFGrfhBP3M/
-              </LinkWebSite>
-              {" "}
-            </PostMessage>
-            <PostLinkContainer />
-            <Actions>
-              <Action>
-                <ActionImage alt="comment" src={comment} />
-                <Count>1</Count>
-              </Action>
-              <Action>
-                <ActionImage alt="retweet" src={retweet} />
-                <Count>4</Count>
-              </Action>
-              <Action>
-                <ActionImage alt="like" src={like} />
-                <Count>2</Count>
-              </Action>
-              <Action>
-                <ActionImage alt="message" src={message} />
-                <Count />
-              </Action>
-            </Actions>
-          </ContentContainer>
-        </Post>
-        <Post>
-          <AvatarContainer>
-            <Avatar alt="avatar" to="/EveryInteract" />
-          </AvatarContainer>
-          <ContentContainer>
-            <Title>
-              <Person>
-                <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
-              </Person>
-              <Nickname>
-                <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
-              </Nickname>
-              <Date>
-                <DateLink to="/status/777">
-                  Nov 18
-                </DateLink>
-              </Date>
-            </Title>
-            <PostMessageLink>
-              Variable web fonts are coming, and will open a world of
-              opportunities for weight use online
-            </PostMessageLink>
-            <PostLinkContainer>
-              <Image alt="Promo website" src={"/img/promo.png"} />
-              <InfoContainer>
-                <InfoTitle>The Future of Web Fonts</InfoTitle>
-                <InfoText>
-                  We love typefaces. They give our sites and applications
-                  personalized feel. They convey the information and tell a story.
-                  They establish information hierarchy. But they’re…
-                </InfoText>
-                <InfoLink href="https://vilijamis.com">vilijamis.com</InfoLink>
-              </InfoContainer>
-            </PostLinkContainer>
-            <Actions>
-              <Action>
-                <ActionImage alt="comment" src={comment} />
-                <Count />
-              </Action>
-              <Action>
-                <ActionImage alt="retweet" src={retweet} />
-                <Count />
-              </Action>
-              <Action>
-                <ActionImage alt="like" src={like} />
-                <Count />
-              </Action>
-              <Action>
-                <ActionImage alt="message" src={message} />
-                <Count />
-              </Action>
-            </Actions>
-          </ContentContainer>
-        </Post>
+        {this.state.posts.map(item => {
+          return (
+            <Post key={item.key}>
+              {item.statusPin && (
+                <Pinned>
+                  <PinnedIcon alt="Pinned icon" src={pinned} />
+                  <PinnedText>{this.state.textPin}</PinnedText>
+                </Pinned>
+              )}
+              <PostContent>
+                <AvatarContainer>
+                  <Avatar src={item.avatar} />
+                </AvatarContainer>
+                <ContentContainer>
+                  <Title>
+                    <Person>
+                      <PersonLink to={item.personLink}>
+                        {item.person}
+                      </PersonLink>
+                    </Person>
+                    <Nickname>
+                      <NicknameLink to={item.nicknameLink}>
+                        {item.nickname}
+                      </NicknameLink>
+                    </Nickname>
+                    <Date>
+                      <DateLink to={item.dateLink}>{item.date}</DateLink>
+                    </Date>
+                  </Title>
+                  {item.postText.match(/[^\s]+/g).length >= 16 ? (
+                    <PostMessage short>
+                      {this.postMessage(item.postText)}
+                    </PostMessage>
+                  ) : (
+                    <PostMessage>{this.postMessage(item.postText)}</PostMessage>
+                  )}
+                  <ShortInfo>
+                    {item.src &&
+                      item.promo && (
+                        <Image alt={item.alt} src={item.src} shortImg />
+                      )}
+                    {item.src &&
+                      !item.promo && <Image alt={item.alt} src={item.src} />}
+                    {item.promo && (
+                      <Info>
+                        {item.promoTitle && (
+                          <InfoTitle>{item.promoTitle}</InfoTitle>
+                        )}
+                        {item.promoText && (
+                          <InfoText>{item.promoText}</InfoText>
+                        )}
+                        {item.promoLink && (
+                          <InfoLink>{item.promoLink}</InfoLink>
+                        )}
+                      </Info>
+                    )}
+                  </ShortInfo>
+                  <Actions>
+                    {this.state.actions.map((action, index) => {
+                      return (
+                        <Action key={action.key}>
+                          {action.alt === "likes" && item.key === 1 ?
+                            <ActionImage alt={action.alt} src={likeActive} /> :
+                            <ActionImage alt={action.alt} src={action.src} />}
+                          <Count>
+                            {" "}
+                            {
+                              item.actionPost[
+                                Object.keys(item.actionPost)[index]
+                              ]
+                            }{" "}
+                          </Count>
+                        </Action>
+                      );
+                    })}
+                  </Actions>
+                </ContentContainer>
+              </PostContent>
+            </Post>
+          );
+        })}
       </Container>
-    )
+    );
   }
 }
 

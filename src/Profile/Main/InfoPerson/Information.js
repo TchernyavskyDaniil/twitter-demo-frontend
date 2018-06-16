@@ -13,29 +13,18 @@ const Profile = styled.div`
 
 const ProfileTitle = styled.div``;
 
-const Nickname = styled.div`
+const Person = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-const NicknameLink = styled(Link)`
+const Nickname = styled(Link)`
   margin: 0;
   font-size: 22px;
   line-height: 22px;
   font-weight: bold;
   text-decoration: none;
   color: black;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const Text = styled.h1`
-  margin: 0;
-  font-size: 22px;
-  line-height: 22px;
-  font-weight: bold;
 
   &:hover {
     text-decoration: underline;
@@ -66,7 +55,7 @@ const FollowLink = styled(Link)`
   }
 `;
 
-const FollowText = styled.span`
+const FollowState = styled.span`
   font-size: 12px;
   line-height: 12px;
   color: #697787;
@@ -100,12 +89,6 @@ const InfoText = styled.div`
   font-size: 14px;
   line-height: 28px;
   color: #697787;
-`;
-
-const City = styled.span``;
-
-const Country = styled(City)`
-  padding-left: 4px;
 `;
 
 const Ref = styled.a`
@@ -155,7 +138,7 @@ class Information extends Component {
         icon: web,
         alt: "web",
         text: null,
-        link: "https://everyinteraction.com",
+        link: "https://everyinteraction.com"
       },
       {
         key: 3,
@@ -171,13 +154,13 @@ class Information extends Component {
     return (
       <Profile>
         <ProfileTitle>
-          <Nickname>
-            <NicknameLink to="/EveryInteract">Every Interaction</NicknameLink>
-            <Verified alt="Verified user" src={check}/>
-          </Nickname>
+          <Person>
+            <Nickname to="/EveryInteract">Every Interaction</Nickname>
+            <Verified alt="Verified user" src={check} />
+          </Person>
           <Follow>
             <FollowLink to="/EveryInteract">@EveryInteract</FollowLink>
-            <FollowText>Follows you</FollowText>
+            <FollowState>Follows you</FollowState>
           </Follow>
         </ProfileTitle>
         <ProfileBio>
@@ -185,19 +168,15 @@ class Information extends Component {
           how can we make things *work* amazing.
         </ProfileBio>
         <ProfileInfo>
-          {
-            this.state.info.map(item => {
-              return (
-                <Info key={item.key}>
-                  {item.icon ? <InfoIcon alt={item.alt} src={item.icon} /> : null}
-                  {item.link ? <Ref href={item.link}>{item.link}</Ref> : null}
-                  <InfoText>
-                    {item.text ? item.text : null}
-                  </InfoText>
-                </Info>
-              )
-            })
-          }
+          {this.state.info.map(item => {
+            return (
+              <Info key={item.key}>
+                {item.icon && <InfoIcon alt={item.alt} src={item.icon} />}
+                {item.link && <Ref href={item.link}>{item.link}</Ref>}
+                <InfoText>{item.text && item.text}</InfoText>
+              </Info>
+            );
+          })}
           <Actions>
             <Action>Tweet to</Action>
             <Action>Message</Action>

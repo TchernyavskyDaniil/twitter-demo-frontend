@@ -39,8 +39,7 @@ const HomeLink = styled(NavLink)`
   text-decoration: none;
   padding-bottom: 4px;
   padding-top: 4px;
-  
-  
+
   &.normal {
     border-bottom: 2px solid transparent;
   }
@@ -48,10 +47,10 @@ const HomeLink = styled(NavLink)`
   &.active {
     border-bottom: 2px solid black;
   }
-  
+
   &:hover {
     border-bottom: 2px solid black;
-    transition: all .1s ease-in-out;
+    transition: all 0.1s ease-in-out;
   }
 `;
 
@@ -62,9 +61,9 @@ const CrumbText = styled.span`
   line-height: 15px;
 `;
 
-const CrumbIcon = styled.img``;
+const CrumbLogo = styled.img``;
 
-const TwitterIcon = styled.img`
+const TwitterLogo = styled.img`
   min-height: 17px;
 `;
 
@@ -79,7 +78,7 @@ const Search = styled.form`
   position: relative;
 `;
 
-const SearchInput = styled.input`
+const SearchField = styled.input`
   border-radius: 100px;
   border: 1px solid #e6ecf0;
   background-color: #f5f8fa;
@@ -91,7 +90,7 @@ const SearchInput = styled.input`
   font-weight: normal;
   line-height: 14px;
   font-size: 12px;
-  
+
   &:focus {
     border: 1px solid black;
     outline: none;
@@ -115,11 +114,11 @@ const AvatarLink = styled(Link)`
   width: 26px;
   height: 26px;
   border-color: transparent;
-  
+
   &:hover {
     border: 1px solid black;
     border-radius: 100px;
-    transition: all .1s ease-in-out;
+    transition: all 0.1s ease-in-out;
   }
 `;
 
@@ -139,10 +138,10 @@ const Tweet = styled.button`
   line-height: 14px;
   font-weight: 500;
   cursor: pointer;
-  
+
   &:hover {
     opacity: 0.9;
-    transition: all .1s ease-in-out;
+    transition: all 0.1s ease-in-out;
   }
 `;
 
@@ -181,25 +180,26 @@ class Nav extends Component {
       <div className="container">
         <NavContainer>
           <BreadCrumbs>
-            {
-              this.state.navigation.map(item => {
-                return (
-                  <Crumb key={item.key}>
-                    <HomeLink to={item.link} className="normal" activeClassName="active" exact>
-                      <CrumbIcon alt={item.text} src={item.pic} />
-                      <CrumbText>
-                        {item.text}
-                      </CrumbText>
-                    </HomeLink>
-                  </Crumb>
-                )
-              })
-            }
+            {this.state.navigation.map(item => {
+              return (
+                <Crumb key={item.key}>
+                  <HomeLink
+                    to={item.link}
+                    className="normal"
+                    activeClassName="active"
+                    exact
+                  >
+                    <CrumbLogo alt={item.text} src={item.pic} />
+                    <CrumbText>{item.text}</CrumbText>
+                  </HomeLink>
+                </Crumb>
+              );
+            })}
           </BreadCrumbs>
-          <TwitterIcon alt="Twitter logo" src={twitterLogo} />
+          <TwitterLogo alt="Twitter logo" src={twitterLogo} />
           <Actions>
             <Search action="/search">
-              <SearchInput
+              <SearchField
                 type="text"
                 id="search-input"
                 placeholder="Search Twitter"

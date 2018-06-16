@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-const HeadingSwitches = styled.ul`
+const Tabs = styled.ul`
   padding: 12px 16px;
   margin: 0;
   display: flex;
@@ -11,29 +11,29 @@ const HeadingSwitches = styled.ul`
   list-style: none;
 `;
 
-const HeaderSwitch = styled.li`
+const Tab = styled.li`
   font-size: 18px;
   line-height: 20px;
   padding-right: 35px;
   font-weight: 500;
 `;
 
-const HeadingLink = styled(NavLink)`
+const TabLink = styled(NavLink)`
   text-decoration: none;
-  
+
   &.normal {
     color: black;
-    
+
     &:hover {
       border-bottom: 2px solid black;
     }
   }
-  
+
   &.active {
-    color: #1DA1F2;
-    
+    color: #1da1f2;
+
     &:hover {
-      border-bottom: 2px solid #1DA1F2;
+      border-bottom: 2px solid #1da1f2;
     }
   }
 `;
@@ -61,20 +61,23 @@ class ProfileHeading extends Component {
 
   render() {
     return (
-      <HeadingSwitches>
-        {
-          this.state.switches.map(item => {
-            return (
-              <HeaderSwitch key={item.key}>
-                <HeadingLink to={item.link} className="normal" activeClassName="active" exact>
-                  {item.text}
-                </HeadingLink>
-              </HeaderSwitch>
-            )
-          })
-        }
-      </HeadingSwitches>
-    )
+      <Tabs>
+        {this.state.switches.map(item => {
+          return (
+            <Tab key={item.key}>
+              <TabLink
+                to={item.link}
+                className="normal"
+                activeClassName="active"
+                exact
+              >
+                {item.text}
+              </TabLink>
+            </Tab>
+          );
+        })}
+      </Tabs>
+    );
   }
 }
 

@@ -11,14 +11,17 @@ const ProfileCanopyHeader = styled.img`
 `;
 
 const ProfileCanopy = styled.div`
-  display: grid;
-  grid-template-columns: 265px 1fr 1fr;
   min-height: 59px;
   position: relative;
   align-items: center;
+  display: flex;
+  flex-direction: row;
 `;
 
-const ProfileView = styled.div``;
+const ProfileView = styled.div`
+  flex-basis: 25%;
+  max-width: 25%;
+`;
 
 const AvatarLink = styled(Link)`
   position: absolute;
@@ -32,6 +35,7 @@ const AvatarLink = styled(Link)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px solid gainsboro;
 `;
 
 const Avatar = styled.img`
@@ -45,9 +49,11 @@ const ProfileInfo = styled.ul`
   display: flex;
   flex-direction: row;
   min-width: 200px;
-  justify-content: space-between;
-  padding-left: 18px;
   list-style: none;
+  flex-basis: 50%;
+  max-width: 50%;
+  justify-content: flex-start;
+  padding: 0;
 `;
 
 const Info = styled.li`
@@ -67,10 +73,9 @@ const Text = styled.span`
   color: #707e88;
 `;
 
-const SubText = styled(Text)`
+const Sub = styled(Text)`
   font-size: 18px;
   color: #707e88;
-  
 `;
 
 const InfoLink = styled(NavLink)`
@@ -81,25 +86,25 @@ const InfoLink = styled(NavLink)`
   text-decoration: none;
   align-items: center;
   width: 100%;
-  
+
   &.normal {
     border-bottom: 3px solid transparent;
   }
 
   &.active {
-    border-bottom: 3px solid #1DA1F2;
-    
-    ${SubText} {
-      color: #1DA1F2;
+    border-bottom: 3px solid #1da1f2;
+
+    ${Sub} {
+      color: #1da1f2;
     }
   }
-  
+
   &:hover {
-    border-bottom: 3px solid #1DA1F2;
-    transition: all .1s ease-in-out;
-    
-    ${SubText} {
-      color: #1DA1F2;
+    border-bottom: 3px solid #1da1f2;
+    transition: all 0.1s ease-in-out;
+
+    ${Sub} {
+      color: #1da1f2;
     }
   }
 `;
@@ -109,6 +114,8 @@ const UserActions = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  flex-basis: 25%;
+  max-width: 25%;
 `;
 
 const Follow = styled.button`
@@ -117,11 +124,11 @@ const Follow = styled.button`
   border: 1px solid #1da1f2;
   color: #1da1f2;
   cursor: pointer;
-  
+
   &:hover {
     color: white;
     background-color: #1da1f2;
-    transition: all .1s ease-in-out;
+    transition: all 0.1s ease-in-out;
   }
 `;
 
@@ -151,31 +158,31 @@ class Header extends Component {
         key: 1,
         text: "Tweets",
         link: "/EveryInteract",
-        subText: 8058
+        sub: 8058
       },
       {
         key: 2,
         text: "Following",
         link: "/following",
-        subText: 721
+        sub: 721
       },
       {
         key: 3,
         text: "Followers",
         link: "/followers",
-        subText: 1815
+        sub: 1815
       },
       {
         key: 4,
         text: "Likes",
         link: "/likes",
-        subText: 460
+        sub: 460
       },
       {
         key: 5,
         text: "Lists",
         link: "/lists",
-        subText: 2
+        sub: 2
       }
     ]
   };
@@ -189,26 +196,25 @@ class Header extends Component {
           <ProfileCanopy>
             <ProfileView>
               <AvatarLink to="/profile_images">
-                <Avatar src="/img/big-avatar.png"/>
+                <Avatar src="/img/big-avatar.png" />
               </AvatarLink>
             </ProfileView>
             <ProfileInfo>
-              {
-                this.state.profiles.map(item => {
-                  return (
-                    <Info key={item.key}>
-                      <InfoLink to={item.link} className="normal" activeClassName="active" exact>
-                        <Text>
-                          {item.text}
-                        </Text>
-                        <SubText>
-                          {item.subText}
-                        </SubText>
-                      </InfoLink>
-                    </Info>
-                  )
-                })
-              }
+              {this.state.profiles.map(item => {
+                return (
+                  <Info key={item.key}>
+                    <InfoLink
+                      to={item.link}
+                      className="normal"
+                      activeClassName="active"
+                      exact
+                    >
+                      <Text>{item.text}</Text>
+                      <Sub>{item.sub}</Sub>
+                    </InfoLink>
+                  </Info>
+                );
+              })}
             </ProfileInfo>
             <UserActions>
               <Follow>Follow</Follow>
