@@ -210,7 +210,7 @@ const Action = styled.div`
   flex-direction: row;
   align-items: center;
   cursor: pointer;
-  
+
   &:hover {
     ${ActionImage} {
       border-bottom: 1px solid black;
@@ -447,9 +447,11 @@ class Posts extends Component {
                     {this.state.actions.map((action, index) => {
                       return (
                         <Action key={action.key}>
-                          {action.alt === "likes" && item.key === 1 ?
-                            <ActionImage alt={action.alt} src={likeActive} /> :
-                            <ActionImage alt={action.alt} src={action.src} />}
+                          {action.alt === "likes" && item.key === 1 ? (
+                            <ActionImage alt={action.alt} src={likeActive} />
+                          ) : (
+                            <ActionImage alt={action.alt} src={action.src} />
+                          )}
                           <Count>
                             {" "}
                             {
