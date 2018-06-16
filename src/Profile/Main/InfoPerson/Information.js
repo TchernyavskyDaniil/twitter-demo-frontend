@@ -6,7 +6,7 @@ import web from "./web.svg";
 import reg from "./reg.svg";
 import check from "./check.svg";
 
-const ProfileContainer = styled.div`
+const Profile = styled.div`
   padding-top: 32px;
   max-width: 265px;
 `;
@@ -47,7 +47,7 @@ const Verified = styled.img`
   margin-top: 4px;
 `;
 
-const FollowContainer = styled.div`
+const Follow = styled.div`
   padding-top: 6px;
 `;
 
@@ -66,7 +66,7 @@ const FollowLink = styled(Link)`
   }
 `;
 
-const TextFollow = styled.span`
+const FollowText = styled.span`
   font-size: 12px;
   line-height: 12px;
   color: #697787;
@@ -83,17 +83,19 @@ const ProfileBio = styled.p`
   margin-right: 10px;
 `;
 
-const MainInfo = styled.div``;
-
-const Location = styled.div`
-  flex-direction: row;
-  display: flex;
-  padding-top: 13px;
+const ProfileInfo = styled.div`
+  padding-top: 5px;
 `;
 
-const LocationIcon = styled.img``;
+const Info = styled.div`
+  flex-direction: row;
+  display: flex;
+  padding-top: 4px;
+`;
 
-const Place = styled.div`
+const InfoIcon = styled.img``;
+
+const InfoText = styled.div`
   padding-left: 13px;
   font-size: 14px;
   line-height: 28px;
@@ -106,13 +108,7 @@ const Country = styled(City)`
   padding-left: 4px;
 `;
 
-const WebSite = styled.div`
-  padding-top: 0;
-`;
-
-const WebSiteIcon = styled.img``;
-
-const Source = styled.a`
+const Ref = styled.a`
   padding-left: 13px;
   font-size: 14px;
   line-height: 28px;
@@ -124,18 +120,6 @@ const Source = styled.a`
   }
 `;
 
-const DateReg = styled(Location)`
-  padding-top: 0;
-`;
-
-const DateIcon = styled.img``;
-
-const Date = styled(Place)``;
-
-const Month = styled(Country)``;
-
-const Year = styled(Month)``;
-
 const Actions = styled.div`
   padding-top: 17px;
   display: flex;
@@ -143,7 +127,7 @@ const Actions = styled.div`
   justify-content: space-between;
 `;
 
-const Tweet = styled.button`
+const Action = styled.button`
   color: white;
   padding: 10px 12px;
   border-radius: 100px;
@@ -156,50 +140,72 @@ const Tweet = styled.button`
   }
 `;
 
-const Message = styled(Tweet)``;
+class Information extends Component {
+  state = {
+    info: [
+      {
+        key: 1,
+        icon: location,
+        alt: "location",
+        text: "London, UK",
+        link: null
+      },
+      {
+        key: 2,
+        icon: web,
+        alt: "web",
+        text: null,
+        link: "https://everyinteraction.com",
+      },
+      {
+        key: 3,
+        icon: reg,
+        alt: "date registration",
+        text: "Joined May 2008",
+        link: null
+      }
+    ]
+  };
 
-export default () => {
-  return (
-    <ProfileContainer>
-      <ProfileTitle>
-        <Nickname>
-          <NicknameLink to="/EveryInteract">Every Interaction</NicknameLink>
-          <Verified alt="Verified user" src={check} />
-        </Nickname>
-        <FollowContainer>
-          <FollowLink to="/EveryInteract">@EveryInteract</FollowLink>
-          <TextFollow>Follows you</TextFollow>
-        </FollowContainer>
-      </ProfileTitle>
-      <ProfileBio>
-        UX Design studio focussed problem solving creativity. Design to us is
-        how can we make things *work* amazing.
-      </ProfileBio>
-      <MainInfo>
-        <Location>
-          <LocationIcon alt="location" src={location} />
-          <Place>
-            <City>London</City>,
-            <Country>UK</Country>
-          </Place>
-        </Location>
-        <WebSite>
-          <WebSiteIcon alt="website" src={web} />
-          <Source href="https://everyinteraction.com">everyinteraction.com</Source>
-        </WebSite>
-        <DateReg>
-          <DateIcon alt="date registration" src={reg} />
-          <Date>
-            Joined
-            <Month>May</Month>
-            <Year>2008</Year>
-          </Date>
-        </DateReg>
-        <Actions>
-          <Tweet>Tweet to</Tweet>
-          <Message>Message</Message>
-        </Actions>
-      </MainInfo>
-    </ProfileContainer>
-  );
-};
+  render() {
+    return (
+      <Profile>
+        <ProfileTitle>
+          <Nickname>
+            <NicknameLink to="/EveryInteract">Every Interaction</NicknameLink>
+            <Verified alt="Verified user" src={check}/>
+          </Nickname>
+          <Follow>
+            <FollowLink to="/EveryInteract">@EveryInteract</FollowLink>
+            <FollowText>Follows you</FollowText>
+          </Follow>
+        </ProfileTitle>
+        <ProfileBio>
+          UX Design studio focussed problem solving creativity. Design to us is
+          how can we make things *work* amazing.
+        </ProfileBio>
+        <ProfileInfo>
+          {
+            this.state.info.map(item => {
+              return (
+                <Info key={item.key}>
+                  {item.icon ? <InfoIcon alt={item.alt} src={item.icon} /> : null}
+                  {item.link ? <Ref href={item.link}>{item.link}</Ref> : null}
+                  <InfoText>
+                    {item.text ? item.text : null}
+                  </InfoText>
+                </Info>
+              )
+            })
+          }
+          <Actions>
+            <Action>Tweet to</Action>
+            <Action>Message</Action>
+          </Actions>
+        </ProfileInfo>
+      </Profile>
+    );
+  }
+}
+
+export default Information;

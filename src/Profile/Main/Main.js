@@ -9,8 +9,8 @@ const Container = styled.div`
 `;
 
 const Info = styled.div`
-  display: grid;
-  grid-template-columns: 265px 1fr 1fr;
+  display: flex;
+  flex-direction: row;
   padding-top: 10px;
 `;
 

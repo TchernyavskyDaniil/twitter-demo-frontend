@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Nav from "./Nav/Nav";
 import dotted from "./dotted.svg";
 
-const ProfileCanopy = styled.img`
+const ProfileCanopyHeader = styled.img`
   backface-visibility: hidden;
   will-change: transform;
   max-width: 100%;
 `;
 
-const ProfileInfoContainer = styled.div`
+const ProfileCanopy = styled.div`
   display: grid;
   grid-template-columns: 265px 1fr 1fr;
   min-height: 59px;
@@ -60,17 +60,6 @@ const Info = styled.li`
   cursor: pointer;
 `;
 
-const Active = styled(Link)`
-  border-bottom: 3px solid #1DA1F2;
-  padding-bottom: 8px;
-  padding-top: 8px;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  align-items: center;
-  width: 100%;
-`;
-
 const Text = styled.span`
   font-size: 12px;
   font-weight: 500;
@@ -80,10 +69,30 @@ const Text = styled.span`
 
 const SubText = styled(Text)`
   font-size: 18px;
+  color: #707e88;
+  
 `;
 
-const Default = styled(Active)`
-  border-bottom: 3px solid transparent;
+const InfoLink = styled(NavLink)`
+  padding-bottom: 8px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  align-items: center;
+  width: 100%;
+  
+  &.normal {
+    border-bottom: 3px solid transparent;
+  }
+
+  &.active {
+    border-bottom: 3px solid #1DA1F2;
+    
+    ${SubText} {
+      color: #1DA1F2;
+    }
+  }
   
   &:hover {
     border-bottom: 3px solid #1DA1F2;
@@ -93,10 +102,6 @@ const Default = styled(Active)`
       color: #1DA1F2;
     }
   }
-`;
-
-const SubTextActive = styled(SubText)`
-  color: #1DA1F2; 
 `;
 
 const UserActions = styled.div`
@@ -141,49 +146,47 @@ const Dropdown = styled.div`
 
 class Header extends Component {
   state = {
-    profileList: [
+    profiles: [
       {
         key: 1,
         text: "Tweets",
+        link: "/EveryInteract",
         subText: 8058
       },
       {
         key: 2,
         text: "Following",
+        link: "/following",
         subText: 721
       },
       {
         key: 3,
         text: "Followers",
+        link: "/followers",
         subText: 1815
       },
       {
         key: 4,
         text: "Likes",
+        link: "/likes",
         subText: 460
       },
       {
         key: 5,
         text: "Lists",
+        link: "/lists",
         subText: 2
       }
-    ],
-    activeIndex: null
-  };
-
-  handlerClickActive = index => {
-    this.setState({
-      activeIndex: index
-    })
+    ]
   };
 
   render() {
     return (
       <header>
         <Nav />
-        <ProfileCanopy alt="Profile Image" src="/img/profile.png" />
+        <ProfileCanopyHeader alt="Profile Image" src="/img/profile.png" />
         <div className="container">
-          <ProfileInfoContainer>
+          <ProfileCanopy>
             <ProfileView>
               <AvatarLink to="/profile_images">
                 <Avatar src="/img/big-avatar.png"/>
@@ -191,29 +194,17 @@ class Header extends Component {
             </ProfileView>
             <ProfileInfo>
               {
-                this.state.profileList.map((item, index) => {
+                this.state.profiles.map(item => {
                   return (
-                    <Info key={item.key} onClick={() => this.handlerClickActive(index)}>
-                      {
-                        this.state.activeIndex === index ?
-                          <Active to="/EveryInteract">
-                            <Text>
-                              {item.text}
-                            </Text>
-                            <SubTextActive>
-                              {item.subText}
-                            </SubTextActive>
-                          </Active>
-                          :
-                          <Default to="/EveryInteract">
-                            <Text>
-                              {item.text}
-                            </Text>
-                            <SubText className="active-text">
-                              {item.subText}
-                            </SubText>
-                          </Default>
-                      }
+                    <Info key={item.key}>
+                      <InfoLink to={item.link} className="normal" activeClassName="active" exact>
+                        <Text>
+                          {item.text}
+                        </Text>
+                        <SubText>
+                          {item.subText}
+                        </SubText>
+                      </InfoLink>
                     </Info>
                   )
                 })
@@ -223,7 +214,7 @@ class Header extends Component {
               <Follow>Follow</Follow>
               <Dropdown />
             </UserActions>
-          </ProfileInfoContainer>
+          </ProfileCanopy>
         </div>
       </header>
     );

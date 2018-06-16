@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import home from "./home.svg";
 import moments from "./moments.svg";
 import notifications from "./notifications.svg";
@@ -31,24 +31,28 @@ const Crumb = styled.li`
   cursor: pointer;
 `;
 
-const HomeLink = styled(Link)`
+const HomeLink = styled(NavLink)`
   display: flex;
   flex-direction: row;
   align-items: center;
   color: #667580;
   text-decoration: none;
-  border-bottom: 2px solid transparent;
   padding-bottom: 4px;
   padding-top: 4px;
+  
+  
+  &.normal {
+    border-bottom: 2px solid transparent;
+  }
+
+  &.active {
+    border-bottom: 2px solid black;
+  }
   
   &:hover {
     border-bottom: 2px solid black;
     transition: all .1s ease-in-out;
   }
-`;
-
-const HomeLinkActive = styled(HomeLink)`
-  border-bottom: 2px solid black;
 `;
 
 const CrumbText = styled.span`
@@ -58,20 +62,20 @@ const CrumbText = styled.span`
   line-height: 15px;
 `;
 
-const CrumbSvg = styled.img``;
+const CrumbIcon = styled.img``;
 
-const TwitterSvg = styled.img`
+const TwitterIcon = styled.img`
   min-height: 17px;
 `;
 
-const ActionsContainer = styled.div`
+const Actions = styled.div`
   display: flex;
   min-width: 390px;
   justify-content: space-between;
   align-items: center;
 `;
 
-const SearchContainer = styled.form`
+const Search = styled.form`
   position: relative;
 `;
 
@@ -94,7 +98,7 @@ const SearchInput = styled.input`
   }
 `;
 
-const Search = styled.button`
+const SearchBtn = styled.button`
   background-image: url(${search});
   position: absolute;
   height: 19px;
@@ -144,7 +148,7 @@ const Tweet = styled.button`
 
 class Nav extends Component {
   state = {
-    listMenu: [
+    navigation: [
       {
         key: 1,
         link: "/",
@@ -165,18 +169,11 @@ class Nav extends Component {
       },
       {
         key: 4,
-        link: "/EveryInteract#",
+        link: "/EveryInteract",
         pic: messages,
         text: "Messages"
       }
-    ],
-    activeIndex: null
-  };
-
-  handlerClickActive = index => {
-    this.setState({
-      activeIndex: index
-    });
+    ]
   };
 
   render() {
@@ -185,45 +182,35 @@ class Nav extends Component {
         <NavContainer>
           <BreadCrumbs>
             {
-              this.state.listMenu.map((item, index) => {
+              this.state.navigation.map(item => {
                 return (
-                  <Crumb key={item.key} onClick={() => this.handlerClickActive(index)}>
-                    {
-                      this.state.activeIndex === index ?
-                        <HomeLinkActive to={item.link}>
-                          <CrumbSvg alt={item.text} src={item.pic} />
-                          <CrumbText>
-                            {item.text}
-                          </CrumbText>
-                        </HomeLinkActive>
-                        :
-                        <HomeLink to={item.link}>
-                          <CrumbSvg alt={item.text} src={item.pic} />
-                          <CrumbText>
-                            {item.text}
-                          </CrumbText>
-                        </HomeLink>
-                    }
+                  <Crumb key={item.key}>
+                    <HomeLink to={item.link} className="normal" activeClassName="active" exact>
+                      <CrumbIcon alt={item.text} src={item.pic} />
+                      <CrumbText>
+                        {item.text}
+                      </CrumbText>
+                    </HomeLink>
                   </Crumb>
                 )
               })
             }
           </BreadCrumbs>
-          <TwitterSvg alt="Twitter logo" src={twitterLogo} />
-          <ActionsContainer>
-            <SearchContainer action="/search">
+          <TwitterIcon alt="Twitter logo" src={twitterLogo} />
+          <Actions>
+            <Search action="/search">
               <SearchInput
                 type="text"
                 id="search-input"
                 placeholder="Search Twitter"
               />
-              <Search />
-            </SearchContainer>
+              <SearchBtn />
+            </Search>
             <AvatarLink to="/EveryInteract">
-              <Avatar src={"/img/small-avatar.png"} />
+              <Avatar src="/img/small-avatar.png" />
             </AvatarLink>
             <Tweet>Tweet</Tweet>
-          </ActionsContainer>
+          </Actions>
         </NavContainer>
       </div>
     );

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import ProfileHeading from "./ProfileHeading";
 import pinned from "./pinned.svg";
-import contentImg from "./post-img.jpg";
+import contentImg from "./post.png";
 import comment from "./comment.svg";
 import retweet from "./retweet.svg";
 import like from "./like.svg";
@@ -13,31 +14,6 @@ const Container = styled.div`
   min-width: 591px;
   width: 600px;
   margin-left: 18px;
-`;
-
-const ProfileHeading = styled.ul`
-  padding: 12px 16px;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  list-style: none;
-`;
-
-const Heading = styled.li`
-  font-size: 18px;
-  line-height: 20px;
-  padding-right: 35px;
-  font-weight: 500;
-`;
-
-const HeadingLink = styled(Link)`
-  text-decoration: none;
-  color: #1da1f2;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;
 
 const Post = styled.div`
@@ -258,185 +234,256 @@ const Count = styled.span`
   color: #667580;
 `;
 
-export default () => {
-  return (
-    <Container>
-      <ProfileHeading>
-        <Heading>
-          <HeadingLink to="/EveryInteract">
-            Tweets
-          </HeadingLink>
-        </Heading>
-        <Heading>
-          <HeadingLink to="/EveryInteract/with_replies">
-            Tweets & replies
-          </HeadingLink>
-        </Heading>
-        <Heading>
-          <HeadingLink to="/EveryInteract/media">
-            Media
-          </HeadingLink>
-        </Heading>
-      </ProfileHeading>
-      <Post>
-        <AvatarContainer>
-          <Avatar alt="avatar" to="/EveryInteract" />
-        </AvatarContainer>
-        <ContentContainer>
-          <Pinned>Pinned Tweet</Pinned>
-          <Title>
-            <Person>
-              <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
-            </Person>
-            <Nickname>
-              <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
-            </Nickname>
-            <Date>
-              <DateLink to="/status/777">
-                2 Mar 2015
-              </DateLink>
-            </Date>
-          </Title>
-          <PostMessage>
-            We've made some more resources for all you wonderful
-            {" "}
-            <Hashtag to="/hashtag/design">#design</Hashtag>
-            {" "}
-            folk
-            {" "}
-            <LinkWebSite href="https://everyinteraction.com/resources/">
-              everyinteraction.com/resources/
-            </LinkWebSite>
-            {" "}
-            <Hashtag to="/hashtag/webdesign">#webdesign</Hashtag>{" "}
-            <Hashtag to="/hashtag/ui">#UI</Hashtag>{" "}
-          </PostMessage>
-          <PostLinkContainer imgWidth>
-            <Image alt="post image" src={contentImg} />
-          </PostLinkContainer>
-          <Actions>
-            <Action>
-              <ActionImage alt="comment" src={comment} />
-              <Count />
-            </Action>
-            <Action>
-              <ActionImage alt="retweet" src={retweet} />
-              <Count>17</Count>
-            </Action>
-            <Action>
-              <ActionImage alt="like" src={like} />
-              <Count>47</Count>
-            </Action>
-            <Action>
-              <ActionImage alt="message" src={message} />
-              <Count />
-            </Action>
-          </Actions>
-        </ContentContainer>
-      </Post>
-      <Post>
-        <AvatarContainer>
-          <Avatar alt="avatar" to="/EveryInteract" />
-        </AvatarContainer>
-        <ContentContainer>
-          <Title>
-            <Person>
-              <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
-            </Person>
-            <Nickname>
-              <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
-            </Nickname>
-            <Date>
-              <DateLink to="/status/777">
-                23h
-              </DateLink>
-            </Date>
-          </Title>
-          <PostMessage>
-            Our new website concept; Taking you from ...
-            {" "}
-            <LinkProfile to="/EveryInteract">@ Every Interaction</LinkProfile>
-            {" "}
-            <LinkWebSite href="https://instagram.com/p/BNFGrfhBP3M/">
-              instagram.com/p/BNFGrfhBP3M/
-            </LinkWebSite>
-            {" "}
-          </PostMessage>
-          <PostLinkContainer />
-          <Actions>
-            <Action>
-              <ActionImage alt="comment" src={comment} />
-              <Count>1</Count>
-            </Action>
-            <Action>
-              <ActionImage alt="retweet" src={retweet} />
-              <Count>4</Count>
-            </Action>
-            <Action>
-              <ActionImage alt="like" src={like} />
-              <Count>2</Count>
-            </Action>
-            <Action>
-              <ActionImage alt="message" src={message} />
-              <Count />
-            </Action>
-          </Actions>
-        </ContentContainer>
-      </Post>
-      <Post>
-        <AvatarContainer>
-          <Avatar alt="avatar" to="/EveryInteract" />
-        </AvatarContainer>
-        <ContentContainer>
-          <Title>
-            <Person>
-              <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
-            </Person>
-            <Nickname>
-              <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
-            </Nickname>
-            <Date>
-              <DateLink to="/status/777">
-                Nov 18
-              </DateLink>
-            </Date>
-          </Title>
-          <PostMessageLink>
-            Variable web fonts are coming, and will open a world of
-            opportunities for weight use online
-          </PostMessageLink>
-          <PostLinkContainer>
-            <Image alt="Promo website" src={"/img/promo.png"} />
-            <InfoContainer>
-              <InfoTitle>The Future of Web Fonts</InfoTitle>
-              <InfoText>
-                We love typefaces. They give our sites and applications
-                personalized feel. They convey the information and tell a story.
-                They establish information hierarchy. But they’re…
-              </InfoText>
-              <InfoLink href="https://vilijamis.com">vilijamis.com</InfoLink>
-            </InfoContainer>
-          </PostLinkContainer>
-          <Actions>
-            <Action>
-              <ActionImage alt="comment" src={comment} />
-              <Count />
-            </Action>
-            <Action>
-              <ActionImage alt="retweet" src={retweet} />
-              <Count />
-            </Action>
-            <Action>
-              <ActionImage alt="like" src={like} />
-              <Count />
-            </Action>
-            <Action>
-              <ActionImage alt="message" src={message} />
-              <Count />
-            </Action>
-          </Actions>
-        </ContentContainer>
-      </Post>
-    </Container>
-  );
-};
+class Posts extends Component {
+  state = {
+    textPin: "Pinned Tweet",
+
+    posts: [
+      {
+        key: 1,
+        avatar: "/img/small-avatar.png",
+        statusPin: true,
+        personLink: "/EveryInteract",
+        person: "Every Interaction",
+        nicknameLink: "/EveryInteract",
+        nickname: "@EveryInteract",
+        dateLink: "/status/777",
+        date: "2 Mar 2015",
+        postText: "We've made some more resources for all you wonderful " +
+        "#design folk everyinteraction.com/resources/ #webdesign #UI",
+        alt: "Post image",
+        src: "/img/post.png",
+        promoLink: false,
+        promoTitle: null,
+        promoText: null
+      },
+      {
+        key: 2,
+        avatar: "/img/small-avatar.png",
+        statusPin: false,
+        personLink: "/EveryInteract",
+        person: "Every Interaction",
+        nicknameLink: "/EveryInteract",
+        nickname: "@EveryInteract",
+        dateLink: "/status/776",
+        date: "23h",
+        postText: "Our new website concept; Taking you from ... @EveryInteraction instagram.com/p/BNFGrfhBP3M/",
+        alt: "post image",
+        src: null,
+        promoLink: false
+      },
+      {
+        key: 3,
+        avatar: "/img/small-avatar.png",
+        statusPin: false,
+        personLink: "/EveryInteract",
+        person: "Every Interaction",
+        nicknameLink: "/EveryInteract",
+        nickname: "@EveryInteract",
+        dateLink: "/status/775",
+        date: "Nov 18",
+        postText: "Variable web fonts are coming, " +
+        "and will open a world of opportunities for weight use online",
+        alt: "Promo website",
+        src: "/img/promo.png",
+        promoLink: true,
+        promoTitle: "The Future of Web Fonts",
+        promoText: "We love typefaces. They give our sites and applications " +
+        "personalized feel. They convey the information and tell a story. " +
+        "They establish information hierarchy. But they’re…"
+      }
+    ],
+    actions: [
+      {
+        key: 1,
+        alt: "Comment",
+        src: comment,
+        count: null
+      },
+      {
+        key: 2,
+        alt: "Retweet",
+        src: retweet,
+        count: null
+      },
+      {
+        key: 3,
+        alt: "Like",
+        src: like,
+        count: null,
+      },
+      {
+        key: 4
+      }
+    ]
+  };
+
+  render() {
+    return (
+      <Container>
+        <ProfileHeading />
+        <Post>
+          <AvatarContainer>
+            <Avatar alt="avatar" to="/EveryInteract" />
+          </AvatarContainer>
+          <ContentContainer>
+            <Pinned>Pinned Tweet</Pinned>
+            <Title>
+              <Person>
+                <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
+              </Person>
+              <Nickname>
+                <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
+              </Nickname>
+              <Date>
+                <DateLink to="/status/777">
+                  2 Mar 2015
+                </DateLink>
+              </Date>
+            </Title>
+            <PostMessage>
+              We've made some more resources for all you wonderful
+              {" "}
+              <Hashtag to="/hashtag/design">#design</Hashtag>
+              {" "}
+              folk
+              {" "}
+              <LinkWebSite href="https://everyinteraction.com/resources/">
+                everyinteraction.com/resources/
+              </LinkWebSite>
+              {" "}
+              <Hashtag to="/hashtag/webdesign">#webdesign</Hashtag>{" "}
+              <Hashtag to="/hashtag/ui">#UI</Hashtag>{" "}
+            </PostMessage>
+            <PostLinkContainer imgWidth>
+              <Image alt="post image" src={contentImg} />
+            </PostLinkContainer>
+            <Actions>
+              <Action>
+                <ActionImage alt="comment" src={comment} />
+                <Count />
+              </Action>
+              <Action>
+                <ActionImage alt="retweet" src={retweet} />
+                <Count>17</Count>
+              </Action>
+              <Action>
+                <ActionImage alt="like" src={like} />
+                <Count>47</Count>
+              </Action>
+              <Action>
+                <ActionImage alt="message" src={message} />
+                <Count />
+              </Action>
+            </Actions>
+          </ContentContainer>
+        </Post>
+        <Post>
+          <AvatarContainer>
+            <Avatar alt="avatar" to="/EveryInteract" />
+          </AvatarContainer>
+          <ContentContainer>
+            <Title>
+              <Person>
+                <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
+              </Person>
+              <Nickname>
+                <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
+              </Nickname>
+              <Date>
+                <DateLink to="/status/777">
+                  23h
+                </DateLink>
+              </Date>
+            </Title>
+            <PostMessage>
+              Our new website concept; Taking you from ...
+              {" "}
+              <LinkProfile to="/EveryInteract">@ Every Interaction</LinkProfile>
+              {" "}
+              <LinkWebSite href="https://instagram.com/p/BNFGrfhBP3M/">
+                instagram.com/p/BNFGrfhBP3M/
+              </LinkWebSite>
+              {" "}
+            </PostMessage>
+            <PostLinkContainer />
+            <Actions>
+              <Action>
+                <ActionImage alt="comment" src={comment} />
+                <Count>1</Count>
+              </Action>
+              <Action>
+                <ActionImage alt="retweet" src={retweet} />
+                <Count>4</Count>
+              </Action>
+              <Action>
+                <ActionImage alt="like" src={like} />
+                <Count>2</Count>
+              </Action>
+              <Action>
+                <ActionImage alt="message" src={message} />
+                <Count />
+              </Action>
+            </Actions>
+          </ContentContainer>
+        </Post>
+        <Post>
+          <AvatarContainer>
+            <Avatar alt="avatar" to="/EveryInteract" />
+          </AvatarContainer>
+          <ContentContainer>
+            <Title>
+              <Person>
+                <PersonLink to="/EveryInteract">Every Interaction</PersonLink>
+              </Person>
+              <Nickname>
+                <NicknameLink to="/EveryInteract">@EveryInteract</NicknameLink>
+              </Nickname>
+              <Date>
+                <DateLink to="/status/777">
+                  Nov 18
+                </DateLink>
+              </Date>
+            </Title>
+            <PostMessageLink>
+              Variable web fonts are coming, and will open a world of
+              opportunities for weight use online
+            </PostMessageLink>
+            <PostLinkContainer>
+              <Image alt="Promo website" src={"/img/promo.png"} />
+              <InfoContainer>
+                <InfoTitle>The Future of Web Fonts</InfoTitle>
+                <InfoText>
+                  We love typefaces. They give our sites and applications
+                  personalized feel. They convey the information and tell a story.
+                  They establish information hierarchy. But they’re…
+                </InfoText>
+                <InfoLink href="https://vilijamis.com">vilijamis.com</InfoLink>
+              </InfoContainer>
+            </PostLinkContainer>
+            <Actions>
+              <Action>
+                <ActionImage alt="comment" src={comment} />
+                <Count />
+              </Action>
+              <Action>
+                <ActionImage alt="retweet" src={retweet} />
+                <Count />
+              </Action>
+              <Action>
+                <ActionImage alt="like" src={like} />
+                <Count />
+              </Action>
+              <Action>
+                <ActionImage alt="message" src={message} />
+                <Count />
+              </Action>
+            </Actions>
+          </ContentContainer>
+        </Post>
+      </Container>
+    )
+  }
+}
+
+export default Posts;
