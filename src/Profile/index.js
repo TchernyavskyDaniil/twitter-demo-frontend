@@ -20,15 +20,16 @@ export default () => {
   return (
     <div>
       <Helmet>
-        <title>Profile Page</title>
+        <title>EveryInteract (@EveryInteract)</title>
       </Helmet>
       <Header />
       <main>
         <Container>
           <div className="container">
-            <Info>
+            <Info className="row">
               <InfoPerson />
               <Posts />
+              <div className="col-xs-3" />
             </Info>
           </div>
         </Container>

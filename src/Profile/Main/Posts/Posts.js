@@ -11,9 +11,6 @@ import likeActive from "./like-active.svg";
 
 const Container = styled.div`
   background-color: white;
-  min-width: 591px;
-  width: 600px;
-  margin-left: 18px;
 `;
 
 const Post = styled.section`
@@ -347,33 +344,32 @@ class Posts extends Component {
         src: message,
         count: null
       }
-    ],
-    activeIndex: 0
+    ]
   };
 
   postMessage = text => {
-    let newText = [];
-    let textArr = text.split(" ");
+    const newText = [];
+    const textArr = text.split(" ");
     let element;
 
     for (let i = 0; i < textArr.length; i++) {
       if (textArr[i][0] === "#") {
         element = (
           <span>
-            <Hashtag to={"/" + textArr[i]}>{textArr[i]}</Hashtag>{" "}
+            <Hashtag to={`/${textArr[i]}`}>{textArr[i]}</Hashtag>{" "}
           </span>
         );
         // Пока только с com, раз сам сказал, что слишком рано лезу
       } else if (textArr[i].includes(".com")) {
         element = (
           <span>
-            <LinkWebSite href={"https://" + textArr[i]}>
+            <LinkWebSite href={`https://${textArr[i]}`}>
               {textArr[i]}
             </LinkWebSite>{" "}
           </span>
         );
       } else {
-        element = textArr[i] + " ";
+        element = `${textArr[i]} `;
       }
 
       newText.push(element);
@@ -384,92 +380,96 @@ class Posts extends Component {
 
   render() {
     return (
-      <Container>
-        <ProfileHeading />
-        {this.state.posts.map(item => {
-          return (
-            <Post key={item.key}>
-              {item.statusPin && (
-                <Pinned>
-                  <PinnedIcon alt="Pinned icon" src={pinned} />
-                  <PinnedText>{this.state.textPin}</PinnedText>
-                </Pinned>
-              )}
-              <PostContent>
-                <AvatarContainer>
-                  <Avatar src={item.avatar} />
-                </AvatarContainer>
-                <ContentContainer>
-                  <Title>
-                    <Person>
-                      <PersonLink to={item.personLink}>
-                        {item.person}
-                      </PersonLink>
-                    </Person>
-                    <Nickname>
-                      <NicknameLink to={item.nicknameLink}>
-                        {item.nickname}
-                      </NicknameLink>
-                    </Nickname>
-                    <Date>
-                      <DateLink to={item.dateLink}>{item.date}</DateLink>
-                    </Date>
-                  </Title>
-                  {item.postText.match(/[^\s]+/g).length >= 16 ? (
-                    <PostMessage short>
-                      {this.postMessage(item.postText)}
-                    </PostMessage>
-                  ) : (
-                    <PostMessage>{this.postMessage(item.postText)}</PostMessage>
-                  )}
-                  <ShortInfo>
-                    {item.src &&
-                      item.promo && (
-                        <Image alt={item.alt} src={item.src} shortImg />
-                      )}
-                    {item.src &&
-                      !item.promo && <Image alt={item.alt} src={item.src} />}
-                    {item.promo && (
-                      <Info>
-                        {item.promoTitle && (
-                          <InfoTitle>{item.promoTitle}</InfoTitle>
-                        )}
-                        {item.promoText && (
-                          <InfoText>{item.promoText}</InfoText>
-                        )}
-                        {item.promoLink && (
-                          <InfoLink>{item.promoLink}</InfoLink>
-                        )}
-                      </Info>
+      <div className="col-xs-6">
+        <Container>
+          <ProfileHeading />
+          {this.state.posts.map(item => {
+            return (
+              <Post key={item.key}>
+                {item.statusPin && (
+                  <Pinned>
+                    <PinnedIcon alt="Pinned icon" src={pinned} />
+                    <PinnedText>{this.state.textPin}</PinnedText>
+                  </Pinned>
+                )}
+                <PostContent>
+                  <AvatarContainer>
+                    <Avatar src={item.avatar} />
+                  </AvatarContainer>
+                  <ContentContainer>
+                    <Title>
+                      <Person>
+                        <PersonLink to={item.personLink}>
+                          {item.person}
+                        </PersonLink>
+                      </Person>
+                      <Nickname>
+                        <NicknameLink to={item.nicknameLink}>
+                          {item.nickname}
+                        </NicknameLink>
+                      </Nickname>
+                      <Date>
+                        <DateLink to={item.dateLink}>{item.date}</DateLink>
+                      </Date>
+                    </Title>
+                    {item.postText.match(/[^\s]+/g).length >= 16 ? (
+                      <PostMessage short>
+                        {this.postMessage(item.postText)}
+                      </PostMessage>
+                    ) : (
+                      <PostMessage>
+                        {this.postMessage(item.postText)}
+                      </PostMessage>
                     )}
-                  </ShortInfo>
-                  <Actions>
-                    {this.state.actions.map((action, index) => {
-                      return (
-                        <Action key={action.key}>
-                          {action.alt === "likes" && item.key === 1 ? (
-                            <ActionImage alt={action.alt} src={likeActive} />
-                          ) : (
-                            <ActionImage alt={action.alt} src={action.src} />
+                    <ShortInfo>
+                      {item.src &&
+                        item.promo && (
+                          <Image alt={item.alt} src={item.src} shortImg />
+                        )}
+                      {item.src &&
+                        !item.promo && <Image alt={item.alt} src={item.src} />}
+                      {item.promo && (
+                        <Info>
+                          {item.promoTitle && (
+                            <InfoTitle>{item.promoTitle}</InfoTitle>
                           )}
-                          <Count>
-                            {" "}
-                            {
-                              item.actionPost[
-                                Object.keys(item.actionPost)[index]
-                              ]
-                            }{" "}
-                          </Count>
-                        </Action>
-                      );
-                    })}
-                  </Actions>
-                </ContentContainer>
-              </PostContent>
-            </Post>
-          );
-        })}
-      </Container>
+                          {item.promoText && (
+                            <InfoText>{item.promoText}</InfoText>
+                          )}
+                          {item.promoLink && (
+                            <InfoLink>{item.promoLink}</InfoLink>
+                          )}
+                        </Info>
+                      )}
+                    </ShortInfo>
+                    <Actions>
+                      {this.state.actions.map((action, index) => {
+                        return (
+                          <Action key={action.key}>
+                            {action.alt === "likes" && item.key === 1 ? (
+                              <ActionImage alt={action.alt} src={likeActive} />
+                            ) : (
+                              <ActionImage alt={action.alt} src={action.src} />
+                            )}
+                            <Count>
+                              {" "}
+                              {
+                                item.actionPost[
+                                  Object.keys(item.actionPost)[index]
+                                ]
+                              }{" "}
+                            </Count>
+                          </Action>
+                        );
+                      })}
+                    </Actions>
+                  </ContentContainer>
+                </PostContent>
+              </Post>
+            );
+          })}
+        </Container>
+      </div>
     );
   }
 }

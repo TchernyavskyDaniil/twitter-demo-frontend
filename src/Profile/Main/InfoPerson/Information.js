@@ -8,7 +8,6 @@ import check from "./check.svg";
 
 const Profile = styled.div`
   padding-top: 32px;
-  max-width: 265px;
 `;
 
 const ProfileTitle = styled.div``;
@@ -153,37 +152,39 @@ class Information extends Component {
 
   render() {
     return (
-      <Profile>
-        <ProfileTitle>
-          <Person>
-            <Nickname to="/EveryInteract">Every Interaction</Nickname>
-            <Verified alt="Verified user" src={check} />
-          </Person>
-          <Follow>
-            <FollowLink to="/EveryInteract">@EveryInteract</FollowLink>
-            <FollowState>Follows you</FollowState>
-          </Follow>
-        </ProfileTitle>
-        <ProfileBio>
-          UX Design studio focussed problem solving creativity. Design to us is
-          how can we make things *work* amazing.
-        </ProfileBio>
-        <ProfileInfo>
-          {this.state.info.map(item => {
-            return (
-              <Info key={item.key}>
-                {item.icon && <InfoIcon alt={item.alt} src={item.icon} />}
-                {item.link && <Ref href={item.link}>{item.link}</Ref>}
-                <InfoText>{item.text && item.text}</InfoText>
-              </Info>
-            );
-          })}
-          <Actions>
-            <Action>Tweet to</Action>
-            <Action>Message</Action>
-          </Actions>
-        </ProfileInfo>
-      </Profile>
+      <div className="col-xs-3">
+        <Profile>
+          <ProfileTitle>
+            <Person>
+              <Nickname to="/EveryInteract">Every Interaction</Nickname>
+              <Verified alt="Verified user" src={check} />
+            </Person>
+            <Follow>
+              <FollowLink to="/EveryInteract">@EveryInteract</FollowLink>
+              <FollowState>Follows you</FollowState>
+            </Follow>
+          </ProfileTitle>
+          <ProfileBio>
+            UX Design studio focussed problem solving creativity. Design to us
+            is how can we make things *work* amazing.
+          </ProfileBio>
+          <ProfileInfo>
+            {this.state.info.map(item => {
+              return (
+                <Info key={item.key}>
+                  {item.icon && <InfoIcon alt={item.alt} src={item.icon} />}
+                  {item.link && <Ref href={item.link}>{item.link}</Ref>}
+                  <InfoText>{item.text && item.text}</InfoText>
+                </Info>
+              );
+            })}
+            <Actions>
+              <Action>Tweet to</Action>
+              <Action>Message</Action>
+            </Actions>
+          </ProfileInfo>
+        </Profile>
+      </div>
     );
   }
 }

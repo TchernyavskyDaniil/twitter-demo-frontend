@@ -1,7 +1,27 @@
 {
+  "parser": "babel-eslint",
   "extends": "airbnb",
   "env": {
     "browser": true,
     "jest": true
+  },
+  "rules": {
+    // Отключаю сообщения о том, чтобы использовал jsx
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    // let foo = () => 0;
+    // Вместо
+    // let foo = () => {
+    //     return 0;
+    // };
+    "arrow-body-style": ["error", "always"],
+    // "string" вместо 'string'
+    "quotes": [2, "double", {"allowTemplateLiterals": true}],
+    // Не ставим , у последнего ключ - значение
+    "comma-dangle": ["error", "never"],
+    // i++ для циклов вместо i =+ 1, в остальных случаях вариант 2
+    "no-plusplus": [2, {"allowForLoopAfterthoughts": true }],
+    "no-confusing-arrow": ["error", {"allowParens": true}],
+    // https://eslint.org/docs/rules/arrow-parens
+    "arrow-parens": [2, "as-needed"]
   }
 }
