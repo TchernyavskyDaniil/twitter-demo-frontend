@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import search from "./search.svg";
+import React from 'react';
+import styled from 'styled-components';
+import iconSearch from './search.svg';
 
 const Search = styled.form`
   position: relative;
@@ -26,7 +26,8 @@ const SearchField = styled.input`
 `;
 
 const SearchBtn = styled.button`
-  background-image: url(${search});
+  cursor: pointer;
+  background-image: url(${iconSearch});
   position: absolute;
   height: 19px;
   width: 19px;
@@ -36,13 +37,12 @@ const SearchBtn = styled.button`
   border-color: transparent;
   right: 10px;
   top: 6px;
+  border-radius: 50%;
 `;
 
-export default () => {
-  return (
-    <Search action="/search">
-      <SearchField type="text" id="search-input" placeholder="Search Twitter" />
-      <SearchBtn />
-    </Search>
-  );
-};
+export default () => (
+  <Search action="/search">
+    <SearchField type="text" id="search-input" placeholder="Search Twitter" />
+    <SearchBtn />
+  </Search>
+);

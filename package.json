@@ -6,7 +6,6 @@
     "babel-eslint": "^8.2.3",
     "flexboxgrid2": "^7.2.1",
     "normalize.css": "^8.0.0",
-    "prettier": "1.13.5",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-helmet": "^5.2.0",
@@ -17,9 +16,12 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.9.1"
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.9.1",
+    "prettier": "^1.13.5"
   },
   "scripts": {
     "start": "react-scripts start",
