@@ -76,7 +76,7 @@ const Stats = styled.ul`
   min-width: 200px;
   list-style: none;
   justify-content: flex-start;
-  padding: 0;
+  padding: 0 5px;
 `;
 
 export default () => (

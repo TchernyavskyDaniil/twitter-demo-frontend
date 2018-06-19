@@ -7,17 +7,15 @@ import PersonInfo from './PersonInfo';
 import Post from './Tweet';
 import Tab from './Tab';
 import Actions from './Actions';
-import Content from './Content';
-import Title from './Title';
 import Recommendtation from './Recomnendation';
 import Option from './Option';
 import Trend from './Trend';
+import CommonFollowers from './CommonFollowers';
+import Media from './Media';
 import iconLocation from './location.svg';
 import iconWeb from './web.svg';
 import iconReg from './reg.svg';
 import iconPinned from './pinned.svg';
-import iconFollower from './follower.svg';
-import iconMedia from './media.svg';
 import iconPeople from './people.svg';
 
 const Container = styled.div`
@@ -57,20 +55,8 @@ const PostContainer = styled.section`
   }
 `;
 
-const Person = styled.div``;
-
-const PersonContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 19px;
-`;
-
-const ContentContainer = styled.div`
-  margin: -8px 0 0 -8px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+const Person = styled.div`
+  margin-bottom: 20px;
 `;
 
 const Recommendations = styled.div`
@@ -96,6 +82,7 @@ const Sidebar = styled.div`
   background-color: white;
   padding: 12px 16px;
   margin-bottom: 10px;
+  min-height: 290px;
 `;
 
 const SearchText = styled.p`
@@ -104,11 +91,11 @@ const SearchText = styled.p`
   color: #1da1f2;
   margin: 0;
   margin-left: 8px;
+  border-bottom: 1px solid transparent;
 `;
 
 const SearchLink = styled(Link)`
   text-decoration: none;
-  border-bottom: 1px solid transparent;
   display: flex;
   flex-direction: row;
   margin-top: 15px;
@@ -124,7 +111,9 @@ const SearchIcon = styled.img``;
 
 const Trends = styled.div``;
 
-const TrendsContainer = styled.div``;
+const TrendsContainer = styled.div`
+  margin-top: 14px;
+`;
 
 export default () => (
   <main>
@@ -134,7 +123,7 @@ export default () => (
     <Header />
     <Container>
       <div className="container">
-        <Info className="row">
+        <Info>
           <div className="col-xs-3">
             <Person>
               <PersonInfo
@@ -155,111 +144,9 @@ export default () => (
                 dateSrc={iconReg}
                 date="May 2008"
               />
-              <PersonContent>
-                <Title
-                  titleLink="/followers"
-                  titleSrc={iconFollower}
-                  titleAlt="follower icon"
-                  titleText="6 Followers you now"
-                />
-                <ContentContainer>
-                  <Content
-                    contentLink="/name1"
-                    contentSrc={
-                      process.env.PUBLIC_URL + '/img/avatar-person-1.png'
-                    }
-                    contentAlt="avatar"
-                    contentSize={false}
-                  />
-                  <Content
-                    contentLink="/name2"
-                    contentSrc={
-                      process.env.PUBLIC_URL + '/img/avatar-person-2.png'
-                    }
-                    contentAlt="avatar"
-                    contentSize={false}
-                  />
-                  <Content
-                    contentLink="/name3"
-                    contentSrc={
-                      process.env.PUBLIC_URL + '/img/avatar-person-3.png'
-                    }
-                    contentAlt="avatar"
-                    contentSize={false}
-                  />
-                  <Content
-                    contentLink="/name4"
-                    contentSrc={
-                      process.env.PUBLIC_URL + '/img/avatar-person-4.png'
-                    }
-                    contentAlt="avatar"
-                    contentSize={false}
-                  />
-                  <Content
-                    contentLink="/name5"
-                    contentSrc={
-                      process.env.PUBLIC_URL + '/img/avatar-person-5.png'
-                    }
-                    contentAlt="avatar"
-                    contentSize={false}
-                  />
-                  <Content
-                    contentLink="/name6"
-                    contentSrc={
-                      process.env.PUBLIC_URL + '/img/avatar-person-6.png'
-                    }
-                    contentAlt="avatar"
-                    contentSize={false}
-                  />
-                </ContentContainer>
-              </PersonContent>
-              <PersonContent>
-                <Title
-                  titleLink="/media"
-                  titleSrc={iconMedia}
-                  titleAlt="media icon"
-                  titleText="522 Photos and videos"
-                />
-                <ContentContainer>
-                  <Content
-                    contentLink="/media1"
-                    contentSrc={process.env.PUBLIC_URL + '/img/media-1.png'}
-                    contentAlt="media"
-                    contentSize
-                  />
-                  <Content
-                    contentLink="/media2"
-                    contentSrc={process.env.PUBLIC_URL + '/img/media-2.png'}
-                    contentAlt="media"
-                    contentSize
-                  />
-                  <Content
-                    contentLink="/media3"
-                    contentSrc={process.env.PUBLIC_URL + '/img/media-3.png'}
-                    contentAlt="media"
-                    contentSize
-                  />
-                  <Content
-                    contentLink="/media4"
-                    contentSrc={process.env.PUBLIC_URL + '/img/media-4.png'}
-                    contentAlt="media"
-                    contentSize
-                  />
-                  <Content
-                    contentLink="/media5"
-                    contentSrc={process.env.PUBLIC_URL + '/img/media-5.png'}
-                    contentAlt="media"
-                    contentSize
-                  />
-                  <Content
-                    contentLink="/media6"
-                    contentSrc={process.env.PUBLIC_URL + '/img/media-6.png'}
-                    contentAlt="media"
-                    contentSize
-                  />
-                </ContentContainer>
-              </PersonContent>
             </Person>
+            <CommonFollowers />
+            <Media />
           </div>
           <div className="col-xs-6">
             <Tabs>
@@ -395,38 +282,38 @@ export default () => (
                 </SideTitle>
                 <TrendsContainer>
                   <Trend
-                    trendTag="BringYourDogToWorkDay"
-                    trendLink="/hasttag/BringYourDogToWorkDay"
+                    trendTag="#BringYourDogToWorkDay"
+                    trendLink="/hashtag/BringYourDogToWorkDay"
                     trendDesc={null}
                     trendTweets={null}
                   />
                   <Trend
-                    trendTag="FridayFeeling"
+                    trendTag="#FridayFeeling"
                     trendLink="/hashtag/FridayFeeling"
                     trendDesc={null}
                     trendTweets="12.1K Tweets"
                   />
                   <Trend
-                    trendTag="BrexitAnniversary"
+                    trendTag="#BrexitAnniversary"
                     trendLink="/hashtag/BrexitAnniversary"
                     trendDesc="It’s one year since the UK voted to leave the European Union"
                     trendTweets={null}
                   />
                   <Trend
                     trendTag="HMS Queen Elizabeth"
-                    trendLink="/hashtag/HMS_Queen_Elizabeth"
+                    trendLink="/search/HMS_Queen_Elizabeth"
                     trendDesc={null}
                     trendTweets="1,036 Tweets"
                   />
                   <Trend
                     trendTag="Joe Budden"
-                    trendLink="/hashtag/Joe_Budden"
+                    trendLink="/search/Joe_Budden"
                     trendDesc={null}
                     trendTweets="1,036 Tweets"
                   />
                   <Trend
                     trendTag="Trident"
-                    trendLink="/hashtag/Trident"
+                    trendLink="/search/Trident"
                     trendDesc={null}
                     trendTweets="6,136 Tweets"
                   />

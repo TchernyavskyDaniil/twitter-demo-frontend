@@ -7,10 +7,20 @@ const Hashtag = styled.span`
   font-size: 15px;
   line-height: 20px;
   font-weight: bold;
+  border-bottom: 1px solid transparent;
 `;
 
 const TrendLink = styled(Link)`
   text-decoration: none;
+  display: block;
+  padding-bottom: 10px;
+  min-height: 20px;
+
+  &:hover {
+    ${Hashtag} {
+      border-bottom: 1px solid #1da1f2;
+    }
+  }
 `;
 
 const Desc = styled.p`
@@ -18,14 +28,13 @@ const Desc = styled.p`
   font-size: 12px;
   line-height: 16px;
   color: #697787;
-  padding-top: 4px;
 `;
 
 const Tweets = Desc.extend``;
 
 export default ({ trendTag, trendLink, trendDesc, trendTweets }) => (
   <TrendLink to={trendLink}>
-    <Hashtag>#{trendTag}</Hashtag>
+    <Hashtag>{trendTag}</Hashtag>
     <Desc>{trendDesc}</Desc>
     <Tweets>{trendTweets}</Tweets>
   </TrendLink>
