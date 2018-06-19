@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import iconSearch from './search.svg';
+import iconSearch from '../Header/search.svg';
 
 const Search = styled.form`
   position: relative;
+  margin: 0 8px 0 8px;
 `;
 
 const SearchField = styled.input`

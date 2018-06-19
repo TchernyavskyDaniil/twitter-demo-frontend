@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import iconCheck from './check.svg';
+import Button from '../UI/Button';
 
 const Profile = styled.div`
   padding-top: 32px;
@@ -107,20 +108,6 @@ const Actions = styled.div`
   justify-content: space-between;
 `;
 
-const Action = styled.button`
-  color: white;
-  padding: 10px 12px;
-  border-radius: 100px;
-  background-color: #1da1f2;
-  min-width: 128px;
-  cursor: pointer;
-  border: none;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
 export default ({
   linkPerson,
   name,
@@ -165,8 +152,8 @@ export default ({
         <InfoText>{date}</InfoText>
       </Info>
       <Actions>
-        <Action>Tweet to</Action>
-        <Action>Message</Action>
+        <Button>Tweet to</Button>
+        <Button>Message</Button>
       </Actions>
     </ProfileInfo>
   </Profile>

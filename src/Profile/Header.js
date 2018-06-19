@@ -2,15 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Stat from './Stat';
+import Button from '../UI/Button';
 import iconDotted from './dotted.svg';
 
-const ProfileCanopyHeader = styled.img`
+const Background = styled.img`
   backface-visibility: hidden;
   will-change: transform;
   max-width: 100%;
 `;
 
-const ProfileCanopy = styled.div`
+const ProfileHeader = styled.div`
   min-height: 59px;
   position: relative;
   align-items: center;
@@ -45,27 +46,9 @@ const UserActions = styled.div`
   align-items: center;
 `;
 
-const Follow = styled.button`
-  padding: 9px 27px;
-  border-radius: 100px;
-  border: 1px solid #1da1f2;
-  color: #1da1f2;
-  cursor: pointer;
-  background-color: transparent;
-
-  &:hover {
-    color: white;
-    background-color: #1da1f2;
-    transition: all 0.1s ease-in-out;
-  }
-`;
-
 const Dropdown = styled.div`
   height: 14px;
   width: 4px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
   cursor: pointer;
   padding: 10px;
   margin-left: 15px;
@@ -98,10 +81,10 @@ const Stats = styled.ul`
 
 export default () => (
   <div>
-    <ProfileCanopyHeader alt="Profile Image" src="/img/profile.png" />
+    <Background alt="Profile Image" src="/img/profile.png" />
     <div className="container">
       <div className="row">
-        <ProfileCanopy>
+        <ProfileHeader>
           <div className="col-xs-3">
             <AvatarLink to="/profile_images">
               <Avatar src="/img/big-avatar.png" />
@@ -118,11 +101,11 @@ export default () => (
           </div>
           <div className="col-xs-3">
             <UserActions>
-              <Follow>Follow</Follow>
+              <Button primary>Follow</Button>
               <Dropdown />
             </UserActions>
           </div>
-        </ProfileCanopy>
+        </ProfileHeader>
       </div>
     </div>
   </div>

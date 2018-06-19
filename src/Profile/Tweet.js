@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styledMap from 'styled-map';
 
 const TweetContent = styled.div`
   display: flex;
@@ -91,9 +92,17 @@ const DateLink = styled(Link)`
 `;
 
 const Message = styled.p`
-  font-size: ${props => (props.short ? '16px' : '25px')};
+  font-size: ${styledMap({
+    short: '16px',
+    default: '25px',
+  })};
+
+  line-height: ${styledMap({
+    short: '22px',
+    default: '30px',
+  })};
+
   font-weight: 200;
-  line-height: ${props => (props.short ? '22px' : '30px')};
   color: black;
   margin: 2px 0 8px 0;
   white-space: pre-wrap;
@@ -119,8 +128,16 @@ const LinkWebSite = styled.a`
 `;
 
 const Image = styled.img`
-  width: ${props => (props.shortImg ? '126px' : '100%')};
-  height: ${props => (props.shortImg ? '126px' : '100%')};
+  width: ${styledMap({
+    shortImg: '126px',
+    default: '100%',
+  })};
+
+  height: ${styledMap({
+    shortImg: '126px',
+    default: '100%',
+  })};
+
   backface-visibility: hidden;
   will-change: transform;
   max-width: 100%;
