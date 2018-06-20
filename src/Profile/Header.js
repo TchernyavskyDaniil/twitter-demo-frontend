@@ -20,6 +20,12 @@ const ProfileHeader = styled.div`
   width: 100%;
 `;
 
+const AvatarContainer = styled.div`
+  max-width: 265px;
+  padding: 0 12px 0 12px;
+  width: 100%;
+`;
+
 const AvatarLink = styled(Link)`
   position: absolute;
   border-radius: 100px;
@@ -44,6 +50,7 @@ const UserActions = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  min-height: 36px;
 `;
 
 const Dropdown = styled.div`
@@ -79,17 +86,21 @@ const Stats = styled.ul`
   padding: 0 5px;
 `;
 
+const Action = styled(Button)`
+  padding: 10px 20px;
+`;
+
 export default () => (
-  <div>
+  <React.Fragment>
     <Background alt="Profile Image" src="/img/profile.png" />
     <div className="container">
       <div className="row">
         <ProfileHeader>
-          <div className="col-xs-3">
+          <AvatarContainer>
             <AvatarLink to="/profile_images">
               <Avatar src="/img/big-avatar.png" />
             </AvatarLink>
-          </div>
+          </AvatarContainer>
           <div className="col-xs-6">
             <Stats>
               <Stat link="/EveryInteract" text="Tweets" count="8058" />
@@ -101,12 +112,12 @@ export default () => (
           </div>
           <div className="col-xs-3">
             <UserActions>
-              <Button primary>Follow</Button>
+              <Action primary>Follow</Action>
               <Dropdown />
             </UserActions>
           </div>
         </ProfileHeader>
       </div>
     </div>
-  </div>
+  </React.Fragment>
 );

@@ -50,6 +50,10 @@ const PersonLink = styled(Link)`
   }
 `;
 
+const Follow = styled(Button)`
+  padding: 7px 20px;
+`;
+
 const Status = styled.img`
   margin-left: 4px;
 `;
@@ -77,19 +81,19 @@ const Fullname = styled.p`
   display: inline-block;
 `;
 
-export default ({ recSrc, recLink, recFull, recStatus, recUser }) => (
+export default ({ src, to, name, status, username }) => (
   <Person>
     <Recommended>
       <Info>
-        <PersonLink to={recLink}>
-          <Avatar src={recSrc} alt="avatar" />
+        <PersonLink to={to}>
+          <Avatar src={src} alt="avatar" />
           <Fullname>
-            <Name>{recFull}</Name>
-            {recStatus && <Status src={iconCheck} />}
+            <Name>{name}</Name>
+            {status && <Status src={iconCheck} />}
           </Fullname>
-          <Username>{recUser}</Username>
+          <Username>{username}</Username>
         </PersonLink>
-        <Button primary>Follow</Button>
+        <Follow primary>Follow</Follow>
       </Info>
       <Delete src={iconDelete} alt="icon delete" />
     </Recommended>

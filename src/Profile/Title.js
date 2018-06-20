@@ -27,9 +27,9 @@ const TitleLink = styled(Link)`
   }
 `;
 
-export default ({ titleSrc, titleText, titleAlt, titleLink }) => (
-  <TitleLink to={titleLink}>
-    <TitleIcon src={titleSrc} alt={titleAlt} />
-    <Text>{titleText}</Text>
+export default props => (
+  <TitleLink to={props.to}>
+    <TitleIcon src={props.src} alt={props.alt} />
+    <Text>{props.children}</Text>
   </TitleLink>
 );

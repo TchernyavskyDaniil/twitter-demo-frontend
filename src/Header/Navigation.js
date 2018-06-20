@@ -36,11 +36,11 @@ const CrumbText = styled.span`
 
 const CrumbLogo = styled.img``;
 
-export default ({ link, altName, pic, text }) => (
+export default props => (
   <Crumb>
-    <HomeLink to={link} activeClassName="active" exact>
-      <CrumbLogo alt={altName} src={pic} />
-      <CrumbText>{text}</CrumbText>
+    <HomeLink to={props.to} activeClassName="active" exact>
+      <CrumbLogo alt={props.alt} src={props.src} />
+      <CrumbText>{props.children}</CrumbText>
     </HomeLink>
   </Crumb>
 );

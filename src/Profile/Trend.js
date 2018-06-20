@@ -32,10 +32,10 @@ const Desc = styled.p`
 
 const Tweets = Desc.extend``;
 
-export default ({ trendTag, trendLink, trendDesc, trendTweets }) => (
-  <TrendLink to={trendLink}>
-    <Hashtag>{trendTag}</Hashtag>
-    <Desc>{trendDesc}</Desc>
-    <Tweets>{trendTweets}</Tweets>
+export default ({ tag, to, desc, tweets }) => (
+  <TrendLink to={to}>
+    <Hashtag>{tag}</Hashtag>
+    <Desc>{desc}</Desc>
+    <Tweets>{tweets}</Tweets>
   </TrendLink>
 );

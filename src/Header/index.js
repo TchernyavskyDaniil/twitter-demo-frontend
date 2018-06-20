@@ -25,8 +25,7 @@ const Index = styled.nav`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5px 10px;
 `;
 
 const TwitterLogo = styled.img`
@@ -73,25 +72,22 @@ export default () => (
     <div className="container">
       <Index>
         <BreadCrumbs>
-          <Navigation link="/" text="Home" pic={iconHome} alt="home page" />
+          <Navigation to="/" src={iconHome} alt="home page">
+            Home
+          </Navigation>
+          <Navigation to="/moments" src={iconMoments} alt="moments page">
+            Moments
+          </Navigation>
           <Navigation
-            link="/moments"
-            text="Moments"
-            pic={iconMoments}
-            alt="moments page"
-          />
-          <Navigation
-            link="/notifications"
-            text="Notifications"
-            pic={iconNotifications}
+            to="/notifications"
+            src={iconNotifications}
             alt="notifications page"
-          />
-          <Navigation
-            link="/messages"
-            text="Messages"
-            pic={iconMessages}
-            alt="messages page"
-          />
+          >
+            Notifications
+          </Navigation>
+          <Navigation to="/messages" src={iconMessages} alt="messages page">
+            Messages
+          </Navigation>
         </BreadCrumbs>
         <TwitterLogo alt="Twitter logo" src={twitterLogo} />
         <Actions>

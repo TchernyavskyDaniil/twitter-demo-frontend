@@ -17,9 +17,9 @@ const Dotted = styled.small`
   margin: 0 5px 0 5px;
 `;
 
-export default ({ optionLink, optionText }) => (
+export default props => (
   <React.Fragment>
     <Dotted>·</Dotted>
-    <Option to={optionLink}>{optionText}</Option>
+    <Option to={props.link}>{props.children}</Option>
   </React.Fragment>
 );

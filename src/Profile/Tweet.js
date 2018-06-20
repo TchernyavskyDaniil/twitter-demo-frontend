@@ -157,7 +157,9 @@ const InfoTitle = styled.span`
 
 const InfoText = styled.p`
   margin: 0;
-  padding-bottom: 2px;
+  max-height: 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const InfoLink = styled.a`
@@ -211,10 +213,10 @@ export default ({
   srcPin,
   pin,
   userAvatar,
-  personLink,
+  toPerson,
   person,
   nickname,
-  dateLink,
+  toDate,
   dateText,
   tweetText,
   infoSrc,
@@ -222,7 +224,7 @@ export default ({
   infoAlt,
   infoTitle,
   infoText,
-  infoLink,
+  toInfo,
 }) => (
   <React.Fragment>
     {statusPin && (
@@ -238,11 +240,11 @@ export default ({
       <ContentContainer>
         <Title>
           <Person>
-            <PersonLink to={personLink}>{person}</PersonLink>
+            <PersonLink to={toPerson}>{person}</PersonLink>
             <Nickname>{nickname}</Nickname>
           </Person>
           <Date>
-            <DateLink to={dateLink}>{dateText}</DateLink>
+            <DateLink to={toDate}>{dateText}</DateLink>
           </Date>
         </Title>
         {tweetText.match(/[^\s]+/g).length >= 16 ? (
@@ -257,8 +259,10 @@ export default ({
           {infoPromo && (
             <Info>
               {infoTitle && <InfoTitle>{infoTitle}</InfoTitle>}
-              {infoText && <InfoText>{infoText}</InfoText>}
-              {infoLink && <InfoLink>{infoLink}</InfoLink>}
+              {infoText && (
+                <InfoText>{`${infoText.substring(0, 300)}...`}</InfoText>
+              )}
+              {toInfo && <InfoLink>{toInfo}</InfoLink>}
             </Info>
           )}
         </ShortInfo>

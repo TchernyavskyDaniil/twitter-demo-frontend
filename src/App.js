@@ -5,12 +5,12 @@ import Nav from './Header';
 
 export default () => (
   <BrowserRouter>
-    <div>
+    <React.Fragment>
       <Nav />
       <Switch>
         <Route exact path="/EveryInteract" component={Profile} />
         <Redirect exact from="/" to="/EveryInteract" />
       </Switch>
-    </div>
+    </React.Fragment>
   </BrowserRouter>
 );

@@ -3,14 +3,14 @@ import styledMap from 'styled-map';
 
 export default styled.button`
   border-radius: 100px;
-  padding: 8px 23px;
+  padding: 8px 20px;
   border: 1px solid #1da1f2;
   cursor: pointer;
   font-size: 14px;
   line-height: 14px;
   flex-grow: 1;
   white-space: nowrap;
-  max-width: 128px;
+  max-width: 100px;
 
   background-color: ${styledMap({
     primary: 'white',

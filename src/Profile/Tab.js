@@ -26,10 +26,10 @@ const TabLink = styled(NavLink)`
   }
 `;
 
-export default ({ tabLink, text }) => (
+export default props => (
   <Tab>
-    <TabLink to={tabLink} activeClassName="active" exact>
-      {text}
+    <TabLink to={props.to} activeClassName="active" exact>
+      {props.children}
     </TabLink>
   </Tab>
 );

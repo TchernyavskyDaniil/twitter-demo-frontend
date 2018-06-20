@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header';
 import PersonInfo from './PersonInfo';
-import Post from './Tweet';
+import Tweet from './Tweet';
 import Tab from './Tab';
 import Actions from './Actions';
 import Recommendtation from './Recomnendation';
@@ -12,6 +12,7 @@ import Option from './Option';
 import Trend from './Trend';
 import CommonFollowers from './CommonFollowers';
 import Media from './Media';
+import Supports from './Supports';
 import iconLocation from './location.svg';
 import iconWeb from './web.svg';
 import iconReg from './reg.svg';
@@ -21,12 +22,17 @@ import iconPeople from './people.svg';
 const Container = styled.div`
   background-color: #e6ecf0;
   width: 100%;
+  padding-top: 10px;
 `;
 
 const Info = styled.div`
   display: flex;
   flex-direction: row;
-  padding-top: 10px;
+`;
+
+const ProfileSideBar = styled.div`
+  max-width: 265px;
+  padding: 0 8px 0 12px;
 `;
 
 const Tabs = styled.ul`
@@ -39,11 +45,11 @@ const Tabs = styled.ul`
   background-color: white;
 `;
 
-const Posts = styled.div`
+const Tweets = styled.div`
   background-color: white;
 `;
 
-const PostContainer = styled.section`
+const TweetContainer = styled.section`
   padding: 12px 16px;
   display: flex;
   flex-direction: column;
@@ -80,7 +86,7 @@ const Desc = styled.h3`
 
 const Sidebar = styled.div`
   background-color: white;
-  padding: 12px 16px;
+  padding: 12px;
   margin-bottom: 10px;
   min-height: 290px;
 `;
@@ -124,13 +130,13 @@ export default () => (
     <Container>
       <div className="container">
         <Info>
-          <div className="col-xs-3">
+          <ProfileSideBar>
             <Person>
               <PersonInfo
-                linkPerson="/EveryInteract"
+                to="/EveryInteract"
                 name="Every Interaction"
                 verfStatus
-                linkFollow="/EveryInteract"
+                toFollow="/EveryInteract"
                 follow="@EveryInteract"
                 followStatus
                 desc="UX Design studio focussed problem solving creativity. Design to us is how can we make things *work* amazing."
@@ -139,7 +145,7 @@ export default () => (
                 loc="London, UK"
                 refAlt="Main WebSite"
                 refSrc={iconWeb}
-                mainLink="https://everyinteraction.com"
+                website="https://everyinteraction.com"
                 dateAlt="Date registration"
                 dateSrc={iconReg}
                 date="May 2008"
@@ -147,36 +153,33 @@ export default () => (
             </Person>
             <CommonFollowers />
             <Media />
-          </div>
+          </ProfileSideBar>
           <div className="col-xs-6">
             <Tabs>
-              <Tab tabLink="/EveryInteract" text="Tweets" />
-              <Tab
-                tabLink="/EveryInteract/with_replies"
-                text="Tweets & replies"
-              />
-              <Tab tabLink="/EveryInteract/media" text="Media" />
+              <Tab to="/EveryInteract">Tweets</Tab>
+              <Tab to="/EveryInteract/with_replies">Tweets & replies</Tab>
+              <Tab to="/EveryInteract/media">Media</Tab>
             </Tabs>
-            <Posts>
-              <PostContainer>
-                <Post
+            <Tweets>
+              <TweetContainer>
+                <Tweet
                   statusPin
                   altPin="pinned"
                   srcPin={iconPinned}
                   pin="Pinned Tweet"
-                  userAvatar={process.env.PUBLIC_URL + '/img/small-avatar.png'}
-                  personLink="/EveryInteract"
+                  userAvatar={`${process.env.PUBLIC_URL}/img/small-avatar.png`}
+                  toPerson="/EveryInteract"
                   person="Every Interaction"
                   nickname="@EveryInteract"
-                  dateLink="/status/777"
+                  toDate="/status/777"
                   dateText="2 Mar 2015"
                   tweetText="We've made some more resources for all you wonderful #design folk everyinteraction.com/resources/ #webdesign #UI"
-                  infoSrc={process.env.PUBLIC_URL + '/img/post.png'}
+                  infoSrc={`${process.env.PUBLIC_URL}/img/post.png`}
                   infoPromo={false}
                   infoAlt="Tweet image"
                   infoTitle={null}
                   infoText={null}
-                  infoLink={null}
+                  toInfo={null}
                 />
                 <Actions
                   comments={null}
@@ -185,18 +188,18 @@ export default () => (
                   messages={null}
                   activeLike
                 />
-              </PostContainer>
-              <PostContainer>
-                <Post
+              </TweetContainer>
+              <TweetContainer>
+                <Tweet
                   statusPin={false}
                   altPin="pinned"
                   srcPin={iconPinned}
                   pin="Pinned Tweet"
-                  userAvatar={process.env.PUBLIC_URL + '/img/small-avatar.png'}
-                  personLink="/EveryInteract"
+                  userAvatar={`${process.env.PUBLIC_URL}/img/small-avatar.png`}
+                  toPerson="/EveryInteract"
                   person="Every Interaction"
                   nickname="@EveryInteract"
-                  dateLink="/status/776"
+                  toDate="/status/776"
                   dateText="23h"
                   tweetText="Our new website concept; Taking you from ... @ Every Interaction instagram.com/p/BNFGrfhBP3M/"
                   infoSrc={null}
@@ -204,29 +207,29 @@ export default () => (
                   infoAlt="Tweet image"
                   infoTitle={null}
                   infoText={null}
-                  infoLink={null}
+                  toInfo={null}
                 />
                 <Actions comments="1" retweets="4" likes="2" messages={null} />
-              </PostContainer>
-              <PostContainer>
-                <Post
+              </TweetContainer>
+              <TweetContainer>
+                <Tweet
                   statusPin={false}
                   altPin="pinned"
                   srcPin={iconPinned}
                   pin="Pinned Tweet"
-                  userAvatar={process.env.PUBLIC_URL + '/img/small-avatar.png'}
-                  personLink="/EveryInteract"
+                  userAvatar={`${process.env.PUBLIC_URL}/img/small-avatar.png`}
+                  toPerson="/EveryInteract"
                   person="Every Interaction"
                   nickname="@EveryInteract"
-                  dateLink="/status/775"
+                  toDate="/status/775"
                   dateText="Nov 18"
                   tweetText="Variable web fonts are coming, and will open a world of opportunities for weight use online"
-                  infoSrc={process.env.PUBLIC_URL + '/img/promo.png'}
+                  infoSrc={`${process.env.PUBLIC_URL}/img/promo.png`}
                   infoPromo
                   infoAlt="Tweet image"
                   infoTitle="The Future of Web Fonts"
-                  infoText="We love typefaces. They give our sites and applications personalized feel. They convey the information and tell a story. They establish information hierarchy. But they’re…"
-                  infoLink="vilijamis.com"
+                  infoText="We love typefaces. They give our sites and applications personalized feel. They convey the information and tell a story. They establish information hierarchy. But they’re"
+                  toInfo="vilijamis.com"
                 />
                 <Actions
                   comments={null}
@@ -234,39 +237,39 @@ export default () => (
                   likes={null}
                   messages={null}
                 />
-              </PostContainer>
-            </Posts>
+              </TweetContainer>
+            </Tweets>
           </div>
           <div className="col-xs-3">
             <Sidebar>
               <SideTitle>
                 <Desc>Who to follow</Desc>
                 <Options>
-                  <Option optionText="Refresh" optionLink="/update" />
-                  <Option optionText="View all" optionLink="/view_all" />
+                  <Option link="/update">Refresh</Option>
+                  <Option link="/view_all">View all</Option>
                 </Options>
               </SideTitle>
               <Recommendations>
                 <Recommendtation
-                  recSrc={process.env.PUBLIC_URL + '/img/rec-avatar-1.png'}
-                  recLink="/rec1"
-                  recFull="AppleInsider"
-                  recStatus={false}
-                  recUser="@appleinsider"
+                  src={`${process.env.PUBLIC_URL}/img/rec-avatar-1.png`}
+                  to="/rec1"
+                  name="AppleInsider"
+                  status={false}
+                  username="@appleinsider"
                 />
                 <Recommendtation
-                  recSrc={process.env.PUBLIC_URL + '/img/rec-avatar-2.png'}
-                  recLink="/rec2"
-                  recFull="Creode"
-                  recStatus
-                  recUser="@Creode"
+                  src={`${process.env.PUBLIC_URL}/img/rec-avatar-2.png`}
+                  to="/rec2"
+                  name="Creode"
+                  status
+                  username="@Creode"
                 />
                 <Recommendtation
-                  recSrc={process.env.PUBLIC_URL + '/img/rec-avatar-3.png'}
-                  recLink="/rec3"
-                  recFull="Epiphany Search"
-                  recStatus={false}
-                  recUser="@Epiphanysearch"
+                  src={`${process.env.PUBLIC_URL}/img/rec-avatar-3.png`}
+                  to="/rec3"
+                  name="Epiphany Search"
+                  status={false}
+                  username="@Epiphanysearch"
                 />
               </Recommendations>
               <SearchLink to="/all_people">
@@ -278,48 +281,49 @@ export default () => (
               <Trends>
                 <SideTitle>
                   <Desc>United Kingdom Trends</Desc>
-                  <Option optionText="Change" optionLink="/change" />
+                  <Option link="/change">Change</Option>
                 </SideTitle>
                 <TrendsContainer>
                   <Trend
-                    trendTag="#BringYourDogToWorkDay"
-                    trendLink="/hashtag/BringYourDogToWorkDay"
-                    trendDesc={null}
-                    trendTweets={null}
+                    tag="#BringYourDogToWorkDay"
+                    to="/hashtag/BringYourDogToWorkDay"
+                    desc={null}
+                    tweets={null}
                   />
                   <Trend
-                    trendTag="#FridayFeeling"
-                    trendLink="/hashtag/FridayFeeling"
-                    trendDesc={null}
-                    trendTweets="12.1K Tweets"
+                    tag="#FridayFeeling"
+                    to="/hashtag/FridayFeeling"
+                    desc={null}
+                    tweets="12.1K Tweets"
                   />
                   <Trend
-                    trendTag="#BrexitAnniversary"
-                    trendLink="/hashtag/BrexitAnniversary"
-                    trendDesc="It’s one year since the UK voted to leave the European Union"
-                    trendTweets={null}
+                    tag="#BrexitAnniversary"
+                    to="/hashtag/BrexitAnniversary"
+                    desc="It’s one year since the UK voted to leave the European Union"
+                    tweets={null}
                   />
                   <Trend
-                    trendTag="HMS Queen Elizabeth"
-                    trendLink="/search/HMS_Queen_Elizabeth"
-                    trendDesc={null}
-                    trendTweets="1,036 Tweets"
+                    tag="HMS Queen Elizabeth"
+                    to="/search/HMS_Queen_Elizabeth"
+                    desc={null}
+                    tweets="1,036 Tweets"
                   />
                   <Trend
-                    trendTag="Joe Budden"
-                    trendLink="/search/Joe_Budden"
-                    trendDesc={null}
-                    trendTweets="1,036 Tweets"
+                    tag="Joe Budden"
+                    to="/search/Joe_Budden"
+                    desc={null}
+                    tweets="1,036 Tweets"
                   />
                   <Trend
-                    trendTag="Trident"
-                    trendLink="/search/Trident"
-                    trendDesc={null}
-                    trendTweets="6,136 Tweets"
+                    tag="Trident"
+                    to="/search/Trident"
+                    desc={null}
+                    tweets="6,136 Tweets"
                   />
                 </TrendsContainer>
               </Trends>
             </Sidebar>
+            <Supports />
           </div>
         </Info>
       </div>

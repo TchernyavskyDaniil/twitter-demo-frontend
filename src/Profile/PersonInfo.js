@@ -106,13 +106,23 @@ const Actions = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  min-height: 39px;
+`;
+
+const Action = styled(Button)`
+  max-width: 100%;
+  width: 100%;
+
+  &:last-child {
+    margin-left: 7px;
+  }
 `;
 
 export default ({
-  linkPerson,
+  to,
   name,
   verfStatus,
-  linkFollow,
+  toFollow,
   follow,
   followStatus,
   desc,
@@ -121,7 +131,7 @@ export default ({
   loc,
   refAlt,
   refSrc,
-  mainLink,
+  website,
   dateAlt,
   dateSrc,
   date,
@@ -129,11 +139,11 @@ export default ({
   <Profile>
     <ProfileTitle>
       <Person>
-        <Nickname to={linkPerson}>{name}</Nickname>
+        <Nickname to={to}>{name}</Nickname>
         {verfStatus && <Verified alt="Verified user" src={iconCheck} />}
       </Person>
       <Follow>
-        <FollowLink to={linkFollow}>{follow}</FollowLink>
+        <FollowLink to={toFollow}>{follow}</FollowLink>
         {followStatus && <FollowState>Follows you</FollowState>}
       </Follow>
     </ProfileTitle>
@@ -145,15 +155,15 @@ export default ({
       </Info>
       <Info>
         <InfoIcon alt={refAlt} src={refSrc} />
-        <Ref href={mainLink}>{mainLink}</Ref>
+        <Ref href={website}>{website}</Ref>
       </Info>
       <Info>
         <InfoIcon alt={dateAlt} src={dateSrc} />
         <InfoText>{date}</InfoText>
       </Info>
       <Actions>
-        <Button>Tweet to</Button>
-        <Button>Message</Button>
+        <Action>Tweet to</Action>
+        <Action>Message</Action>
       </Actions>
     </ProfileInfo>
   </Profile>
