@@ -27,7 +27,7 @@ const Media = styled.li`
 
 const MediaLink = styled(Link)``;
 
-const MediaView = styled.img`
+const Image = styled.img`
   width: 83px;
   background-color: #66757f;
   border-radius: 4px;
@@ -45,7 +45,7 @@ export default () => (
     <MediaBox>
       <Media>
         <MediaLink to="/media1">
-          <MediaView
+          <Image
             src={`${process.env.PUBLIC_URL}/img/media-1.png`}
             alt="media"
           />
@@ -53,7 +53,7 @@ export default () => (
       </Media>
       <Media>
         <MediaLink to="/media2">
-          <MediaView
+          <Image
             src={`${process.env.PUBLIC_URL}/img/media-2.png`}
             alt="media"
           />
@@ -61,7 +61,7 @@ export default () => (
       </Media>
       <Media>
         <MediaLink to="/media3">
-          <MediaView
+          <Image
             src={`${process.env.PUBLIC_URL}/img/media-3.png`}
             alt="media"
           />
@@ -69,7 +69,7 @@ export default () => (
       </Media>
       <Media>
         <MediaLink to="/media4">
-          <MediaView
+          <Image
             src={`${process.env.PUBLIC_URL}/img/media-4.png`}
             alt="media"
           />
@@ -77,7 +77,7 @@ export default () => (
       </Media>
       <Media>
         <MediaLink to="/media5">
-          <MediaView
+          <Image
             src={`${process.env.PUBLIC_URL}/img/media-5.png`}
             alt="media"
           />
@@ -85,7 +85,7 @@ export default () => (
       </Media>
       <Media>
         <MediaLink to="/media6">
-          <MediaView
+          <Image
             src={`${process.env.PUBLIC_URL}/img/media-6.png`}
             alt="media"
           />

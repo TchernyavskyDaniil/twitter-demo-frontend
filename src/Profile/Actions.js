@@ -15,7 +15,7 @@ const Actions = styled.ul`
   margin: 12px 0 0 20px;
 `;
 
-const ActionImage = styled.img`
+const Image = styled.img`
   border-bottom: 1px solid transparent;
   padding-bottom: 2px;
 `;
@@ -30,7 +30,7 @@ const Action = styled.li`
   min-width: 50px;
 
   &:hover {
-    ${ActionImage} {
+    ${Image} {
       border-bottom: 1px solid black;
     }
   }
@@ -51,23 +51,23 @@ const Count = styled.span`
 export default ({ comments, retweets, likes, messages, activeLike }) => (
   <Actions>
     <Action>
-      <ActionImage alt="comments" src={iconComment} />
+      <Image alt="comments" src={iconComment} />
       <Count>{comments}</Count>
     </Action>
     <Action>
-      <ActionImage alt="retweets" src={iconRetweet} />
+      <Image alt="retweets" src={iconRetweet} />
       <Count>{retweets}</Count>
     </Action>
     <Action>
       {activeLike ? (
-        <ActionImage alt="likes" src={iconLikeActive} />
+        <Image alt="likes" src={iconLikeActive} />
       ) : (
-        <ActionImage alt="likes" src={iconLike} />
+        <Image alt="likes" src={iconLike} />
       )}
       <Count>{likes}</Count>
     </Action>
     <Action>
-      <ActionImage alt="messages" src={iconMessage} />
+      <Image alt="messages" src={iconMessage} />
       <Count>{messages}</Count>
     </Action>
   </Actions>

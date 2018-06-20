@@ -20,13 +20,13 @@ const ProfileHeader = styled.div`
   width: 100%;
 `;
 
-const AvatarContainer = styled.div`
+const ProfileContainer = styled.div`
   max-width: 265px;
   padding: 0 12px 0 12px;
   width: 100%;
 `;
 
-const AvatarLink = styled(Link)`
+const Profile = styled(Link)`
   position: absolute;
   border-radius: 100px;
   left: 0;
@@ -96,11 +96,11 @@ export default () => (
     <div className="container">
       <div className="row">
         <ProfileHeader>
-          <AvatarContainer>
-            <AvatarLink to="/profile_images">
+          <ProfileContainer>
+            <Profile to="/profile">
               <Avatar src="/img/big-avatar.png" />
-            </AvatarLink>
-          </AvatarContainer>
+            </Profile>
+          </ProfileContainer>
           <div className="col-xs-6">
             <Stats>
               <Stat link="/EveryInteract" text="Tweets" count="8058" />

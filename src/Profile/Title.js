@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const TitleIcon = styled.img`
+const Image = styled.img`
   margin-right: 10px;
   min-width: 15px;
 `;
@@ -29,7 +29,7 @@ const TitleLink = styled(Link)`
 
 export default props => (
   <TitleLink to={props.to}>
-    <TitleIcon src={props.src} alt={props.alt} />
+    <Image src={props.src} alt={props.alt} />
     <Text>{props.children}</Text>
   </TitleLink>
 );

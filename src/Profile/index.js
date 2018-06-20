@@ -78,7 +78,7 @@ const SideTitle = styled.div`
 
 const Options = styled.div``;
 
-const Desc = styled.h3`
+const Title = styled.h3`
   margin: 0;
   font-size: 17px;
   line-height: 20px;
@@ -91,7 +91,7 @@ const Sidebar = styled.div`
   min-height: 290px;
 `;
 
-const SearchText = styled.p`
+const Desc = styled.p`
   font-size: 13px;
   line-height: 15px;
   color: #1da1f2;
@@ -100,20 +100,20 @@ const SearchText = styled.p`
   border-bottom: 1px solid transparent;
 `;
 
-const SearchLink = styled(Link)`
+const Search = styled(Link)`
   text-decoration: none;
   display: flex;
   flex-direction: row;
   margin-top: 15px;
 
   &:hover {
-    ${SearchText} {
+    ${Desc} {
       border-bottom: 1px solid #1da1f2;
     }
   }
 `;
 
-const SearchIcon = styled.img``;
+const Image = styled.img``;
 
 const Trends = styled.div``;
 
@@ -243,7 +243,7 @@ export default () => (
           <div className="col-xs-3">
             <Sidebar>
               <SideTitle>
-                <Desc>Who to follow</Desc>
+                <Title>Who to follow</Title>
                 <Options>
                   <Option link="/update">Refresh</Option>
                   <Option link="/view_all">View all</Option>
@@ -272,10 +272,10 @@ export default () => (
                   username="@Epiphanysearch"
                 />
               </Recommendations>
-              <SearchLink to="/all_people">
-                <SearchIcon src={iconPeople} />
-                <SearchText>Find people you know</SearchText>
-              </SearchLink>
+              <Search to="/all_people">
+                <Image src={iconPeople} />
+                <Desc>Find people you know</Desc>
+              </Search>
             </Sidebar>
             <Sidebar>
               <Trends>

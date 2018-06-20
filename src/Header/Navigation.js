@@ -6,7 +6,7 @@ const Crumb = styled.li`
   cursor: pointer;
 `;
 
-const HomeLink = styled(NavLink)`
+const Home = styled(NavLink)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -27,20 +27,20 @@ const HomeLink = styled(NavLink)`
   }
 `;
 
-const CrumbText = styled.span`
+const Desc = styled.span`
   font-size: 13px;
   font-weight: 500;
   line-height: 15px;
   margin-left: 8px;
 `;
 
-const CrumbLogo = styled.img``;
+const Logo = styled.img``;
 
 export default props => (
   <Crumb>
-    <HomeLink to={props.to} activeClassName="active" exact>
-      <CrumbLogo alt={props.alt} src={props.src} />
-      <CrumbText>{props.children}</CrumbText>
-    </HomeLink>
+    <Home to={props.to} activeClassName="active" exact>
+      <Logo alt={props.alt} src={props.src} />
+      <Desc>{props.children}</Desc>
+    </Home>
   </Crumb>
 );

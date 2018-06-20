@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import iconFollower from './follower.svg';
 import Title from './Title';
 
-const CommonFollowers = styled.div`
+const Common = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;
@@ -24,9 +24,7 @@ const Follower = styled.li`
   margin: 5px 0 0 5px;
 `;
 
-const FollowerLink = styled(Link)``;
-
-const FollowerAvatar = styled.img`
+const Avatar = styled.img`
   width: 48px;
   background-color: #66757f;
 
@@ -36,59 +34,59 @@ const FollowerAvatar = styled.img`
 `;
 
 export default () => (
-  <CommonFollowers>
+  <Common>
     <Title to="/followers" src={iconFollower} alt="follower icon">
       6 Followers you now
     </Title>
     <Followers>
       <Follower>
-        <FollowerLink to="/name1">
-          <FollowerAvatar
+        <Link to="/name1">
+          <Avatar
             src={`${process.env.PUBLIC_URL}/img/avatar-person-1.png`}
             alt="avatar"
           />
-        </FollowerLink>
+        </Link>
       </Follower>
       <Follower>
-        <FollowerLink to="/name2">
-          <FollowerAvatar
+        <Link to="/name2">
+          <Avatar
             src={`${process.env.PUBLIC_URL}/img/avatar-person-2.png`}
             alt="avatar"
           />
-        </FollowerLink>
+        </Link>
       </Follower>
       <Follower>
-        <FollowerLink to="/name3">
-          <FollowerAvatar
+        <Link to="/name3">
+          <Avatar
             src={`${process.env.PUBLIC_URL}/img/avatar-person-3.png`}
             alt="avatar"
           />
-        </FollowerLink>
+        </Link>
       </Follower>
       <Follower>
-        <FollowerLink to="/name4">
-          <FollowerAvatar
+        <Link to="/name4">
+          <Avatar
             src={`${process.env.PUBLIC_URL}/img/avatar-person-4.png`}
             alt="avatar"
           />
-        </FollowerLink>
+        </Link>
       </Follower>
       <Follower>
-        <FollowerLink to="/name5">
-          <FollowerAvatar
+        <Link to="/name5">
+          <Avatar
             src={`${process.env.PUBLIC_URL}/img/avatar-person-5.png`}
             alt="avatar"
           />
-        </FollowerLink>
+        </Link>
       </Follower>
       <Follower>
-        <FollowerLink to="/name6">
-          <FollowerAvatar
+        <Link to="/name6">
+          <Avatar
             src={`${process.env.PUBLIC_URL}/img/avatar-person-6.png`}
             alt="avatar"
           />
-        </FollowerLink>
+        </Link>
       </Follower>
     </Followers>
-  </CommonFollowers>
+  </Common>
 );

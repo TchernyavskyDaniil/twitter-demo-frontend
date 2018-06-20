@@ -81,7 +81,7 @@ const Info = styled.div`
 
 const InfoIcon = styled.img``;
 
-const InfoText = styled.p`
+const Desc = styled.p`
   margin: 0;
   padding-left: 13px;
   font-size: 14px;
@@ -151,7 +151,7 @@ export default ({
     <ProfileInfo>
       <Info>
         <InfoIcon alt={locAlt} src={locSrc} />
-        <InfoText>{loc}</InfoText>
+        <Desc>{loc}</Desc>
       </Info>
       <Info>
         <InfoIcon alt={refAlt} src={refSrc} />
@@ -159,7 +159,7 @@ export default ({
       </Info>
       <Info>
         <InfoIcon alt={dateAlt} src={dateSrc} />
-        <InfoText>{date}</InfoText>
+        <Desc>{date}</Desc>
       </Info>
       <Actions>
         <Action>Tweet to</Action>
