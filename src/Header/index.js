@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
 import Navigation from './Navigation';
 import Search from '../UI/Search';
 import Button from '../UI/Button';
@@ -30,6 +31,7 @@ const Index = styled.nav`
 
 const TwitterLogo = styled.img`
   min-height: 17px;
+  cursor: pointer;
 `;
 
 const Actions = styled.div`
@@ -89,7 +91,11 @@ export default () => (
             Messages
           </Navigation>
         </BreadCrumbs>
-        <TwitterLogo alt="Twitter logo" src={twitterLogo} />
+        <TwitterLogo
+          alt="Twitter logo"
+          src={twitterLogo}
+          onClick={() => scroll.scrollToTop()}
+        />
         <Actions>
           <Search />
           <AvatarLink to="/EveryInteract">

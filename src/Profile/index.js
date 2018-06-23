@@ -1,13 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header';
 import PersonInfo from './PersonInfo';
-import Tweet from './Tweet';
-import Tab from './Tab';
-import Actions from './Actions';
-import Recommendtation from './Recomnendation';
+import Tweets from './Tweets';
+import Recommendation from './Recommendation';
 import Option from './Option';
 import Trend from './Trend';
 import CommonFollowers from './CommonFollowers';
@@ -16,7 +14,6 @@ import Supports from './Supports';
 import iconLocation from './location.svg';
 import iconWeb from './web.svg';
 import iconReg from './reg.svg';
-import iconPinned from './pinned.svg';
 import iconPeople from './people.svg';
 
 const Container = styled.div`
@@ -33,32 +30,6 @@ const Info = styled.div`
 const ProfileSideBar = styled.div`
   max-width: 265px;
   padding: 0 8px 0 12px;
-`;
-
-const Tabs = styled.ul`
-  padding: 12px 16px;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  list-style: none;
-  background-color: white;
-`;
-
-const Tweets = styled.div`
-  background-color: white;
-`;
-
-const TweetContainer = styled.section`
-  padding: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid #e6ecf0;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #f5f8fa;
-  }
 `;
 
 const Person = styled.div`
@@ -133,11 +104,9 @@ export default () => (
           <ProfileSideBar>
             <Person>
               <PersonInfo
-                to="/EveryInteract"
                 name="Every Interaction"
                 verfStatus
-                toFollow="/EveryInteract"
-                follow="@EveryInteract"
+                nickname="EveryInteract"
                 followStatus
                 desc="UX Design studio focussed problem solving creativity. Design to us is how can we make things *work* amazing."
                 locAlt="Location"
@@ -155,90 +124,27 @@ export default () => (
             <Media />
           </ProfileSideBar>
           <div className="col-xs-6">
-            <Tabs>
-              <Tab to="/EveryInteract">Tweets</Tab>
-              <Tab to="/EveryInteract/with_replies">Tweets & replies</Tab>
-              <Tab to="/EveryInteract/media">Media</Tab>
-            </Tabs>
-            <Tweets>
-              <TweetContainer>
-                <Tweet
-                  statusPin
-                  altPin="pinned"
-                  srcPin={iconPinned}
-                  pin="Pinned Tweet"
-                  userAvatar={`${process.env.PUBLIC_URL}/img/small-avatar.png`}
-                  toPerson="/EveryInteract"
-                  person="Every Interaction"
-                  nickname="@EveryInteract"
-                  toDate="/status/777"
-                  dateText="2 Mar 2015"
-                  tweetText="We've made some more resources for all you wonderful #design folk everyinteraction.com/resources/ #webdesign #UI"
-                  infoSrc={`${process.env.PUBLIC_URL}/img/post.png`}
-                  infoPromo={false}
-                  infoAlt="Tweet image"
-                  infoTitle={null}
-                  infoText={null}
-                  toInfo={null}
-                />
-                <Actions
-                  comments={null}
-                  retweets="17"
-                  likes="47"
-                  messages={null}
-                  activeLike
-                />
-              </TweetContainer>
-              <TweetContainer>
-                <Tweet
-                  statusPin={false}
-                  altPin="pinned"
-                  srcPin={iconPinned}
-                  pin="Pinned Tweet"
-                  userAvatar={`${process.env.PUBLIC_URL}/img/small-avatar.png`}
-                  toPerson="/EveryInteract"
-                  person="Every Interaction"
-                  nickname="@EveryInteract"
-                  toDate="/status/776"
-                  dateText="23h"
-                  tweetText="Our new website concept; Taking you from ... @ Every Interaction instagram.com/p/BNFGrfhBP3M/"
-                  infoSrc={null}
-                  infoPromo={null}
-                  infoAlt="Tweet image"
-                  infoTitle={null}
-                  infoText={null}
-                  toInfo={null}
-                />
-                <Actions comments="1" retweets="4" likes="2" messages={null} />
-              </TweetContainer>
-              <TweetContainer>
-                <Tweet
-                  statusPin={false}
-                  altPin="pinned"
-                  srcPin={iconPinned}
-                  pin="Pinned Tweet"
-                  userAvatar={`${process.env.PUBLIC_URL}/img/small-avatar.png`}
-                  toPerson="/EveryInteract"
-                  person="Every Interaction"
-                  nickname="@EveryInteract"
-                  toDate="/status/775"
-                  dateText="Nov 18"
-                  tweetText="Variable web fonts are coming, and will open a world of opportunities for weight use online"
-                  infoSrc={`${process.env.PUBLIC_URL}/img/promo.png`}
-                  infoPromo
-                  infoAlt="Tweet image"
-                  infoTitle="The Future of Web Fonts"
-                  infoText="We love typefaces. They give our sites and applications personalized feel. They convey the information and tell a story. They establish information hierarchy. But they’re"
-                  toInfo="vilijamis.com"
-                />
-                <Actions
-                  comments={null}
-                  retweets={null}
-                  likes={null}
-                  messages={null}
-                />
-              </TweetContainer>
-            </Tweets>
+            <Route exact path="/EveryInteract" component={Tweets} />
+            <Route
+              exact
+              path="/EveryInteract/following"
+              render={() => <h3>This is Following</h3>}
+            />
+            <Route
+              exact
+              path="/EveryInteract/followers"
+              render={() => <h3>This is Followers</h3>}
+            />
+            <Route
+              exact
+              path="/EveryInteract/likes"
+              render={() => <h3>This is Likes</h3>}
+            />
+            <Route
+              exact
+              path="/EveryInteract/lists"
+              render={() => <h3>This is Lists</h3>}
+            />
           </div>
           <div className="col-xs-3">
             <Sidebar>
@@ -250,26 +156,23 @@ export default () => (
                 </Options>
               </SideTitle>
               <Recommendations>
-                <Recommendtation
+                <Recommendation
                   src={`${process.env.PUBLIC_URL}/img/rec-avatar-1.png`}
-                  to="/rec1"
                   name="AppleInsider"
                   status={false}
-                  username="@appleinsider"
+                  username="appleinsider"
                 />
-                <Recommendtation
+                <Recommendation
                   src={`${process.env.PUBLIC_URL}/img/rec-avatar-2.png`}
-                  to="/rec2"
                   name="Creode"
                   status
-                  username="@Creode"
+                  username="Creode"
                 />
-                <Recommendtation
+                <Recommendation
                   src={`${process.env.PUBLIC_URL}/img/rec-avatar-3.png`}
-                  to="/rec3"
                   name="Epiphany Search"
                   status={false}
-                  username="@Epiphanysearch"
+                  username="Epiphanysearch"
                 />
               </Recommendations>
               <Search to="/all_people">
@@ -280,46 +183,24 @@ export default () => (
             <Sidebar>
               <Trends>
                 <SideTitle>
-                  <Desc>United Kingdom Trends</Desc>
+                  <Title>United Kingdom Trends</Title>
                   <Option link="/change">Change</Option>
                 </SideTitle>
                 <TrendsContainer>
                   <Trend
                     tag="#BringYourDogToWorkDay"
-                    to="/hashtag/BringYourDogToWorkDay"
                     desc={null}
-                    tweets={null}
+                    count={null}
                   />
-                  <Trend
-                    tag="#FridayFeeling"
-                    to="/hashtag/FridayFeeling"
-                    desc={null}
-                    tweets="12.1K Tweets"
-                  />
+                  <Trend tag="#FridayFeeling" desc={null} count="12100" />
                   <Trend
                     tag="#BrexitAnniversary"
-                    to="/hashtag/BrexitAnniversary"
                     desc="It’s one year since the UK voted to leave the European Union"
-                    tweets={null}
+                    count={null}
                   />
-                  <Trend
-                    tag="HMS Queen Elizabeth"
-                    to="/search/HMS_Queen_Elizabeth"
-                    desc={null}
-                    tweets="1,036 Tweets"
-                  />
-                  <Trend
-                    tag="Joe Budden"
-                    to="/search/Joe_Budden"
-                    desc={null}
-                    tweets="1,036 Tweets"
-                  />
-                  <Trend
-                    tag="Trident"
-                    to="/search/Trident"
-                    desc={null}
-                    tweets="6,136 Tweets"
-                  />
+                  <Trend tag="HMS Queen Elizabeth" desc={null} count="1036" />
+                  <Trend tag="Joe Budden" desc={null} count="1036" />
+                  <Trend tag="Trident" desc={null} count="6136" />
                 </TrendsContainer>
               </Trends>
             </Sidebar>

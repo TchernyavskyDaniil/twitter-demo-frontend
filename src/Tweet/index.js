@@ -46,18 +46,17 @@ const Title = styled.div`
   margin-top: 5px;
 `;
 
+const Person = styled.span``;
+
 const PersonLink = styled(Link)`
   font-size: 16px;
   line-height: 16px;
   color: black;
   text-decoration: none;
-`;
-
-const Person = styled.div`
   margin-right: 4px;
   cursor: pointer;
 
-  &:hover ${PersonLink} {
+  &:hover ${Person} {
     text-decoration: underline;
   }
 `;
@@ -69,17 +68,15 @@ const Nickname = styled.span`
   color: #697787;
 `;
 
+const Dotted = styled.span`
+  color: #697787;
+`;
+
 const Date = styled.div`
   padding-left: 2px;
-
-  &:before {
-    content: '•';
-    color: #697787;
-  }
 `;
 
 const DateLink = styled(Link)`
-  padding-left: 2px;
   font-size: 14px;
   line-height: 16px;
   color: #697787;
@@ -213,7 +210,6 @@ export default ({
   srcPin,
   pin,
   userAvatar,
-  toPerson,
   person,
   nickname,
   toDate,
@@ -239,11 +235,12 @@ export default ({
       </AvatarContainer>
       <ContentContainer>
         <Title>
-          <Person>
-            <PersonLink to={toPerson}>{person}</PersonLink>
-            <Nickname>{nickname}</Nickname>
-          </Person>
+          <PersonLink to={`/${nickname}`}>
+            <Person>{person}</Person>
+            <Nickname>{`@${nickname}`}</Nickname>
+          </PersonLink>
           <Date>
+            <Dotted> • </Dotted>
             <DateLink to={toDate}>{dateText}</DateLink>
           </Date>
         </Title>

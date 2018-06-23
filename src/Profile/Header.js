@@ -104,10 +104,18 @@ export default () => (
           <div className="col-xs-6">
             <Stats>
               <Stat link="/EveryInteract" text="Tweets" count="8058" />
-              <Stat link="/following" text="Following" count="721" />
-              <Stat link="/followers" text="Followers" count="1815" />
-              <Stat link="/likes" text="Likes" count="460" />
-              <Stat link="/lists" text="Lists" count="2" />
+              <Stat
+                link="/EveryInteract/following"
+                text="Following"
+                count="721"
+              />
+              <Stat
+                link="/EveryInteract/followers"
+                text="Followers"
+                count="1815"
+              />
+              <Stat link="/EveryInteract/likes" text="Likes" count="460" />
+              <Stat link="/EveryInteract/lists" text="Lists" count="2" />
             </Stats>
           </div>
           <div className="col-xs-3">

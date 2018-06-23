@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { FormattedNumber } from 'react-intl';
 
 const Hashtag = styled.span`
   color: #1da1f2;
@@ -32,10 +33,15 @@ const Desc = styled.p`
 
 const Tweets = Desc.extend``;
 
-export default ({ tag, to, desc, tweets }) => (
-  <TrendLink to={to}>
+export default ({ tag, desc, count }) => (
+  <TrendLink to={`/search?q=${tag}`}>
     <Hashtag>{tag}</Hashtag>
     <Desc>{desc}</Desc>
-    <Tweets>{tweets}</Tweets>
+    {count > 0 && (
+      <Tweets>
+        <FormattedNumber value={count} />
+        {count > 1 ? ' Tweets' : ' Tweet'}
+      </Tweets>
+    )}
   </TrendLink>
 );

@@ -85,13 +85,13 @@ export default ({ src, to, name, status, username }) => (
   <Person>
     <Recommended>
       <Info>
-        <PersonLink to={to}>
+        <PersonLink to={`/${username}`}>
           <Avatar src={src} alt="avatar" />
           <Fullname>
             <Name>{name}</Name>
             {status && <Status src={iconCheck} />}
           </Fullname>
-          <Username>{username}</Username>
+          <Username>{`@${username}`}</Username>
         </PersonLink>
         <Follow primary>Follow</Follow>
       </Info>
