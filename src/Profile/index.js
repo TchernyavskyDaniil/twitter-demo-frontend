@@ -124,7 +124,7 @@ export default () => (
             <Media />
           </ProfileSideBar>
           <div className="col-xs-6">
-            <Route exact path="/EveryInteract" component={Tweets} />
+            <Route path="/EveryInteract" component={Tweets} />
             <Route
               exact
               path="/EveryInteract/following"

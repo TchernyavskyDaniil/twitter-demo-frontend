@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import styledMap from 'styled-map';
+import iconPinned from './pinned.svg';
 
 const TweetContent = styled.div`
   display: flex;
@@ -206,9 +207,6 @@ const tweetMessage = text => {
 
 export default ({
   statusPin,
-  altPin,
-  srcPin,
-  pin,
   userAvatar,
   person,
   nickname,
@@ -217,7 +215,6 @@ export default ({
   tweetText,
   infoSrc,
   infoPromo,
-  infoAlt,
   infoTitle,
   infoText,
   toInfo,
@@ -225,8 +222,8 @@ export default ({
   <React.Fragment>
     {statusPin && (
       <Pinned>
-        <PinnedIcon alt={altPin} src={srcPin} />
-        <PinnedText>{pin}</PinnedText>
+        <PinnedIcon alt="Pinned image" src={iconPinned} />
+        <PinnedText>Pinned Tweet</PinnedText>
       </Pinned>
     )}
     <TweetContent>
@@ -251,8 +248,8 @@ export default ({
         )}
         <ShortInfo>
           {infoSrc &&
-            infoPromo && <Image alt={infoAlt} src={infoSrc} shortImg />}
-          {infoSrc && !infoPromo && <Image alt={infoAlt} src={infoSrc} />}
+            infoPromo && <Image alt="Tweet image" src={infoSrc} shortImg />}
+          {infoSrc && !infoPromo && <Image alt="Tweet image" src={infoSrc} />}
           {infoPromo && (
             <Info>
               {infoTitle && <InfoTitle>{infoTitle}</InfoTitle>}
