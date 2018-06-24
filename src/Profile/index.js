@@ -10,7 +10,7 @@ import Option from './Option';
 import Trend from './Trend';
 import CommonFollowers from './CommonFollowers';
 import Media from './Media';
-import Supports from './Supports';
+import Supports from '../Copyright';
 import iconLocation from './location.svg';
 import iconWeb from './web.svg';
 import iconReg from './reg.svg';

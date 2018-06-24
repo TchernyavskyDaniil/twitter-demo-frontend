@@ -52,11 +52,31 @@ const InfoLink = styled(NavLink)`
   }
 `;
 
-export default ({ link, text, count }) => (
-  <Info>
-    <InfoLink to={link} activeClassName="active" exact>
-      <Text>{text}</Text>
-      <Sub>{count}</Sub>
-    </InfoLink>
-  </Info>
+const isMainNavActive = (match, location) => {
+  const matches = [
+    '/EveryInteract',
+    '/EveryInteract/with_replies',
+    '/EveryInteract/media',
+  ];
+  return matches.some(el => el === (location && location.pathname));
+};
+
+export default ({ link, text, count, active }) => (
+  <React.Fragment>
+    {active ? (
+      <Info>
+        <InfoLink to={link} activeClassName="active" isActive={isMainNavActive}>
+          <Text>{text}</Text>
+          <Sub>{count}</Sub>
+        </InfoLink>
+      </Info>
+    ) : (
+      <Info>
+        <InfoLink to={link} activeClassName="active">
+          <Text>{text}</Text>
+          <Sub>{count}</Sub>
+        </InfoLink>
+      </Info>
+    )}
+  </React.Fragment>
 );

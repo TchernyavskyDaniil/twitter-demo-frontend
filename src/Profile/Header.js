@@ -103,7 +103,7 @@ export default () => (
           </ProfileContainer>
           <div className="col-xs-6">
             <Stats>
-              <Stat link="/EveryInteract" text="Tweets" count="8058" />
+              <Stat link="/EveryInteract" text="Tweets" count="8058" active />
               <Stat
                 link="/EveryInteract/following"
                 text="Following"

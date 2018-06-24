@@ -39,18 +39,18 @@ const Tabs = styled.ul`
 const tabsData = [
   {
     id: 1,
-    to: "",
-    text: "Tweets",
+    to: '',
+    text: 'Tweets',
   },
   {
     id: 2,
-    to: "/with_replies",
-    text: "Tweets & replies",
+    to: '/with_replies',
+    text: 'Tweets & replies',
   },
   {
     id: 3,
-    to: "/media",
-    text: "Media",
+    to: '/media',
+    text: 'Media',
   },
 ];
 
