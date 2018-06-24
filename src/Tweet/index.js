@@ -182,8 +182,6 @@ const ShortInfo = styled.div`
   }
 `;
 
-// Ты просил сделать имутабельную. Но ты ушел после 23:00, из-за этого я хз верно ли сделал
-
 const tweetMessage = text => {
   return text.split(' ').map(textElement => {
     if (textElement[0] === '#') {
