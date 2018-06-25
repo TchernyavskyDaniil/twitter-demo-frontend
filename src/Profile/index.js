@@ -9,7 +9,7 @@ import Recommendations from '../Recommendations';
 import Trends from '../Trends';
 import CommonFollowers from './CommonFollowers';
 import Media from './Media';
-import Supports from '../Copyright';
+import Supports from '../Supports';
 import iconLocation from './location.svg';
 import iconWeb from './web.svg';
 import iconReg from './reg.svg';

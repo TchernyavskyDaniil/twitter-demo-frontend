@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import iconHome from './home.svg';
+import iconMoment from './moment.svg';
+import iconNotification from './notification.svg';
+import iconMessage from './messages.svg';
 
 const Crumb = styled.li`
   cursor: pointer;
@@ -36,11 +40,52 @@ const Desc = styled.span`
 
 const Logo = styled.img``;
 
-export default props => (
-  <Crumb>
-    <Home to={props.to} activeClassName="active" exact>
-      <Logo alt={props.alt} src={props.src} />
-      <Desc>{props.children}</Desc>
-    </Home>
-  </Crumb>
+const BreadCrumbs = styled.ul`
+  display: flex;
+  align-items: center;
+  min-width: 395px;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+`;
+
+const navigation = [
+  {
+    id: 1,
+    link: '/',
+    src: iconHome,
+    text: 'Home',
+  },
+  {
+    id: 2,
+    link: '/moments',
+    src: iconMoment,
+    text: 'Moments',
+  },
+  {
+    id: 3,
+    link: '/notifications',
+    src: iconNotification,
+    text: 'Notifications',
+  },
+  {
+    id: 4,
+    link: '/messages',
+    src: iconMessage,
+    text: 'Messages',
+  },
+];
+
+export default () => (
+  <BreadCrumbs>
+    {navigation.map(nav => (
+      <Crumb key={nav.id}>
+        <Home to={nav.link} activeClassName="active" exact>
+          <Logo alt={nav.text} src={nav.src} />
+          <Desc>{nav.text}</Desc>
+        </Home>
+      </Crumb>
+    ))}
+  </BreadCrumbs>
 );

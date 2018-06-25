@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const Index = styled(Link)`
+const Option = styled(Link)`
   text-decoration: none;
   font-size: 12px;
   line-height: 14px;
@@ -20,6 +20,6 @@ const Dotted = styled.small`
 export default props => (
   <React.Fragment>
     <Dotted>·</Dotted>
-    <Index to={props.link}>{props.children}</Index>
+    <Option to={props.link}>{props.children}</Option>
   </React.Fragment>
 );

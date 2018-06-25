@@ -6,10 +6,6 @@ import Navigation from './Navigation';
 import Search from '../UI/Search';
 import Button from '../UI/Button';
 import twitterLogo from './twitter.svg';
-import iconHome from './home.svg';
-import iconMoments from './moments.svg';
-import iconNotifications from './notifications.svg';
-import iconMessages from './messages.svg';
 
 const Header = styled.header`
   position: fixed;
@@ -59,16 +55,6 @@ const Avatar = styled.img`
   border-radius: 100px;
 `;
 
-const BreadCrumbs = styled.ul`
-  display: flex;
-  align-items: center;
-  min-width: 395px;
-  justify-content: space-between;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-`;
-
 const Tweet = styled(Button)`
   margin-left: 15px;
 `;
@@ -77,24 +63,7 @@ export default () => (
   <Header>
     <div className="container">
       <Index>
-        <BreadCrumbs>
-          <Navigation to="/" src={iconHome} alt="home page">
-            Home
-          </Navigation>
-          <Navigation to="/moments" src={iconMoments} alt="moments page">
-            Moments
-          </Navigation>
-          <Navigation
-            to="/notifications"
-            src={iconNotifications}
-            alt="notifications page"
-          >
-            Notifications
-          </Navigation>
-          <Navigation to="/messages" src={iconMessages} alt="messages page">
-            Messages
-          </Navigation>
-        </BreadCrumbs>
+        <Navigation />
         <TwitterLogo
           alt="Twitter logo"
           src={twitterLogo}
