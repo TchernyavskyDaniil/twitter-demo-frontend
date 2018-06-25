@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Option from '../Profile/Option';
+import Option from '../Option';
 import Button from '../UI/Button';
 import iconDelete from './delete.svg';
 import iconCheck from './check.svg';

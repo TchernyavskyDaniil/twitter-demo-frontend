@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Option from '../Profile/Option';
+import Option from '../Option';
 
 const Container = styled.div`
   display: flex;

@@ -69,6 +69,10 @@ const BreadCrumbs = styled.ul`
   list-style: none;
 `;
 
+const Tweet = styled(Button)`
+  margin-left: 15px;
+`;
+
 export default () => (
   <Header>
     <div className="container">
@@ -101,7 +105,7 @@ export default () => (
           <AvatarLink to="/EveryInteract">
             <Avatar src="/img/small-avatar.png" />
           </AvatarLink>
-          <Button>Tweet</Button>
+          <Tweet>Tweet</Tweet>
         </Actions>
       </Index>
     </div>
