@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './Header';
 import PersonInfo from './PersonInfo';
-import Tweets from './Tweets';
+import Feeds from './Feeds';
 import Recommendations from '../Recommendations';
 import Trends from '../Trends';
 import CommonFollowers from './CommonFollowers';
@@ -41,10 +41,10 @@ const Sidebar = styled.div`
   min-height: 290px;
 `;
 
-export default () => (
+export default ({ match }) => (
   <main>
     <Helmet>
-      <title>EveryInteract (@EveryInteract)</title>
+      <title>{match.params.id} (@{match.params.id})</title>
     </Helmet>
     <Header />
     <Container>
@@ -55,7 +55,7 @@ export default () => (
               <PersonInfo
                 name="Every Interaction"
                 verfStatus
-                nickname="EveryInteract"
+                nickname={match.url}
                 followStatus
                 desc="UX Design studio focussed problem solving creativity. Design to us is how can we make things *work* amazing."
                 locAlt="Location"
@@ -69,29 +69,29 @@ export default () => (
                 date="May 2008"
               />
             </Person>
-            <CommonFollowers />
-            <Media />
+            <Route component={CommonFollowers} />
+            <Route component={Media} />
           </ProfileSideBar>
           <div className="col-xs-6">
-            <Route path="/EveryInteract" component={Tweets} />
+            <Route path={`${match.url}`} component={Feeds} />
             <Route
               exact
-              path="/EveryInteract/following"
+              path={`${match.url}/following`}
               render={() => <h3>This is Following</h3>}
             />
             <Route
               exact
-              path="/EveryInteract/followers"
+              path={`${match.url}/followers`}
               render={() => <h3>This is Followers</h3>}
             />
             <Route
               exact
-              path="/EveryInteract/likes"
+              path={`${match.url}/likes`}
               render={() => <h3>This is Likes</h3>}
             />
             <Route
               exact
-              path="/EveryInteract/lists"
+              path={`${match.url}/lists`}
               render={() => <h3>This is Lists</h3>}
             />
           </div>

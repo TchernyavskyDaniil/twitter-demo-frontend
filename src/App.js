@@ -10,7 +10,7 @@ export default () => (
       <React.Fragment>
         <Nav />
         <Switch>
-          <Route path="/EveryInteract" component={Profile} />
+          <Route path="/:id" component={Profile} />
           <Redirect exact from="/" to="/EveryInteract" />
         </Switch>
       </React.Fragment>

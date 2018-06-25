@@ -128,7 +128,7 @@ const Image = styled.img``;
 
 const publicUrl = process.env.PUBLIC_URL;
 
-const recData = [
+const recommendation = [
   {
     id: 1,
     src: `${publicUrl}/img/rec-avatar-1.png`,
@@ -162,7 +162,7 @@ export default () => (
       </Options>
     </Header>
     <Recommendations>
-      {recData.map(rec => (
+      {recommendation.map(rec => (
         <Person key={rec.id}>
           <Recommended>
             <Info>

@@ -137,11 +137,11 @@ export default ({
   <Profile>
     <ProfileTitle>
       <Person>
-        <Nickname to={`/${nickname}`}>{name}</Nickname>
+        <Nickname to={`${nickname}`}>{name}</Nickname>
         {verfStatus && <Verified alt="Verified user" src={iconCheck} />}
       </Person>
       <Follow>
-        <FollowLink to={`/${nickname}`}>{`@${nickname}`}</FollowLink>
+        <FollowLink to={`${nickname}`}>{`@${nickname.slice(1)}`}</FollowLink>
         {followStatus && <FollowState>Follows you</FollowState>}
       </Follow>
     </ProfileTitle>

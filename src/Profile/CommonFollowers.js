@@ -38,48 +38,52 @@ const publicUrl = process.env.PUBLIC_URL;
 const users = [
   {
     id: 1,
-    name: 'username1',
+    name: '/username1',
     src: `${publicUrl}/img/avatar-person-1.png`,
   },
   {
     id: 2,
-    name: 'username2',
+    name: '/username2',
     src: `${publicUrl}/img/avatar-person-2.png`,
   },
   {
     id: 3,
-    name: 'username3',
+    name: '/username3',
     src: `${publicUrl}/img/avatar-person-3.png`,
   },
   {
     id: 4,
-    name: 'username4',
+    name: '/username4',
     src: `${publicUrl}/img/avatar-person-4.png`,
   },
   {
     id: 5,
-    name: 'username5',
+    name: '/username5',
     src: `${publicUrl}/img/avatar-person-5.png`,
   },
   {
     id: 6,
-    name: 'username6',
+    name: '/username6',
     src: `${publicUrl}/img/avatar-person-6.png`,
   },
 ];
 
-export default () => (
+export default ({match}) => (
   <Common>
-    <Title to="/followers" src={iconFollower} alt="follower icon">
-      6 Followers you now
+    <Title to={`${match.url}/common_followers`} src={iconFollower} alt="follower icon">
+      {users[users.length - 1].id} Followers you now
     </Title>
     <Followers>
       {users.map(user => (
-        <Follower key={user.id}>
-          <Link to={`/${user.name}`}>
-            <Avatar src={user.src} alt={`avatar ${user.name}`} />
-          </Link>
-        </Follower>
+        <React.Fragment key={user.id}>
+          {user.id <= 10 && (
+            <Follower>
+              <Link to={user.name}>
+                <Avatar src={user.src} alt={`avatar ${user.name.slice(1)}`} />
+              </Link>
+            </Follower>
+          )}
+        </React.Fragment>
       ))}
     </Followers>
   </Common>

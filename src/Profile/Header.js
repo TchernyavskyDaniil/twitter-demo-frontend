@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Stat from './Stat';
+import { Link, Route } from 'react-router-dom';
+import Stats from './Stats';
 import Button from '../UI/Button';
 import iconDotted from './dotted.svg';
 
@@ -76,16 +76,6 @@ const Dropdown = styled.div`
   }
 `;
 
-const Stats = styled.ul`
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  min-width: 200px;
-  list-style: none;
-  justify-content: flex-start;
-  padding: 0 5px;
-`;
-
 const Action = styled(Button)`
   padding: 10px 20px;
 `;
@@ -102,21 +92,7 @@ export default () => (
             </Profile>
           </ProfileContainer>
           <div className="col-xs-6">
-            <Stats>
-              <Stat link="/EveryInteract" text="Tweets" count="8058" active />
-              <Stat
-                link="/EveryInteract/following"
-                text="Following"
-                count="721"
-              />
-              <Stat
-                link="/EveryInteract/followers"
-                text="Followers"
-                count="1815"
-              />
-              <Stat link="/EveryInteract/likes" text="Likes" count="460" />
-              <Stat link="/EveryInteract/lists" text="Lists" count="2" />
-            </Stats>
+            <Route component={Stats} />
           </div>
           <div className="col-xs-3">
             <UserActions>

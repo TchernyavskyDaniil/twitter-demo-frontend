@@ -36,32 +36,34 @@ const Tabs = styled.ul`
   background-color: white;
 `;
 
-const tabsData = [
-  {
-    id: 1,
-    to: '',
-    text: 'Tweets',
-  },
-  {
-    id: 2,
-    to: '/with_replies',
-    text: 'Tweets & replies',
-  },
-  {
-    id: 3,
-    to: '/media',
-    text: 'Media',
-  },
-];
+export default ({ match }) => {
+  const tabsData = [
+    {
+      id: 1,
+      to: `${match.url}`,
+      text: 'Tweets',
+    },
+    {
+      id: 2,
+      to: `${match.url}/with_replies`,
+      text: 'Tweets & replies',
+    },
+    {
+      id: 3,
+      to: `${match.url}/media`,
+      text: 'Media',
+    },
+  ];
 
-export default () => (
-  <Tabs>
-    {tabsData.map(tab => (
-      <Tab>
-        <TabLink to={`/EveryInteract${tab.to}`} activeClassName="active" exact>
-          {tab.text}
-        </TabLink>
-      </Tab>
-    ))}
-  </Tabs>
-);
+  return (
+    <Tabs>
+      {tabsData.map(tab => (
+        <Tab key={tab.id}>
+          <TabLink to={tab.to} activeClassName="active" exact>
+            {tab.text}
+          </TabLink>
+        </Tab>
+      ))}
+    </Tabs>
+  );
+};
