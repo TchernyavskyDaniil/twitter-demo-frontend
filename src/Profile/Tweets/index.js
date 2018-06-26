@@ -267,17 +267,19 @@ const tweets = [
   },
 ];
 
-const tweetMessage = text =>
-  text.split(' ').map(textElement => {
+const tweetMessage = text => {
+  let key = 0;
+  return text.split(' ').map(textElement => {
+    key += 1;
     if (textElement[0] === '#') {
       return (
-        <span>
+        <span key={key}>
           <Hashtag to={`/search?q=${textElement}`}>{textElement}</Hashtag>{' '}
         </span>
       );
     } else if (textElement.includes('.com')) {
       return (
-        <span>
+        <span key={key}>
           <LinkWebSite href={`https://${textElement}`}>
             {textElement}
           </LinkWebSite>{' '}
@@ -286,7 +288,8 @@ const tweetMessage = text =>
     }
 
     return `${textElement} `;
-  });
+  })
+};
 
 export default ({ match }) => (
   <TweetList>
