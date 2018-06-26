@@ -288,7 +288,7 @@ const tweetMessage = text => {
     }
 
     return `${textElement} `;
-  })
+  });
 };
 
 export default ({ match }) => (
