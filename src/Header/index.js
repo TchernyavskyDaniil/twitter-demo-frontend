@@ -6,6 +6,10 @@ import Navigation from './Navigation';
 import Search from '../UI/Search';
 import Button from '../UI/Button';
 import twitterLogo from './twitter.svg';
+import iconHome from './home.svg';
+import iconMoment from './moment.svg';
+import iconNotification from './notification.svg';
+import iconMessage from './messages.svg';
 
 const Header = styled.header`
   position: fixed;
@@ -59,11 +63,30 @@ const Tweet = styled(Button)`
   margin-left: 15px;
 `;
 
+const BreadCrumbs = styled.ul`
+  display: flex;
+  align-items: center;
+  min-width: 395px;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+`;
+
 export default () => (
   <Header>
     <div className="container">
       <Index>
-        <Navigation />
+        <BreadCrumbs>
+          <Navigation to="/" src={iconHome} text="Home" />
+          <Navigation to="/moments" src={iconMoment} text="Moments" />
+          <Navigation
+            to="/notifications"
+            src={iconNotification}
+            text="Notification"
+          />
+          <Navigation to="/messages" src={iconMessage} text="Messages" />
+        </BreadCrumbs>
         <TwitterLogo
           alt="Twitter logo"
           src={twitterLogo}

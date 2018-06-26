@@ -30,6 +30,7 @@ const Image = styled.img`
   width: 83px;
   background-color: #66757f;
   border-radius: 4px;
+  user-select: none;
 
   &:hover {
     box-shadow: 0 1px 2px 0 black;
@@ -42,7 +43,6 @@ const Modal = styled.div`
   justify-content: center;
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
   left: 0;
   top: 0;
   width: 100%;
@@ -86,7 +86,7 @@ const media = [
   },
 ];
 
-export default ({match}) => (
+export default ({ match }) => (
   <Content>
     <Title to={`${match.url}/media`} src={iconMedia} alt="media icon">
       522 Photos and videos

@@ -41,40 +41,40 @@ const Trends = styled.ul`
 
 const Trend = styled.li``;
 
-const trends = [
+export const trends = [
   {
     id: 1,
-    tag: '#BringYourDogToWorkDay',
+    to: '#BringYourDogToWorkDay',
     desc: null,
     count: null,
   },
   {
     id: 2,
-    tag: '#FridayFeeling',
+    to: '#FridayFeeling',
     desc: null,
     count: 12100,
   },
   {
     id: 3,
-    tag: '#BrexitAnniversary',
+    to: '#BrexitAnniversary',
     desc: 'It’s one year since the UK voted to leave the European Union',
     count: null,
   },
   {
     id: 4,
-    tag: 'HMS Queen Elizabeth',
+    to: 'HMS Queen Elizabeth',
     desc: null,
     count: 1036,
   },
   {
     id: 5,
-    tag: 'Joe Budden',
+    to: 'Joe Budden',
     desc: null,
     count: 1036,
   },
   {
     id: 6,
-    tag: 'Trident',
+    to: 'Trident',
     desc: null,
     count: 6136,
   },
@@ -84,8 +84,8 @@ export default () => (
   <Trends>
     {trends.map(trend => (
       <Trend key={trend.id}>
-        <TrendLink to={`/search?q=${trend.tag}`}>
-          <Hashtag>{trend.tag}</Hashtag>
+        <TrendLink to={`/search?q=${trend.to}`}>
+          <Hashtag>{trend.to}</Hashtag>
           <Desc>{trend.desc}</Desc>
           {trend.count > 0 && (
             <Tweets>

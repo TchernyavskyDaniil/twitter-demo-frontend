@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styledMap from 'styled-map';
 import Actions from './Actions';
 import iconPinned from './pinned.svg';
+import { findUserById } from '../../urlStorage';
 
 const TweetContent = styled.div`
   display: flex;
@@ -204,8 +205,8 @@ const tweets = [
     id: 1,
     statusPin: true,
     userAvatar: `${process.env.PUBLIC_URL}/img/small-avatar.png`,
-    person: 'Every Interaction',
-    nickname: 'EveryInteract',
+    // person: 'Every Interaction',
+    // nickname: 'EveryInteract',
     toDate: '/status/777',
     dateText: '2 Mar 2015',
     tweetText:
@@ -225,8 +226,8 @@ const tweets = [
     id: 2,
     statusPin: false,
     userAvatar: `${process.env.PUBLIC_URL}/img/small-avatar.png`,
-    person: 'Every Interaction',
-    nickname: 'EveryInteract',
+    // person: 'Every Interaction',
+    // nickname: 'EveryInteract',
     toDate: '/status/776',
     dateText: '23h',
     tweetText:
@@ -246,8 +247,8 @@ const tweets = [
     id: 3,
     statusPin: false,
     userAvatar: `${process.env.PUBLIC_URL}/img/small-avatar.png`,
-    person: 'Every Interaction',
-    nickname: 'EveryInteract',
+    // person: 'Every Interaction',
+    // nickname: 'EveryInteract',
     toDate: '/status/777',
     dateText: 'Nov 18',
     tweetText:
@@ -266,12 +267,12 @@ const tweets = [
   },
 ];
 
-const tweetMessage = text => {
-  return text.split(' ').map(textElement => {
+const tweetMessage = text =>
+  text.split(' ').map(textElement => {
     if (textElement[0] === '#') {
       return (
         <span>
-          <Hashtag to={`/${textElement}`}>{textElement}</Hashtag>{' '}
+          <Hashtag to={`/search?q=${textElement}`}>{textElement}</Hashtag>{' '}
         </span>
       );
     } else if (textElement.includes('.com')) {
@@ -283,11 +284,11 @@ const tweetMessage = text => {
         </span>
       );
     }
+
     return `${textElement} `;
   });
-};
 
-export default () => (
+export default ({ match }) => (
   <TweetList>
     {tweets.map(tweet => (
       <Tweet key={tweet.id}>
@@ -303,9 +304,9 @@ export default () => (
           </AvatarContainer>
           <ContentContainer>
             <Title>
-              <PersonLink to={`/${tweet.nickname}`}>
-                <Person>{tweet.person}</Person>
-                <Nickname>{`@${tweet.nickname}`}</Nickname>
+              <PersonLink to={`${match.url}`}>
+                <Person>{findUserById(match.url.slice(1), 'name')}</Person>
+                <Nickname>@{match.url.slice(1)}</Nickname>
               </PersonLink>
               <Date>
                 <Dotted> • </Dotted>

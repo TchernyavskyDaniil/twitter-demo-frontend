@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Tweets from '../Tweets';
+import Tweets from './Tweets';
 import Tabs from './Tabs';
 
 export default ({ match }) => (
@@ -11,7 +11,7 @@ export default ({ match }) => (
       render={() => (
         <React.Fragment>
           <Route path={`${match.url}`} component={Tabs} />
-          <Tweets />
+          <Route component={Tweets} />
         </React.Fragment>
       )}
     />
@@ -31,7 +31,7 @@ export default ({ match }) => (
       render={() => (
         <React.Fragment>
           <Route path={`${match.url}`} component={Tabs} />
-          <h3> This is With Replies </h3>
+          <h3> This is Media </h3>
         </React.Fragment>
       )}
     />

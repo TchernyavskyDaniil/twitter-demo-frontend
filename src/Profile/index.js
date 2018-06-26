@@ -13,6 +13,7 @@ import Supports from '../Supports';
 import iconLocation from './location.svg';
 import iconWeb from './web.svg';
 import iconReg from './reg.svg';
+import { findUserById } from '../urlStorage';
 
 const Container = styled.div`
   background-color: #e6ecf0;
@@ -44,7 +45,9 @@ const Sidebar = styled.div`
 export default ({ match }) => (
   <main>
     <Helmet>
-      <title>{match.params.id} (@{match.params.id})</title>
+      <title>
+        {findUserById(match.params.user, 'name')} (@{match.params.user})
+      </title>
     </Helmet>
     <Header />
     <Container>
@@ -53,7 +56,7 @@ export default ({ match }) => (
           <ProfileSideBar>
             <Person>
               <PersonInfo
-                name="Every Interaction"
+                name={findUserById(match.params.user, 'name')}
                 verfStatus
                 nickname={match.url}
                 followStatus

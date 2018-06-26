@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Option from '../Option';
 import Button from '../UI/Button';
 import iconDelete from './delete.svg';
 import iconCheck from './check.svg';
@@ -124,7 +123,36 @@ const Recommendations = styled.div`
   position: relative;
 `;
 
+const Option = styled(Link)`
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 14px;
+  color: #1da1f2;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const Dotted = styled.small`
+  margin: 0 5px 0 5px;
+`;
+
 const Image = styled.img``;
+
+const Refresh = styled.button`
+  border: transparent;
+  padding: 0;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 14px;
+  cursor: pointer;
+  color: #1da1f2;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 const publicUrl = process.env.PUBLIC_URL;
 
@@ -157,8 +185,10 @@ export default () => (
     <Header>
       <Title>Who to follow</Title>
       <Options>
-        <Option link="/update">Refresh</Option>
-        <Option link="/view_all">View all</Option>
+        <Dotted>·</Dotted>
+        <Refresh>Refresh</Refresh>
+        <Dotted>·</Dotted>
+        <Option to="/view_all">View all</Option>
       </Options>
     </Header>
     <Recommendations>

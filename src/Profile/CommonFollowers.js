@@ -33,44 +33,50 @@ const Avatar = styled.img`
   }
 `;
 
+const StLink = styled(Link)``;
+
 const publicUrl = process.env.PUBLIC_URL;
 
 const users = [
   {
     id: 1,
-    name: '/username1',
+    name: '/mirhasanjamil75',
     src: `${publicUrl}/img/avatar-person-1.png`,
   },
   {
     id: 2,
-    name: '/username2',
+    name: '/alexdown',
     src: `${publicUrl}/img/avatar-person-2.png`,
   },
   {
     id: 3,
-    name: '/username3',
+    name: '/TerryCoopey',
     src: `${publicUrl}/img/avatar-person-3.png`,
   },
   {
     id: 4,
-    name: '/username4',
+    name: '/NiamhKeaneB_ID',
     src: `${publicUrl}/img/avatar-person-4.png`,
   },
   {
     id: 5,
-    name: '/username5',
+    name: '/venglarcik',
     src: `${publicUrl}/img/avatar-person-5.png`,
   },
   {
     id: 6,
-    name: '/username6',
+    name: '/katzedsgn',
     src: `${publicUrl}/img/avatar-person-6.png`,
   },
 ];
 
-export default ({match}) => (
+export default ({ match }) => (
   <Common>
-    <Title to={`${match.url}/common_followers`} src={iconFollower} alt="follower icon">
+    <Title
+      to={`${match.url}/common_followers`}
+      src={iconFollower}
+      alt="follower icon"
+    >
       {users[users.length - 1].id} Followers you now
     </Title>
     <Followers>
@@ -78,9 +84,9 @@ export default ({match}) => (
         <React.Fragment key={user.id}>
           {user.id <= 10 && (
             <Follower>
-              <Link to={user.name}>
+              <StLink to={user.name}>
                 <Avatar src={user.src} alt={`avatar ${user.name.slice(1)}`} />
-              </Link>
+              </StLink>
             </Follower>
           )}
         </React.Fragment>
