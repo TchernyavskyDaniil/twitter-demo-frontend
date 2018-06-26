@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import iconCheck from './check.svg';
+import iconCheck from '../Recommendations/check.svg';
 import Button from '../UI/Button';
 
 const Profile = styled.div`
@@ -119,11 +119,9 @@ const Action = styled(Button)`
 `;
 
 export default ({
-  to,
   name,
   verfStatus,
-  toFollow,
-  follow,
+  nickname,
   followStatus,
   desc,
   locAlt,
@@ -139,11 +137,11 @@ export default ({
   <Profile>
     <ProfileTitle>
       <Person>
-        <Nickname to={to}>{name}</Nickname>
+        <Nickname to={`${nickname}`}>{name}</Nickname>
         {verfStatus && <Verified alt="Verified user" src={iconCheck} />}
       </Person>
       <Follow>
-        <FollowLink to={toFollow}>{follow}</FollowLink>
+        <FollowLink to={`${nickname}`}>{`@${nickname.slice(1)}`}</FollowLink>
         {followStatus && <FollowState>Follows you</FollowState>}
       </Follow>
     </ProfileTitle>

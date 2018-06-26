@@ -1983,7 +1983,7 @@ This is because when there is a fresh page load for a `/todos/42`, the server lo
 If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to create a `.htaccess` file in the `public` folder that looks like this:
 
 ```
-    Options -MultiViews
+    Option -MultiViews
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.html [QSA,L]

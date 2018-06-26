@@ -2,6 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Title = styled.h3`
+  margin: 0;
+  font-size: 17px;
+  line-height: 20px;
+`;
+
 const Option = styled(Link)`
   text-decoration: none;
   font-size: 12px;
@@ -18,8 +30,9 @@ const Dotted = styled.small`
 `;
 
 export default props => (
-  <React.Fragment>
+  <Container>
+    <Title>{props.children}</Title>
     <Dotted>·</Dotted>
-    <Option to={props.link}>{props.children}</Option>
-  </React.Fragment>
+    <Option to="/change">Change</Option>
+  </Container>
 );

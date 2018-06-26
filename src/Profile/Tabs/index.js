@@ -1,0 +1,21 @@
+import React from 'react';
+import styled from 'styled-components';
+import Tab from './Tab';
+
+const Tabs = styled.ul`
+  padding: 12px 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  list-style: none;
+  background-color: white;
+`;
+
+export default ({ match }) => (
+  <Tabs>
+    <Tab to={`${match.url}`}>Tweets</Tab>
+    <Tab to={`${match.url}/with_replies`}>Tweets & replies </Tab>
+    <Tab to={`${match.url}/media`}>Media</Tab>
+  </Tabs>
+);

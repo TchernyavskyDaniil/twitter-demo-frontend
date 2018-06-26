@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import iconComment from './comment.svg';
-import iconRetweet from './retweet.svg';
-import iconLike from './like.svg';
-import iconMessage from './message.svg';
-import iconLikeActive from './like-active.svg';
+import iconComment from '../comment.svg';
+import iconRetweet from '../retweet.svg';
+import iconLike from '../like.svg';
+import iconMessage from '../message.svg';
+import iconLikeActive from '../like-active.svg';
 
 const Actions = styled.ul`
   display: flex;
@@ -12,7 +12,8 @@ const Actions = styled.ul`
   align-items: center;
   width: 50%;
   justify-content: space-between;
-  margin: 12px 0 0 20px;
+  padding-left: 0;
+  margin: 14px 0 0 0;
 `;
 
 const Image = styled.img`
@@ -48,27 +49,27 @@ const Count = styled.span`
   color: #667580;
 `;
 
-export default ({ comments, retweets, likes, messages, activeLike }) => (
+export default props => (
   <Actions>
     <Action>
       <Image alt="comments" src={iconComment} />
-      <Count>{comments}</Count>
+      <Count>{props.comments}</Count>
     </Action>
     <Action>
       <Image alt="retweets" src={iconRetweet} />
-      <Count>{retweets}</Count>
+      <Count>{props.retweets}</Count>
     </Action>
     <Action>
-      {activeLike ? (
+      {props.activeLike ? (
         <Image alt="likes" src={iconLikeActive} />
       ) : (
         <Image alt="likes" src={iconLike} />
       )}
-      <Count>{likes}</Count>
+      <Count>{props.likes}</Count>
     </Action>
     <Action>
       <Image alt="messages" src={iconMessage} />
-      <Count>{messages}</Count>
+      <Count>{props.messages}</Count>
     </Action>
   </Actions>
 );

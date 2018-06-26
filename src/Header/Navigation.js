@@ -36,11 +36,11 @@ const Desc = styled.span`
 
 const Logo = styled.img``;
 
-export default props => (
+export default ({ to, text, src }) => (
   <Crumb>
-    <Home to={props.to} activeClassName="active" exact>
-      <Logo alt={props.alt} src={props.src} />
-      <Desc>{props.children}</Desc>
+    <Home to={to} activeClassName="active" exact>
+      <Logo alt={text} src={src} />
+      <Desc>{text}</Desc>
     </Home>
   </Crumb>
 );

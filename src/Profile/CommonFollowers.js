@@ -33,60 +33,64 @@ const Avatar = styled.img`
   }
 `;
 
-export default () => (
+const StLink = styled(Link)``;
+
+const publicUrl = process.env.PUBLIC_URL;
+
+const users = [
+  {
+    id: 1,
+    name: '/mirhasanjamil75',
+    src: `${publicUrl}/img/avatar-person-1.png`,
+  },
+  {
+    id: 2,
+    name: '/alexdown',
+    src: `${publicUrl}/img/avatar-person-2.png`,
+  },
+  {
+    id: 3,
+    name: '/TerryCoopey',
+    src: `${publicUrl}/img/avatar-person-3.png`,
+  },
+  {
+    id: 4,
+    name: '/NiamhKeaneB_ID',
+    src: `${publicUrl}/img/avatar-person-4.png`,
+  },
+  {
+    id: 5,
+    name: '/venglarcik',
+    src: `${publicUrl}/img/avatar-person-5.png`,
+  },
+  {
+    id: 6,
+    name: '/katzedsgn',
+    src: `${publicUrl}/img/avatar-person-6.png`,
+  },
+];
+
+export default ({ match }) => (
   <Common>
-    <Title to="/followers" src={iconFollower} alt="follower icon">
-      6 Followers you now
+    <Title
+      to={`${match.url}/common_followers`}
+      src={iconFollower}
+      alt="follower icon"
+    >
+      {users[users.length - 1].id} Followers you now
     </Title>
     <Followers>
-      <Follower>
-        <Link to="/name1">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-1.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name2">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-2.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name3">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-3.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name4">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-4.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name5">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-5.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name6">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-6.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
+      {users.map(user => (
+        <React.Fragment key={user.id}>
+          {user.id <= 10 && (
+            <Follower>
+              <StLink to={user.name}>
+                <Avatar src={user.src} alt={`avatar ${user.name.slice(1)}`} />
+              </StLink>
+            </Follower>
+          )}
+        </React.Fragment>
+      ))}
     </Followers>
   </Common>
 );
