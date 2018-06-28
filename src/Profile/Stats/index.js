@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import Stat from './Stat';
+import React from "react";
+import styled from "styled-components";
+import Stat from "./Stat";
 
 const StatList = styled.ul`
   margin: 0;

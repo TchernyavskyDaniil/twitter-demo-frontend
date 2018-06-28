@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import iconSearch from '../Header/icons/search.svg';
+import React from "react";
+import styled from "styled-components";
+import iconSearch from "../Header/icons/search.svg";
 
 const Search = styled.form`
   position: relative;

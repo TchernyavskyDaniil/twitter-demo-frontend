@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const Text = styled.span`
   font-size: 12px;
@@ -56,7 +56,7 @@ const isMainNavActive = (match, location) => {
   const matches = [
     `${match.url}`,
     `${match.url}/with_replies`,
-    `${match.url}/media`,
+    `${match.url}/media`
   ];
   return matches.some(el => el === (location && location.pathname));
 };

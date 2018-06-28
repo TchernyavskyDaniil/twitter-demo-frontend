@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link, Route } from 'react-router-dom';
-import Stats from './Stats';
-import Button from '../UI/Button';
-import iconDotted from './icons/dotted.svg';
+import React from "react";
+import styled from "styled-components";
+import { Link, Route } from "react-router-dom";
+import Stats from "./Stats";
+import Button from "../UI/Button";
+import iconDotted from "./icons/dotted.svg";
 
 const Background = styled.img`
   backface-visibility: hidden;
@@ -67,7 +67,7 @@ const Dropdown = styled.div`
   }
 
   &:before {
-    content: '';
+    content: "";
     background-image: url(${iconDotted});
     height: 100%;
     display: block;

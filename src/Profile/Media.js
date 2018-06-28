@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { PortalWithState } from 'react-portal';
-import iconMedia from './icons/media.svg';
-import Title from './Title';
+import React from "react";
+import styled from "styled-components";
+import { PortalWithState } from "react-portal";
+import iconMedia from "./icons/media.svg";
+import Title from "./Title";
 
 const Content = styled.div`
   display: flex;
@@ -62,28 +62,28 @@ const ModalContent = styled.div`
 const media = [
   {
     id: 1,
-    src: `${process.env.PUBLIC_URL}/img/media-1.png`,
+    src: `${process.env.PUBLIC_URL}/img/media-1.png`
   },
   {
     id: 2,
-    src: `${process.env.PUBLIC_URL}/img/media-2.png`,
+    src: `${process.env.PUBLIC_URL}/img/media-2.png`
   },
   {
     id: 3,
-    src: `${process.env.PUBLIC_URL}/img/media-3.png`,
+    src: `${process.env.PUBLIC_URL}/img/media-3.png`
   },
   {
     id: 4,
-    src: `${process.env.PUBLIC_URL}/img/media-4.png`,
+    src: `${process.env.PUBLIC_URL}/img/media-4.png`
   },
   {
     id: 5,
-    src: `${process.env.PUBLIC_URL}/img/media-5.png`,
+    src: `${process.env.PUBLIC_URL}/img/media-5.png`
   },
   {
     id: 6,
-    src: `${process.env.PUBLIC_URL}/img/media-6.png`,
-  },
+    src: `${process.env.PUBLIC_URL}/img/media-6.png`
+  }
 ];
 
 export default ({ match }) => (
@@ -108,7 +108,7 @@ export default ({ match }) => (
                         fullSize
                       />
                     </ModalContent>
-                  </Modal>,
+                  </Modal>
                 )}
               </React.Fragment>
             )}

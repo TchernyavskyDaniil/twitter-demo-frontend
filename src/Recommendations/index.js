@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Button from '../UI/Button';
-import iconDelete from './icons/delete.svg';
-import iconCheck from './icons/check.svg';
-import iconPeople from './icons/people.svg';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import Button from "../UI/Button";
+import iconDelete from "./icons/delete.svg";
+import iconCheck from "./icons/check.svg";
+import iconPeople from "./icons/people.svg";
 
 const Recommended = styled.div`
   display: flex;
@@ -161,24 +161,24 @@ const recommendation = [
   {
     id: 1,
     src: `${publicUrl}/img/rec-avatar-1.png`,
-    name: 'AppleInsider',
+    name: "AppleInsider",
     status: false,
-    username: 'appleinsider',
+    username: "appleinsider"
   },
   {
     id: 2,
     src: `${publicUrl}/img/rec-avatar-2.png`,
-    name: 'Creode',
+    name: "Creode",
     status: true,
-    username: 'Creode',
+    username: "Creode"
   },
   {
     id: 3,
     src: `${publicUrl}/img/rec-avatar-3.png`,
-    name: 'Epiphany Search',
+    name: "Epiphany Search",
     status: false,
-    username: 'Epiphanysearch',
-  },
+    username: "Epiphanysearch"
+  }
 ];
 
 export default () => (

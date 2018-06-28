@@ -1,19 +1,19 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import { Route } from 'react-router-dom';
-import styled from 'styled-components';
-import Header from './Header';
-import PersonInfo from './PersonInfo';
-import Feeds from './Feeds';
-import Recommendations from '../Recommendations';
-import Trends from '../Trends';
-import CommonFollowers from './CommonFollowers';
-import Media from './Media';
-import Supports from '../Supports';
-import findUser from '../utils';
-import iconLocation from './icons/location.svg';
-import iconWeb from './icons/web.svg';
-import iconReg from './icons/reg.svg';
+import React from "react";
+import { Helmet } from "react-helmet";
+import { Route } from "react-router-dom";
+import styled from "styled-components";
+import Header from "./Header";
+import PersonInfo from "./PersonInfo";
+import Feeds from "./Feeds";
+import Recommendations from "../Recommendations";
+import Trends from "../Trends";
+import CommonFollowers from "./CommonFollowers";
+import Media from "./Media";
+import Supports from "../Supports";
+import { findUser } from "../utils";
+import iconLocation from "./icons/location.svg";
+import iconWeb from "./icons/web.svg";
+import iconReg from "./icons/reg.svg";
 
 const Container = styled.div`
   background-color: #e6ecf0;
@@ -46,7 +46,7 @@ export default ({ match }) => (
   <main>
     <Helmet>
       <title>
-        {findUser(match.params.user, 'name')} (@{match.params.user})
+        {findUser(match.params.user, "name")} (@{match.params.user})
       </title>
     </Helmet>
     <Header />
@@ -56,9 +56,9 @@ export default ({ match }) => (
           <ProfileSideBar>
             <Person>
               <PersonInfo
-                name={findUser(match.params.user, 'name')}
+                name={findUser(match.params.user, "name")}
                 verfStatus
-                nickname={match.url}
+                nickname={match.params.user}
                 followStatus
                 desc="UX Design studio focussed problem solving creativity. Design to us is how can we make things *work* amazing."
                 locAlt="Location"

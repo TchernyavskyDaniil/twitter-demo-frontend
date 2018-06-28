@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link, withRouter } from 'react-router-dom';
-import styledMap from 'styled-map';
-import Actions from './Actions';
-import iconPinned from './pinned.svg';
-import findUser from '../../utils';
+import React from "react";
+import styled from "styled-components";
+import { Link, withRouter } from "react-router-dom";
+import styledMap from "styled-map";
+import { findUser } from "../../utils";
+import Actions from "./Actions";
+import iconPinned from "./pinned.svg";
 
 const TweetContent = styled.div`
   display: flex;
@@ -93,13 +93,13 @@ const DateLink = styled(Link)`
 
 const Message = styled.p`
   font-size: ${styledMap({
-    short: '16px',
-    default: '25px',
+    short: "16px",
+    default: "25px"
   })};
 
   line-height: ${styledMap({
-    short: '22px',
-    default: '30px',
+    short: "22px",
+    default: "30px"
   })};
 
   font-weight: 200;
@@ -129,13 +129,13 @@ const LinkWebSite = styled.a`
 
 const Image = styled.img`
   width: ${styledMap({
-    shortImg: '126px',
-    default: '100%',
+    shortImg: "126px",
+    default: "100%"
   })};
 
   height: ${styledMap({
-    shortImg: '126px',
-    default: '100%',
+    shortImg: "126px",
+    default: "100%"
   })};
 
   backface-visibility: hidden;
@@ -207,8 +207,8 @@ const tweets = [
     userAvatar: `${process.env.PUBLIC_URL}/img/small-avatar.png`,
     // person: 'Every Interaction',
     // nickname: 'EveryInteract',
-    toDate: '/status/777',
-    dateText: '2 Mar 2015',
+    toDate: "/status/777",
+    dateText: "2 Mar 2015",
     tweetText:
       "We've made some more resources for all you wonderful #design folk everyinteraction.com/resources/ #webdesign #UI",
     infoSrc: `${process.env.PUBLIC_URL}/img/post.png`,
@@ -220,7 +220,7 @@ const tweets = [
     retweets: 17,
     likes: 47,
     messages: null,
-    activeLike: true,
+    activeLike: true
   },
   {
     id: 2,
@@ -228,10 +228,10 @@ const tweets = [
     userAvatar: `${process.env.PUBLIC_URL}/img/small-avatar.png`,
     // person: 'Every Interaction',
     // nickname: 'EveryInteract',
-    toDate: '/status/776',
-    dateText: '23h',
+    toDate: "/status/776",
+    dateText: "23h",
     tweetText:
-      'Our new website concept; Taking you from ... @ Every Interaction instagram.com/p/BNFGrfhBP3M/',
+      "Our new website concept; Taking you from ... @ Every Interaction instagram.com/p/BNFGrfhBP3M/",
     infoSrc: null,
     infoPromo: false,
     infoTitle: null,
@@ -241,7 +241,7 @@ const tweets = [
     retweets: 4,
     likes: 2,
     messages: null,
-    activeLike: false,
+    activeLike: false
   },
   {
     id: 3,
@@ -249,40 +249,40 @@ const tweets = [
     userAvatar: `${process.env.PUBLIC_URL}/img/small-avatar.png`,
     // person: 'Every Interaction',
     // nickname: 'EveryInteract',
-    toDate: '/status/777',
-    dateText: 'Nov 18',
+    toDate: "/status/777",
+    dateText: "Nov 18",
     tweetText:
-      'Variable web fonts are coming, and will open a world of opportunities for weight use online',
+      "Variable web fonts are coming, and will open a world of opportunities for weight use online",
     infoSrc: `${process.env.PUBLIC_URL}/img/promo.png`,
     infoPromo: true,
-    infoTitle: 'The Future of Web Fonts',
+    infoTitle: "The Future of Web Fonts",
     infoText:
-      'We love typefaces. They give our sites and applications personalized feel. They convey the information and tell a story. They establish information hierarchy. But they’re',
-    toInfo: 'vilijamis.com',
+      "We love typefaces. They give our sites and applications personalized feel. They convey the information and tell a story. They establish information hierarchy. But they’re",
+    toInfo: "vilijamis.com",
     comments: null,
     retweets: null,
     likes: null,
     messages: null,
-    activeLike: false,
-  },
+    activeLike: false
+  }
 ];
 
 const tweetMessage = text => {
   let key = 0;
-  return text.split(' ').map(textElement => {
+  return text.split(" ").map(textElement => {
     key += 1;
-    if (textElement[0] === '#') {
+    if (textElement[0] === "#") {
       return (
         <span key={key}>
-          <Hashtag to={`/search?q=${textElement}`}>{textElement}</Hashtag>{' '}
+          <Hashtag to={`/search?q=${textElement}`}>{textElement}</Hashtag>{" "}
         </span>
       );
-    } else if (textElement.includes('.com')) {
+    } else if (textElement.includes(".com")) {
       return (
         <span key={key}>
           <LinkWebSite href={`https://${textElement}`}>
             {textElement}
-          </LinkWebSite>{' '}
+          </LinkWebSite>{" "}
         </span>
       );
     }
@@ -308,7 +308,7 @@ export default withRouter(({ match }) => (
           <ContentContainer>
             <Title>
               <PersonLink to={`${match.url}`}>
-                <Person>{findUser(match.url.slice(1), 'name')}</Person>
+                <Person>{findUser(match.url.slice(1), "name")}</Person>
                 <Nickname>@{match.url.slice(1)}</Nickname>
               </PersonLink>
               <Date>
@@ -336,7 +336,7 @@ export default withRouter(({ match }) => (
                   {tweet.infoText && (
                     <InfoText>{`${tweet.infoText.substring(
                       0,
-                      300,
+                      300
                     )}...`}</InfoText>
                   )}
                   {tweet.toInfo && <InfoLink>{tweet.toInfo}</InfoLink>}

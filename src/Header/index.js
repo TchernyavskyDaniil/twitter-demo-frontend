@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { animateScroll as scroll } from 'react-scroll';
-import Navigation from './Navigation';
-import Search from '../UI/Search';
-import Button from '../UI/Button';
-import twitterLogo from './icons/twitter.svg';
-import iconHome from './icons/home.svg';
-import iconMoment from './icons/moment.svg';
-import iconNotification from './icons/notification.svg';
-import iconMessage from './icons/messages.svg';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { animateScroll as scroll } from "react-scroll";
+import Navigation from "./Navigation";
+import Search from "../UI/Search";
+import Button from "../UI/Button";
+import twitterLogo from "./icons/twitter.svg";
+import iconHome from "./icons/home.svg";
+import iconMoment from "./icons/moment.svg";
+import iconNotification from "./icons/notification.svg";
+import iconMessage from "./icons/messages.svg";
 
 const Header = styled.header`
   position: fixed;

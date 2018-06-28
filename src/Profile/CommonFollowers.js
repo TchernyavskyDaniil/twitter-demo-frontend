@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import iconFollower from './icons/follower.svg';
-import Title from './Title';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import iconFollower from "./icons/follower.svg";
+import Title from "./Title";
 
 const Common = styled.div`
   display: flex;
@@ -40,34 +40,34 @@ const publicUrl = process.env.PUBLIC_URL;
 const users = [
   {
     id: 1,
-    name: '/mirhasanjamil75',
-    src: `${publicUrl}/img/avatar-person-1.png`,
+    name: "/mirhasanjamil75",
+    src: `${publicUrl}/img/avatar-person-1.png`
   },
   {
     id: 2,
-    name: '/alexdown',
-    src: `${publicUrl}/img/avatar-person-2.png`,
+    name: "/alexdown",
+    src: `${publicUrl}/img/avatar-person-2.png`
   },
   {
     id: 3,
-    name: '/TerryCoopey',
-    src: `${publicUrl}/img/avatar-person-3.png`,
+    name: "/TerryCoopey",
+    src: `${publicUrl}/img/avatar-person-3.png`
   },
   {
     id: 4,
-    name: '/NiamhKeaneB_ID',
-    src: `${publicUrl}/img/avatar-person-4.png`,
+    name: "/NiamhKeaneB_ID",
+    src: `${publicUrl}/img/avatar-person-4.png`
   },
   {
     id: 5,
-    name: '/venglarcik',
-    src: `${publicUrl}/img/avatar-person-5.png`,
+    name: "/venglarcik",
+    src: `${publicUrl}/img/avatar-person-5.png`
   },
   {
     id: 6,
-    name: '/katzedsgn',
-    src: `${publicUrl}/img/avatar-person-6.png`,
-  },
+    name: "/katzedsgn",
+    src: `${publicUrl}/img/avatar-person-6.png`
+  }
 ];
 
 export default ({ match }) => (

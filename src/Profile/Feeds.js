@@ -1,7 +1,7 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import Tweets from './Tweets';
-import Tabs from './Tabs';
+import React from "react";
+import { Route } from "react-router-dom";
+import Tweets from "./Tweets";
+import Tabs from "./Tabs";
 
 export default ({ match }) => (
   <React.Fragment>

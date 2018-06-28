@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Support, SupportItem } from './Support';
+import React from "react";
+import styled from "styled-components";
+import { Support, SupportItem } from "./Support";
 
 const SupportList = styled.ul`
   padding: 0;

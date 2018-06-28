@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { FormattedNumber } from 'react-intl';
-import Header from './Header';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { formattedTweet } from "../utils";
+import Header from "./Header";
 
 const Hashtag = styled.span`
   color: #1da1f2;
@@ -45,40 +45,40 @@ const Trend = styled.li``;
 export const trends = [
   {
     id: 1,
-    to: '#BringYourDogToWorkDay',
+    to: "#BringYourDogToWorkDay",
     desc: null,
-    count: null,
+    count: null
   },
   {
     id: 2,
-    to: '#FridayFeeling',
+    to: "#FridayFeeling",
     desc: null,
-    count: 12100,
+    count: 12100
   },
   {
     id: 3,
-    to: '#BrexitAnniversary',
-    desc: 'It’s one year since the UK voted to leave the European Union',
-    count: null,
+    to: "#BrexitAnniversary",
+    desc: "It’s one year since the UK voted to leave the European Union",
+    count: null
   },
   {
     id: 4,
-    to: 'HMS Queen Elizabeth',
+    to: "HMS Queen Elizabeth",
     desc: null,
-    count: 1036,
+    count: 1036
   },
   {
     id: 5,
-    to: 'Joe Budden',
+    to: "Joe Budden",
     desc: null,
-    count: 1036,
+    count: 1036
   },
   {
     id: 6,
-    to: 'Trident',
+    to: "Trident",
     desc: null,
-    count: 6136,
-  },
+    count: 6136
+  }
 ];
 
 export default () => (
@@ -92,8 +92,8 @@ export default () => (
             <Desc>{trend.desc}</Desc>
             {trend.count > 0 && (
               <Tweets>
-                <FormattedNumber value={trend.count} />
-                {trend.count > 1 ? ' Tweets' : ' Tweet'}
+                {formattedTweet(trend.count)}
+                {trend.count > 1 ? " Tweets" : " Tweet"}
               </Tweets>
             )}
           </TrendLink>

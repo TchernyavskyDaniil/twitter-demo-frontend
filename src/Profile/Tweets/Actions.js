@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import iconComment from '../icons/comment.svg';
-import iconRetweet from '../icons/retweet.svg';
-import iconLike from '../icons/like.svg';
-import iconMessage from '../icons/message.svg';
-import iconLikeActive from '../icons/like-active.svg';
+import React from "react";
+import styled from "styled-components";
+import iconComment from "../icons/comment.svg";
+import iconRetweet from "../icons/retweet.svg";
+import iconLike from "../icons/like.svg";
+import iconMessage from "../icons/message.svg";
+import iconLikeActive from "../icons/like-active.svg";
 
 const Actions = styled.ul`
   display: flex;

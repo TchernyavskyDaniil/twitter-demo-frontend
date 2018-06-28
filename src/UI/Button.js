@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import styledMap from 'styled-map';
+import styled from "styled-components";
+import styledMap from "styled-map";
 
 export default styled.button`
   border-radius: 100px;
@@ -13,21 +13,21 @@ export default styled.button`
   max-width: 100px;
 
   background-color: ${styledMap({
-    primary: 'white',
-    default: '#1da1f2',
+    primary: "white",
+    default: "#1da1f2"
   })};
 
   color: ${styledMap({
-    primary: '#1da1f2',
-    default: 'white',
+    primary: "#1da1f2",
+    default: "white"
   })};
 
   &:hover {
     opacity: 0.8;
     transition: all 0.1s ease-in-out;
-    background-color: ${styledMap({ primary: '#1da1f2' })};
+    background-color: ${styledMap({ primary: "#1da1f2" })};
 
-    color: ${styledMap({ primary: 'white' })};
+    color: ${styledMap({ primary: "white" })};
   }
 
   &:focus {

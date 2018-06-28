@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import iconCheck from '../Recommendations/icons/check.svg';
-import Button from '../UI/Button';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import iconCheck from "../Recommendations/icons/check.svg";
+import Button from "../UI/Button";
 
 const Profile = styled.div`
   padding-top: 32px;
@@ -132,7 +132,7 @@ export default ({
   website,
   dateAlt,
   dateSrc,
-  date,
+  date
 }) => (
   <Profile>
     <ProfileTitle>
@@ -141,7 +141,7 @@ export default ({
         {verfStatus && <Verified alt="Verified user" src={iconCheck} />}
       </Person>
       <Follow>
-        <FollowLink to={`${nickname}`}>{`@${nickname.slice(1)}`}</FollowLink>
+        <FollowLink to={`${nickname}`}>{`@${nickname}`}</FollowLink>
         {followStatus && <FollowState>Follows you</FollowState>}
       </Follow>
     </ProfileTitle>

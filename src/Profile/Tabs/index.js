@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import Tab from './Tab';
+import React from "react";
+import styled from "styled-components";
+import Tab from "./Tab";
 
 const Tabs = styled.ul`
   padding: 12px 16px;
