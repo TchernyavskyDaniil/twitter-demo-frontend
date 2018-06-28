@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import iconFollower from './follower.svg';
+import iconFollower from './icons/follower.svg';
 import Title from './Title';
 
 const Common = styled.div`
@@ -77,7 +77,7 @@ export default ({ match }) => (
       src={iconFollower}
       alt="follower icon"
     >
-      {users[users.length - 1].id} Followers you now
+      {users.length} Followers you now
     </Title>
     <Followers>
       {users.map(user => (

@@ -11,7 +11,7 @@ export default ({ match }) => (
       render={() => (
         <React.Fragment>
           <Route path={`${match.url}`} component={Tabs} />
-          <Route component={Tweets} />
+          <Tweets />
         </React.Fragment>
       )}
     />

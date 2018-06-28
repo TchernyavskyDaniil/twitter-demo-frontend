@@ -4,7 +4,6 @@ import { IntlProvider } from 'react-intl';
 import Profile from './Profile';
 import Nav from './Header';
 import OtherUrl from './OtherUrl';
-import { others } from './urlStorage';
 
 export default () => (
   <IntlProvider locale="en">
@@ -12,15 +11,20 @@ export default () => (
       <React.Fragment>
         <Nav />
         <Switch>
-          {others.map(other => (
-            <Route
-              key={other.id}
-              exact
-              path={`${other.to}`}
-              component={OtherUrl}
-            />
-          ))}
-          <Route exact path="/about" render={() => <h3>This is About</h3>} />
+          <Route exact path="/moments" component={OtherUrl} />
+          <Route exact path="/messages" component={OtherUrl} />
+          <Route exact path="/notifications" component={OtherUrl} />
+          <Route exact path="/view_all" component={OtherUrl} />
+          <Route exact path="/change" component={OtherUrl} />
+          <Route exact path="/all_people" component={OtherUrl} />
+          <Route exact path="/about" component={OtherUrl} />
+          <Route exact path="/support" component={OtherUrl} />
+          <Route exact path="/terms" component={OtherUrl} />
+          <Route exact path="/privacy_policy" component={OtherUrl} />
+          <Route exact path="/cookies" component={OtherUrl} />
+          <Route exact path="/ads" component={OtherUrl} />
+          <Route exact path="/search" component={OtherUrl} />
+          <Route exact path="/error" component={OtherUrl} />
           <Route path="/:user" component={Profile} />
           <Redirect exact from="/" to="/EveryInteract" />
         </Switch>

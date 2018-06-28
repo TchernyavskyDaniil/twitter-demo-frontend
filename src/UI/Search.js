@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import iconSearch from '../Header/search.svg';
+import iconSearch from '../Header/icons/search.svg';
 
 const Search = styled.form`
   position: relative;
@@ -11,10 +11,7 @@ const SearchField = styled.input`
   border-radius: 100px;
   border: 1px solid #e6ecf0;
   background-color: #f5f8fa;
-  padding-left: 11px;
-  padding-right: 11px;
-  padding-top: 9px;
-  padding-bottom: 8px;
+  padding: 9px 11px 8px 11px;
   min-width: 220px;
   font-weight: normal;
   line-height: 14px;

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import styledMap from 'styled-map';
 import Actions from './Actions';
 import iconPinned from './pinned.svg';
-import { findUserById } from '../../urlStorage';
+import findUser from '../../utils';
 
 const TweetContent = styled.div`
   display: flex;
@@ -291,7 +291,7 @@ const tweetMessage = text => {
   });
 };
 
-export default ({ match }) => (
+export default withRouter(({ match }) => (
   <TweetList>
     {tweets.map(tweet => (
       <Tweet key={tweet.id}>
@@ -308,7 +308,7 @@ export default ({ match }) => (
           <ContentContainer>
             <Title>
               <PersonLink to={`${match.url}`}>
-                <Person>{findUserById(match.url.slice(1), 'name')}</Person>
+                <Person>{findUser(match.url.slice(1), 'name')}</Person>
                 <Nickname>@{match.url.slice(1)}</Nickname>
               </PersonLink>
               <Date>
@@ -355,4 +355,4 @@ export default ({ match }) => (
       </Tweet>
     ))}
   </TweetList>
-);
+));

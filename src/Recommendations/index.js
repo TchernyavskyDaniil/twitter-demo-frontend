@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Button from '../UI/Button';
-import iconDelete from './delete.svg';
-import iconCheck from './check.svg';
-import iconPeople from './people.svg';
+import iconDelete from './icons/delete.svg';
+import iconCheck from './icons/check.svg';
+import iconPeople from './icons/people.svg';
 
 const Recommended = styled.div`
   display: flex;
@@ -148,6 +148,7 @@ const Refresh = styled.button`
   line-height: 14px;
   cursor: pointer;
   color: #1da1f2;
+  background-color: transparent;
 
   &:hover {
     text-decoration: underline;

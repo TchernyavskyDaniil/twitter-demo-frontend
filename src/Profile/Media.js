@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { PortalWithState } from 'react-portal';
-import iconMedia from './media.svg';
+import iconMedia from './icons/media.svg';
 import Title from './Title';
 
 const Content = styled.div`

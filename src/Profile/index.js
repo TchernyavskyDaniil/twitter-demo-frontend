@@ -10,10 +10,10 @@ import Trends from '../Trends';
 import CommonFollowers from './CommonFollowers';
 import Media from './Media';
 import Supports from '../Supports';
-import iconLocation from './location.svg';
-import iconWeb from './web.svg';
-import iconReg from './reg.svg';
-import { findUserById } from '../urlStorage';
+import findUser from '../utils';
+import iconLocation from './icons/location.svg';
+import iconWeb from './icons/web.svg';
+import iconReg from './icons/reg.svg';
 
 const Container = styled.div`
   background-color: #e6ecf0;
@@ -46,7 +46,7 @@ export default ({ match }) => (
   <main>
     <Helmet>
       <title>
-        {findUserById(match.params.user, 'name')} (@{match.params.user})
+        {findUser(match.params.user, 'name')} (@{match.params.user})
       </title>
     </Helmet>
     <Header />
@@ -56,7 +56,7 @@ export default ({ match }) => (
           <ProfileSideBar>
             <Person>
               <PersonInfo
-                name={findUserById(match.params.user, 'name')}
+                name={findUser(match.params.user, 'name')}
                 verfStatus
                 nickname={match.url}
                 followStatus

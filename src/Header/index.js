@@ -5,11 +5,11 @@ import { animateScroll as scroll } from 'react-scroll';
 import Navigation from './Navigation';
 import Search from '../UI/Search';
 import Button from '../UI/Button';
-import twitterLogo from './twitter.svg';
-import iconHome from './home.svg';
-import iconMoment from './moment.svg';
-import iconNotification from './notification.svg';
-import iconMessage from './messages.svg';
+import twitterLogo from './icons/twitter.svg';
+import iconHome from './icons/home.svg';
+import iconMoment from './icons/moment.svg';
+import iconNotification from './icons/notification.svg';
+import iconMessage from './icons/messages.svg';
 
 const Header = styled.header`
   position: fixed;

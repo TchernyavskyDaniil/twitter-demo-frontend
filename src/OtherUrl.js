@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Announcing = styled.div`
   position: absolute;
@@ -25,8 +26,13 @@ const Back = styled(Link)`
 `;
 
 export default ({ match }) => (
-  <Announcing>
-    <Desc> You are on the {match.url.slice(1)} page </Desc>
-    <Back to="/"> Home page </Back>
-  </Announcing>
+  <React.Fragment>
+    <Helmet>
+      <title>{match.url.slice(1)}</title>
+    </Helmet>
+    <Announcing>
+      <Desc> You are on the {match.url.slice(1)} page </Desc>
+      <Back to="/"> Home page </Back>
+    </Announcing>
+  </React.Fragment>
 );
