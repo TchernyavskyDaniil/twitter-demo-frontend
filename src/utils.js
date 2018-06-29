@@ -18,7 +18,9 @@ export const formattedTweet = tweet => {
   };
 
   if (tweet >= 10000) {
-    return numbro(tweet).format(longTweet);
+    return numbro(tweet)
+      .format(longTweet)
+      .toUpperCase();
   }
 
   return numbro(tweet).format({ thousandSeparated: true });
