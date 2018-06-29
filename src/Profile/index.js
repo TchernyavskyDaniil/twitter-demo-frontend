@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
 import PersonInfo from "./PersonInfo";
@@ -49,66 +49,72 @@ export default ({ match }) => (
         {findUser(match.params.user, "name")} (@{match.params.user})
       </title>
     </Helmet>
-    <Header />
-    <Container>
-      <div className="container">
-        <Info>
-          <ProfileSideBar>
-            <Person>
-              <PersonInfo
-                name={findUser(match.params.user, "name")}
-                verfStatus
-                nickname={match.params.user}
-                followStatus
-                desc="UX Design studio focussed problem solving creativity. Design to us is how can we make things *work* amazing."
-                locAlt="Location"
-                locSrc={iconLocation}
-                loc="London, UK"
-                refAlt="Main WebSite"
-                refSrc={iconWeb}
-                website="https://everyinteraction.com"
-                dateAlt="Date registration"
-                dateSrc={iconReg}
-                date="May 2008"
-              />
-            </Person>
-            <Route component={CommonFollowers} />
-            <Route component={Media} />
-          </ProfileSideBar>
-          <div className="col-xs-6">
-            <Route path={`${match.url}`} component={Feeds} />
-            <Route
-              exact
-              path={`${match.url}/following`}
-              render={() => <h3>This is Following</h3>}
-            />
-            <Route
-              exact
-              path={`${match.url}/followers`}
-              render={() => <h3>This is Followers</h3>}
-            />
-            <Route
-              exact
-              path={`${match.url}/likes`}
-              render={() => <h3>This is Likes</h3>}
-            />
-            <Route
-              exact
-              path={`${match.url}/lists`}
-              render={() => <h3>This is Lists</h3>}
-            />
+    {match.params.user !== findUser(match.params.user, "username") ? (
+      <Redirect to="/error" />
+    ) : (
+      <React.Fragment>
+        <Header />
+        <Container>
+          <div className="container">
+            <Info>
+              <ProfileSideBar>
+                <Person>
+                  <PersonInfo
+                    name={findUser(match.params.user, "name")}
+                    verfStatus
+                    nickname={match.params.user}
+                    followStatus
+                    desc="UX Design studio focussed problem solving creativity. Design to us is how can we make things *work* amazing."
+                    locAlt="Location"
+                    locSrc={iconLocation}
+                    loc="London, UK"
+                    refAlt="Main WebSite"
+                    refSrc={iconWeb}
+                    website="https://everyinteraction.com"
+                    dateAlt="Date registration"
+                    dateSrc={iconReg}
+                    date="May 2008"
+                  />
+                </Person>
+                <Route component={CommonFollowers} />
+                <Route component={Media} />
+              </ProfileSideBar>
+              <div className="col-xs-6">
+                <Route path={`${match.url}`} component={Feeds} />
+                <Route
+                  exact
+                  path={`${match.url}/following`}
+                  render={() => <h3>This is Following</h3>}
+                />
+                <Route
+                  exact
+                  path={`${match.url}/followers`}
+                  render={() => <h3>This is Followers</h3>}
+                />
+                <Route
+                  exact
+                  path={`${match.url}/likes`}
+                  render={() => <h3>This is Likes</h3>}
+                />
+                <Route
+                  exact
+                  path={`${match.url}/lists`}
+                  render={() => <h3>This is Lists</h3>}
+                />
+              </div>
+              <div className="col-xs-3">
+                <Sidebar>
+                  <Recommendations />
+                </Sidebar>
+                <Sidebar>
+                  <Trends />
+                </Sidebar>
+                <Supports />
+              </div>
+            </Info>
           </div>
-          <div className="col-xs-3">
-            <Sidebar>
-              <Recommendations />
-            </Sidebar>
-            <Sidebar>
-              <Trends />
-            </Sidebar>
-            <Supports />
-          </div>
-        </Info>
-      </div>
-    </Container>
+        </Container>
+      </React.Fragment>
+    )}
   </main>
 );
