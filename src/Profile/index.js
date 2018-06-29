@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
 import PersonInfo from "./PersonInfo";
@@ -80,27 +80,29 @@ export default ({ match }) => (
                 <Route component={Media} />
               </ProfileSideBar>
               <div className="col-xs-6">
-                <Route path={`${match.url}`} component={Feeds} />
-                <Route
-                  exact
-                  path={`${match.url}/following`}
-                  render={() => <h3>This is Following</h3>}
-                />
-                <Route
-                  exact
-                  path={`${match.url}/followers`}
-                  render={() => <h3>This is Followers</h3>}
-                />
-                <Route
-                  exact
-                  path={`${match.url}/likes`}
-                  render={() => <h3>This is Likes</h3>}
-                />
-                <Route
-                  exact
-                  path={`${match.url}/lists`}
-                  render={() => <h3>This is Lists</h3>}
-                />
+                <Switch>
+                  <Route
+                    exact
+                    path={`${match.url}/following`}
+                    render={() => <h3>This is Following</h3>}
+                  />
+                  <Route
+                    exact
+                    path={`${match.url}/followers`}
+                    render={() => <h3>This is Followers</h3>}
+                  />
+                  <Route
+                    exact
+                    path={`${match.url}/likes`}
+                    render={() => <h3>This is Likes</h3>}
+                  />
+                  <Route
+                    exact
+                    path={`${match.url}/lists`}
+                    render={() => <h3>This is Lists</h3>}
+                  />
+                  <Route path={`${match.url}`} component={Feeds} />
+                </Switch>
               </div>
               <div className="col-xs-3">
                 <Sidebar>

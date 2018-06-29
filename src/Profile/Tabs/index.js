@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 import Tab from "./Tab";
 
 const Tabs = styled.ul`
@@ -12,10 +13,10 @@ const Tabs = styled.ul`
   background-color: white;
 `;
 
-export default ({ match }) => (
+export default withRouter(({ match }) => (
   <Tabs>
     <Tab to={`${match.url}`}>Tweets</Tab>
     <Tab to={`${match.url}/with_replies`}>Tweets & replies </Tab>
     <Tab to={`${match.url}/media`}>Media</Tab>
   </Tabs>
-);
+));
