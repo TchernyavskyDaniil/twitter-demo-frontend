@@ -38,7 +38,7 @@ const Logo = styled.img``;
 
 export default ({ to, text, src }) => (
   <Crumb>
-    <Home to={to} activeClassName="active" exact>
+    <Home to={to} exact>
       <Logo alt={text} src={src} />
       <Desc>{text}</Desc>
     </Home>

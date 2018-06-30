@@ -91,10 +91,7 @@ export default () => (
             <Hashtag>{trend.to}</Hashtag>
             <Desc>{trend.desc}</Desc>
             {trend.count > 0 && (
-              <Tweets>
-                {formattedTweet(trend.count)}
-                {trend.count > 1 ? " Tweets" : " Tweet"}
-              </Tweets>
+              <Tweets> {formattedTweet(trend.count)} Tweets </Tweets>
             )}
           </TrendLink>
         </Trend>
