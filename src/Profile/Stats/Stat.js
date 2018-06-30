@@ -52,31 +52,15 @@ const Stat = styled.li`
   cursor: pointer;
 `;
 
-const isMainNavActive = (match, location) => {
-  const matches = [
-    `${match.url}`,
-    `${match.url}/with_replies`,
-    `${match.url}/media`
-  ];
-  return matches.some(el => el === (location && location.pathname));
-};
-
 export default props => (
   <Stat>
-    {props.active ? (
-      <InfoLink
-        to={`${props.url}${props.to}`}
-        activeClassName="active"
-        isActive={isMainNavActive}
-      >
-        <Text>{props.text}</Text>
-        <Sub>{props.count}</Sub>
-      </InfoLink>
-    ) : (
-      <InfoLink to={`${props.url}${props.to}`} activeClassName="active">
-        <Text>{props.text}</Text>
-        <Sub>{props.count}</Sub>
-      </InfoLink>
-    )}
+    <InfoLink
+      to={`${props.url}${props.to}`}
+      activeClassName="active"
+      isActive={props.active}
+    >
+      <Text>{props.text}</Text>
+      <Sub>{props.count}</Sub>
+    </InfoLink>
   </Stat>
 );

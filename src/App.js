@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Profile from "./Profile";
 import Nav from "./Header";
-import OtherUrl from "./OtherUrl";
+import OtherUrl from "./Stub";
 
 export default () => (
   <BrowserRouter>

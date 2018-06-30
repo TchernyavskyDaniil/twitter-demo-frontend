@@ -12,9 +12,18 @@ const StatList = styled.ul`
   padding: 0 5px;
 `;
 
+const isMainNavActive = (match, location) => {
+  const matches = [
+    `${match.url}`,
+    `${match.url}/with_replies`,
+    `${match.url}/media`
+  ];
+  return matches.some(el => el === (location && location.pathname));
+};
+
 export default ({ match }) => (
   <StatList>
-    <Stat url={match.url} active to="" text="Tweets" count={8058} />
+    <Stat url={match.url} active={isMainNavActive} to="" text="Tweets" count={8058} />
     <Stat url={match.url} to="/following" text="Following" count={721} />
     <Stat url={match.url} to="/followers" text="Followers" count={1815} />
     <Stat url={match.url} to="/likes" text="Likes" count={460} />

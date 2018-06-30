@@ -316,31 +316,25 @@ export default withRouter(({ match }) => (
                 <DateLink to={tweet.toDate}>{tweet.dateText}</DateLink>
               </Date>
             </Title>
-            {tweet.tweetText.match(/[^\s]+/g).length >= 16 ? (
+            {tweet.tweetText.split(" ").length >= 16 ? (
               <Message short>{tweetMessage(tweet.tweetText)}</Message>
             ) : (
               <Message>{tweetMessage(tweet.tweetText)}</Message>
             )}
             <ShortInfo>
               {tweet.infoSrc &&
-                tweet.infoPromo && (
-                  <Image alt="Tweet image" src={tweet.infoSrc} shortImg />
-                )}
-              {tweet.infoSrc &&
                 !tweet.infoPromo && (
                   <Image alt="Tweet image" src={tweet.infoSrc} />
                 )}
               {tweet.infoPromo && (
-                <Info>
-                  {tweet.infoTitle && <InfoTitle>{tweet.infoTitle}</InfoTitle>}
-                  {tweet.infoText && (
-                    <InfoText>{`${tweet.infoText.substring(
-                      0,
-                      300
-                    )}...`}</InfoText>
-                  )}
-                  {tweet.toInfo && <InfoLink>{tweet.toInfo}</InfoLink>}
-                </Info>
+                <React.Fragment>
+                  <Image alt="Tweet image" src={tweet.infoSrc} shortImg />
+                  <Info>
+                    <InfoTitle>{tweet.infoTitle}</InfoTitle>
+                    <InfoText>{tweet.infoText}</InfoText>
+                    <InfoLink>{tweet.toInfo}</InfoLink>
+                  </Info>
+                </React.Fragment>
               )}
             </ShortInfo>
             <Actions
