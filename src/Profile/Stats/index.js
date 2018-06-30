@@ -23,7 +23,13 @@ const isMainNavActive = (match, location) => {
 
 export default ({ match }) => (
   <StatList>
-    <Stat url={match.url} active={isMainNavActive} to="" text="Tweets" count={8058} />
+    <Stat
+      url={match.url}
+      active={isMainNavActive}
+      to=""
+      text="Tweets"
+      count={8058}
+    />
     <Stat url={match.url} to="/following" text="Following" count={721} />
     <Stat url={match.url} to="/followers" text="Followers" count={1815} />
     <Stat url={match.url} to="/likes" text="Likes" count={460} />
