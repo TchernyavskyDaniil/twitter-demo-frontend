@@ -310,7 +310,7 @@ export default withRouter(({ match }) => (
                 <DateLink to={tweet.toDate}>{tweet.dateText}</DateLink>
               </Date>
             </Title>
-            {tweet.tweetText.split(" ").length >= 16 ? (
+            {tweet.infoPromo ? (
               <Message short>{tweetMessage(tweet.tweetText)}</Message>
             ) : (
               <Message>{tweetMessage(tweet.tweetText)}</Message>
