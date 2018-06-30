@@ -205,8 +205,6 @@ const tweets = [
     id: 1,
     statusPin: true,
     userAvatar: `${process.env.PUBLIC_URL}/img/small-avatar.png`,
-    // person: 'Every Interaction',
-    // nickname: 'EveryInteract',
     toDate: "/status/777",
     dateText: "2 Mar 2015",
     tweetText:
@@ -226,8 +224,6 @@ const tweets = [
     id: 2,
     statusPin: false,
     userAvatar: `${process.env.PUBLIC_URL}/img/small-avatar.png`,
-    // person: 'Every Interaction',
-    // nickname: 'EveryInteract',
     toDate: "/status/776",
     dateText: "23h",
     tweetText:
@@ -247,8 +243,6 @@ const tweets = [
     id: 3,
     statusPin: false,
     userAvatar: `${process.env.PUBLIC_URL}/img/small-avatar.png`,
-    // person: 'Every Interaction',
-    // nickname: 'EveryInteract',
     toDate: "/status/777",
     dateText: "Nov 18",
     tweetText:

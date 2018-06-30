@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, withRouter } from "react-router-dom";
 import Stats from "./Stats";
 import Button from "../UI/Button";
 import iconDotted from "./icons/dotted.svg";
@@ -80,14 +80,14 @@ const Action = styled(Button)`
   padding: 10px 20px;
 `;
 
-export default () => (
+export default withRouter(({ match }) => (
   <React.Fragment>
     <Background alt="Profile Image" src="/img/profile.png" />
     <div className="container">
       <div className="row">
         <ProfileHeader>
           <ProfileContainer>
-            <Profile to="/profile">
+            <Profile to={match.url}>
               <Avatar src="/img/big-avatar.png" />
             </Profile>
           </ProfileContainer>
@@ -104,4 +104,4 @@ export default () => (
       </div>
     </div>
   </React.Fragment>
-);
+));

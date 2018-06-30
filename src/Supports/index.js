@@ -20,7 +20,7 @@ export default () => (
     <SupportItem to="/about">About</SupportItem>
     <SupportItem to="/support">Help Center</SupportItem>
     <SupportItem to="/terms">Terms</SupportItem>
-    <SupportItem to="/privacy_policy">Privacy policy</SupportItem>
+    <SupportItem to="/privacy-policy">Privacy policy</SupportItem>
     <SupportItem to="/cookies">Cookies</SupportItem>
     <SupportItem to="/ads">Ads Info</SupportItem>
   </SupportList>

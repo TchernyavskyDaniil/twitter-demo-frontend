@@ -16,7 +16,7 @@ const Tabs = styled.ul`
 export default withRouter(({ match }) => (
   <Tabs>
     <Tab to={`${match.url}`}>Tweets</Tab>
-    <Tab to={`${match.url}/with_replies`}>Tweets & replies </Tab>
+    <Tab to={`${match.url}/with-replies`}>Tweets & replies </Tab>
     <Tab to={`${match.url}/media`}>Media</Tab>
   </Tabs>
 ));

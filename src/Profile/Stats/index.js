@@ -15,7 +15,7 @@ const StatList = styled.ul`
 const isMainNavActive = (match, location) => {
   const matches = [
     `${match.url}`,
-    `${match.url}/with_replies`,
+    `${match.url}/with-replies`,
     `${match.url}/media`
   ];
   return matches.some(el => el === (location && location.pathname));

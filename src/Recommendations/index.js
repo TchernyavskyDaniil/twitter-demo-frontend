@@ -189,7 +189,7 @@ export default () => (
         <Dotted>·</Dotted>
         <Refresh>Refresh</Refresh>
         <Dotted>·</Dotted>
-        <Option to="/view_all">View all</Option>
+        <Option to="/view-all">View all</Option>
       </Options>
     </Header>
     <Recommendations>
@@ -212,7 +212,7 @@ export default () => (
         </Person>
       ))}
     </Recommendations>
-    <Search to="/all_people">
+    <Search to="/all-people">
       <Image src={iconPeople} />
       <Desc>Find people you know</Desc>
     </Search>

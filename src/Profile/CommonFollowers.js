@@ -73,7 +73,7 @@ const users = [
 export default ({ match }) => (
   <Common>
     <Title
-      to={`${match.url}/common_followers`}
+      to={`${match.url}/common-followers`}
       src={iconFollower}
       alt="follower icon"
     >

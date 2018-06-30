@@ -28,7 +28,7 @@ const TabLink = styled(NavLink)`
 
 export default props => (
   <Tab>
-    <TabLink to={props.to} activeClassName="active" exact>
+    <TabLink to={props.to} exact>
       {props.children}
     </TabLink>
   </Tab>

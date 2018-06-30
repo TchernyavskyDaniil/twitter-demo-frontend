@@ -9,7 +9,7 @@ export default ({ match }) => (
     <Route exact path={`${match.url}`} component={Tweets} />
     <Route
       exact
-      path={`${match.url}/with_replies`}
+      path={`${match.url}/with-replies`}
       render={() => <h3> This is With Replies </h3>}
     />
     <Route

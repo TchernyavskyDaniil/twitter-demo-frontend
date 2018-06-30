@@ -54,11 +54,7 @@ const Stat = styled.li`
 
 export default props => (
   <Stat>
-    <InfoLink
-      to={`${props.url}${props.to}`}
-      activeClassName="active"
-      isActive={props.active}
-    >
+    <InfoLink to={`${props.url}${props.to}`} isActive={props.active}>
       <Text>{props.text}</Text>
       <Sub>{props.count}</Sub>
     </InfoLink>
