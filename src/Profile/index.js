@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Helmet } from "react-helmet";
 import { Route, Redirect, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
@@ -90,11 +89,6 @@ class Profile extends Component {
 
     return (
       <main>
-        <Helmet>
-          <title>
-            {userInfo.display_name} (@{userInfo.username})
-          </title>
-        </Helmet>
         <React.Fragment>
           <Header
             background={userInfo.header_static}
