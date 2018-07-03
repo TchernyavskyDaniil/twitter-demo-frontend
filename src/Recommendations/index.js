@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Button from "../UI/Button";
@@ -118,7 +118,7 @@ const Search = styled(Link)`
   }
 `;
 
-const Recommendations = styled.div`
+const Recommends = styled.div`
   margin-top: 6px;
   position: relative;
 `;
@@ -155,66 +155,107 @@ const Refresh = styled.button`
   }
 `;
 
-const publicUrl = process.env.PUBLIC_URL;
+class Recommendations extends Component {
+  state = {
+    error: false,
+    recommendations: [],
+    minIndex: 0,
+    maxIndex: 3
+  };
 
-const recommendation = [
-  {
-    id: 1,
-    src: `${publicUrl}/img/rec-avatar-1.png`,
-    name: "AppleInsider",
-    status: false,
-    username: "appleinsider"
-  },
-  {
-    id: 2,
-    src: `${publicUrl}/img/rec-avatar-2.png`,
-    name: "Creode",
-    status: true,
-    username: "Creode"
-  },
-  {
-    id: 3,
-    src: `${publicUrl}/img/rec-avatar-3.png`,
-    name: "Epiphany Search",
-    status: false,
-    username: "Epiphanysearch"
+  componentDidMount() {
+    this.getCommonFollowers();
   }
-];
 
-export default () => (
-  <React.Fragment>
-    <Header>
-      <Title>Who to follow</Title>
-      <Options>
-        <Dotted>·</Dotted>
-        <Refresh>Refresh</Refresh>
-        <Dotted>·</Dotted>
-        <Option to="/view-all">View all</Option>
-      </Options>
-    </Header>
-    <Recommendations>
-      {recommendation.map(rec => (
-        <Person key={rec.id}>
-          <Recommended>
-            <Info>
-              <PersonLink to={`/${rec.username}`}>
-                <Avatar src={rec.src} alt="avatar" />
-                <Fullname>
-                  <Name>{rec.name}</Name>
-                  {rec.status && <Status src={iconCheck} />}
-                </Fullname>
-                <Username>{`@${rec.username}`}</Username>
-              </PersonLink>
-              <Follow primary>Follow</Follow>
-            </Info>
-            <Delete src={iconDelete} alt="icon delete" />
-          </Recommended>
-        </Person>
-      ))}
-    </Recommendations>
-    <Search to="/all-people">
-      <Image src={iconPeople} />
-      <Desc>Find people you know</Desc>
-    </Search>
-  </React.Fragment>
-);
+  componentDidUpdate(prevProps) {
+    if (prevProps.userId !== this.props.userId) {
+      this.getCommonFollowers();
+    }
+  }
+
+  getCommonFollowers = () => {
+    fetch(
+      `https://twitter-demo.erodionov.ru/api/v1/accounts/${
+        this.props.userId
+      }/followers?access_token=${process.env.REACT_APP_KEY}`
+    )
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            recommendations: result,
+            minIndex: 0,
+            maxIndex: 3
+          });
+        },
+        error => {
+          this.setState({
+            error
+          });
+        }
+      );
+  };
+
+  handleClickRefresh = () => {
+    this.setState(prevState => ({
+      minIndex: prevState.minIndex + 3,
+      maxIndex: prevState.maxIndex + 3
+    }));
+  };
+
+  render() {
+    const { error, recommendations, minIndex, maxIndex } = this.state;
+    if (error) {
+      return <h3>Error: {error.message}</h3>;
+    }
+
+    return (
+      <React.Fragment>
+        <Header>
+          <Title>Who to follow</Title>
+          <Options>
+            <Dotted>·</Dotted>
+            <Refresh onClick={this.handleClickRefresh}>Refresh</Refresh>
+            <Dotted>·</Dotted>
+            <Option to="/view-all">View all</Option>
+          </Options>
+        </Header>
+        <Recommends>
+          {recommendations.length < minIndex ? (
+            <p>No recommendations</p>
+          ) : (
+            recommendations.map((rec, index) => (
+              <React.Fragment key={rec.id}>
+                {index >= minIndex &&
+                  index < maxIndex && (
+                    <Person>
+                      <Recommended>
+                        <Info>
+                          <PersonLink to={`/${rec.id}`}>
+                            <Avatar src={rec.avatar_static} alt="avatar" />
+                            <Fullname>
+                              <Name>{rec.display_name}</Name>
+                              {rec.status && <Status src={iconCheck} />}
+                            </Fullname>
+                            <Username>{`@${rec.username}`}</Username>
+                          </PersonLink>
+                          <Follow primary>Follow</Follow>
+                        </Info>
+                        <Delete src={iconDelete} alt="icon delete" />
+                      </Recommended>
+                    </Person>
+                  )}
+              </React.Fragment>
+            ))
+          )}
+        </Recommends>
+        <Search to="/all-people">
+          <Image src={iconPeople} />
+          <Desc>Find people you know</Desc>
+        </Search>
+      </React.Fragment>
+    );
+  }
+}
+
+export default Recommendations;

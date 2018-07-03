@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "date-fns": "^1.29.0",
     "flexboxgrid2": "^7.2.1",
     "normalize.css": "^8.0.0",
     "numbro": "^2.1.0",
+    "open-graph-scraper": "^3.5.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-helmet": "^5.2.0",

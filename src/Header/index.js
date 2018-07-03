@@ -94,7 +94,7 @@ export default () => (
         />
         <Actions>
           <Search />
-          <AvatarLink to="/EveryInteract">
+          <AvatarLink to="/">
             <Avatar src="/img/small-avatar.png" />
           </AvatarLink>
           <Tweet>Tweet</Tweet>

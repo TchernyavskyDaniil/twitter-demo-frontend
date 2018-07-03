@@ -1,13 +1,6 @@
 import numbro from "numbro";
-import users from "./users";
-
-export const findUser = (user, param) => {
-  try {
-    return users.find(obj => obj.username === user)[param];
-  } catch (e) {
-    return "Invalid URL";
-  }
-};
+import format from "date-fns/format";
+import enLocale from "date-fns/locale/en";
 
 export const formattedTweet = tweet => {
   const longTweet = {
@@ -25,3 +18,6 @@ export const formattedTweet = tweet => {
 
   return numbro(tweet).format({ thousandSeparated: true });
 };
+
+export const dateFormat = type =>
+  format(new Date(type), "Do MMMM YYYY", { locale: enLocale });
