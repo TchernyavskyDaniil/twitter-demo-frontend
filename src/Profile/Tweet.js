@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import styledMap from "styled-map";
 import { Link } from "react-router-dom";
-import { dateFormat } from "../../utils";
+import { dateFormat, api } from "../utils";
 import Actions from "./Actions";
 import iconPinned from "./pinned.svg";
 
@@ -125,12 +125,18 @@ const Message = styled.div`
 const Image = styled.img`
   width: ${styledMap({
     shortImg: "126px",
-    default: "100%"
+    maxWidth: "100%",
+    default: "45%"
   })};
 
   height: ${styledMap({
     shortImg: "126px",
     default: "100%"
+  })};
+
+  padding: ${styledMap({
+    shortImg: "0",
+    default: "5px"
   })};
 
   backface-visibility: hidden;
@@ -165,7 +171,7 @@ const InfoText = styled.p`
   text-overflow: ellipsis;
 `;
 
-const InfoLink = styled.a`
+const InfoLink = styled.span`
   font-weight: normal;
   color: #697787;
   text-decoration: none;
@@ -183,12 +189,17 @@ const ShortInfo = styled.div`
   display: flex;
   flex-direction: row;
   cursor: pointer;
+
+  flex-wrap: ${styledMap({
+    fewImg: "wrap",
+    default: "none"
+  })};
 `;
 
 const TweetSt = styled.section`
   padding: 12px 16px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border-top: 1px solid #e6ecf0;
   cursor: pointer;
 
@@ -205,9 +216,9 @@ class Tweet extends Component {
 
   componentDidMount() {
     fetch(
-      `https://twitter-demo.erodionov.ru/api/v1/statuses/${
-        this.props.id
-      }/card?access_token=${process.env.REACT_APP_KEY}`
+      `${api}/statuses/${this.props.id}/card?access_token=${
+        process.env.REACT_APP_KEY
+      }`
     )
       .then(res => res.json())
       .then(
@@ -262,26 +273,39 @@ class Tweet extends Component {
                 dangerouslySetInnerHTML={{ __html: this.props.content }}
               />
             )}
-            <ShortInfo>
-              {this.props.media.length > 0 && (
-                <Image
-                  alt="Tweet image"
-                  src={this.props.media[0].preview_url}
-                />
-              )}
-              {card.url ? (
-                <React.Fragment>
-                  {card.image ? (
-                    <Image alt="Tweet image" src={card.image} shortImg />
-                  ) : null}
-                  <Info href={card.url}>
-                    <InfoTitle>{card.title}</InfoTitle>
-                    <InfoText>{card.description}</InfoText>
-                    <InfoLink href={card.url}>{card.url}</InfoLink>
-                  </Info>
-                </React.Fragment>
-              ) : null}
-            </ShortInfo>
+            {this.props.attachments.length > 1 && (
+              <ShortInfo fewImg>
+                {this.props.attachments.map(attachment => (
+                  <Image
+                    key={attachment.id}
+                    alt="Tweet image"
+                    src={attachment.preview_url}
+                  />
+                ))}
+              </ShortInfo>
+            )}
+            {this.props.attachments.length === 1 &&
+              this.props.attachments.map(attachment => (
+                <ShortInfo key={attachment.id}>
+                  <Image
+                    alt="Tweet image"
+                    src={attachment.preview_url}
+                    maxWidth
+                  />
+                </ShortInfo>
+              ))}
+            {card.url && (
+              <ShortInfo>
+                {card.image && (
+                  <Image alt="Tweet image" src={card.image} shortImg />
+                )}
+                <Info href={card.url}>
+                  <InfoTitle>{card.title}</InfoTitle>
+                  <InfoText>{card.description}</InfoText>
+                  <InfoLink>{card.url}</InfoLink>
+                </Info>
+              </ShortInfo>
+            )}
             <Actions
               comments={this.props.comments}
               retweets={this.props.retweets}

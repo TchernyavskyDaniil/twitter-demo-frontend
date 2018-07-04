@@ -10,6 +10,7 @@ import Trends from "../Trends";
 import CommonFollowers from "./CommonFollowers";
 import Media from "./Media";
 import Supports from "../Supports";
+import { api } from "../utils";
 import iconLocation from "./icons/location.svg";
 import iconWeb from "./icons/web.svg";
 import iconReg from "./icons/reg.svg";
@@ -59,9 +60,9 @@ class Profile extends Component {
 
   getUserInfo = () => {
     fetch(
-      `https://twitter-demo.erodionov.ru/api/v1/accounts/${
-        this.props.match.params.id
-      }?access_token=${process.env.REACT_APP_KEY}`
+      `${api}/accounts/${this.props.match.params.id}?access_token=${
+        process.env.REACT_APP_KEY
+      }`
     )
       .then(res => res.json())
       .then(

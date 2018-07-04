@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Button from "../UI/Button";
+import { api } from "../utils";
 import iconDelete from "./icons/delete.svg";
 import iconCheck from "./icons/check.svg";
 import iconPeople from "./icons/people.svg";
@@ -175,9 +176,9 @@ class Recommendations extends Component {
 
   getCommonFollowers = () => {
     fetch(
-      `https://twitter-demo.erodionov.ru/api/v1/accounts/${
-        this.props.userId
-      }/followers?access_token=${process.env.REACT_APP_KEY}`
+      `${api}/accounts/${this.props.userId}/followers?access_token=${
+        process.env.REACT_APP_KEY
+      }`
     )
       .then(res => res.json())
       .then(

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
+import styledMap from "styled-map";
 import { PortalWithState } from "react-portal";
-import iconMedia from "./icons/media.svg";
 import Title from "./Title";
+import { api } from "../utils";
+import iconMedia from "./icons/media.svg";
 
 const Content = styled.div`
   display: flex;
@@ -19,7 +21,7 @@ const MediaBox = styled.ul`
   padding: 0;
 `;
 
-const Media = styled.li`
+const MediaSt = styled.li`
   list-style: none;
   padding: 0;
   margin: 5px 0 0 5px;
@@ -27,7 +29,10 @@ const Media = styled.li`
 `;
 
 const Image = styled.img`
-  width: 83px;
+  width: ${styledMap({
+    increasedSize: "50%",
+    default: "83px"
+  })};
   background-color: #66757f;
   border-radius: 4px;
   user-select: none;
@@ -59,62 +64,97 @@ const ModalContent = styled.div`
   text-align: center;
 `;
 
-const media = [
-  {
-    id: 1,
-    src: `${process.env.PUBLIC_URL}/img/media-1.png`
-  },
-  {
-    id: 2,
-    src: `${process.env.PUBLIC_URL}/img/media-2.png`
-  },
-  {
-    id: 3,
-    src: `${process.env.PUBLIC_URL}/img/media-3.png`
-  },
-  {
-    id: 4,
-    src: `${process.env.PUBLIC_URL}/img/media-4.png`
-  },
-  {
-    id: 5,
-    src: `${process.env.PUBLIC_URL}/img/media-5.png`
-  },
-  {
-    id: 6,
-    src: `${process.env.PUBLIC_URL}/img/media-6.png`
-  }
-];
+class Media extends Component {
+  state = {
+    error: false,
+    media: []
+  };
 
-export default ({ match }) => (
-  <Content>
-    <Title to={`${match.url}/media`} src={iconMedia} alt="media icon">
-      522 Photos and videos
-    </Title>
-    <MediaBox>
-      {media.map(mediaItem => (
-        <Media key={mediaItem.id}>
-          <PortalWithState closeOnOutsideClick closeOnEsc>
-            {({ openPortal, closePortal, portal }) => (
-              <React.Fragment>
-                <Image src={mediaItem.src} alt="media" onClick={openPortal} />
-                {portal(
-                  <Modal onClick={closePortal}>
-                    <ModalContent>
-                      <Image
-                        src={mediaItem.src}
-                        alt="media"
-                        onClick={openPortal}
-                        fullSize
-                      />
-                    </ModalContent>
-                  </Modal>
-                )}
-              </React.Fragment>
-            )}
-          </PortalWithState>
-        </Media>
-      ))}
-    </MediaBox>
-  </Content>
-);
+  componentDidMount() {
+    this.getMediaInfo();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.getMediaInfo();
+    }
+  }
+
+  getMediaInfo = () => {
+    fetch(
+      `${api}/accounts/${
+        this.props.match.params.id
+      }/statuses?only_media=yes&access_token=${process.env.REACT_APP_KEY}`
+    )
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            media: result
+          });
+        },
+        error => {
+          this.setState({
+            error
+          });
+        }
+      );
+  };
+
+  render() {
+    const { error, media } = this.state;
+    if (error) {
+      return <h3>Can not render Media</h3>;
+    }
+    return (
+      <Content>
+        <Title
+          to={`${this.props.match.url}/media`}
+          src={iconMedia}
+          alt="media icon"
+        >
+          522 Photos and videos
+        </Title>
+        <MediaBox>
+          {media.map(mediaItem => (
+            <React.Fragment key={mediaItem.id}>
+              {mediaItem.media_attachments.map(attachment => (
+                <React.Fragment key={attachment.id}>
+                  {attachment.id < 9 && (
+                    <MediaSt>
+                      <PortalWithState closeOnOutsideClick closeOnEsc>
+                        {({ openPortal, closePortal, portal }) => (
+                          <React.Fragment>
+                            <Image
+                              src={attachment.preview_url}
+                              alt="media"
+                              onClick={openPortal}
+                            />
+                            {portal(
+                              <Modal onClick={closePortal}>
+                                <ModalContent>
+                                  <Image
+                                    src={attachment.url}
+                                    alt="media"
+                                    onClick={openPortal}
+                                    increasedSize
+                                  />
+                                </ModalContent>
+                              </Modal>
+                            )}
+                          </React.Fragment>
+                        )}
+                      </PortalWithState>
+                    </MediaSt>
+                  )}
+                </React.Fragment>
+              ))}
+            </React.Fragment>
+          ))}
+        </MediaBox>
+      </Content>
+    );
+  }
+}
+
+export default Media;

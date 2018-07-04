@@ -1,4 +1,5 @@
 import numbro from "numbro";
+import distanceInWordsToNow from "date-fns/distance_in_words_to_now";
 import format from "date-fns/format";
 import enLocale from "date-fns/locale/en";
 
@@ -20,4 +21,13 @@ export const formattedTweet = tweet => {
 };
 
 export const dateFormat = type =>
+  distanceInWordsToNow(
+    new Date(type),
+    { addSuffix: true },
+    { locale: enLocale }
+  );
+
+export const dateReg = type =>
   format(new Date(type), "Do MMMM YYYY", { locale: enLocale });
+
+export const api = "https://twitter-demo.erodionov.ru/api/v1";
