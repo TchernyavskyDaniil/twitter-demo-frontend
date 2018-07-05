@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import styledMap from "styled-map";
 import { Link } from "react-router-dom";
-import { dateFormat, api } from "../utils";
+import { dateFormating, api } from "../utils";
 import Actions from "./Actions";
-import iconPinned from "./pinned.svg";
+import iconPinned from "./icons/pinned.svg";
+import iconRetweet from "./icons/retweet.svg";
 
 const TweetContent = styled.div`
   display: flex;
@@ -13,6 +14,16 @@ const TweetContent = styled.div`
 
 const AvatarContainer = styled.div`
   padding-right: 10px;
+`;
+
+const User = styled(Link)`
+  color: #0b24fb;
+  text-decoration: none;
+  font-size: 14px;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Avatar = styled.img`
@@ -25,21 +36,27 @@ const Avatar = styled.img`
 
 const ContentContainer = styled.div``;
 
-const Pinned = styled.div`
+const State = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0 38px;
+  margin: 0 29px;
 `;
 
-const PinnedText = styled.p`
+const StateText = styled.p`
   margin: 0;
-  font-size: 12px;
+  font-size: ${styledMap({
+    reply: "14px",
+    default: "12px"
+  })};
   line-height: 14px;
   color: #707e88;
-  padding-left: 6px;
+  padding: ${styledMap({
+    reply: "5px 5px 0 2px",
+    default: "0 0 0 6px"
+  })};
 `;
 
-const PinnedIcon = styled.img``;
+const StateIcon = styled.img``;
 
 const Title = styled.div`
   display: flex;
@@ -143,6 +160,10 @@ const Image = styled.img`
   will-change: transform;
   object-fit: cover;
   max-width: 100%;
+  border-radius: ${styledMap({
+    shortImg: "0",
+    default: "10px"
+  })};
 `;
 
 const Info = styled.a`
@@ -192,14 +213,14 @@ const ShortInfo = styled.div`
 
   flex-wrap: ${styledMap({
     fewImg: "wrap",
-    default: "none"
+    default: "initial"
   })};
 `;
 
 const TweetSt = styled.section`
   padding: 12px 16px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border-top: 1px solid #e6ecf0;
   cursor: pointer;
 
@@ -243,10 +264,16 @@ class Tweet extends Component {
     return (
       <TweetSt key={this.props.id}>
         {this.props.pinned && (
-          <Pinned>
-            <PinnedIcon alt="Pinned image" src={iconPinned} />
-            <PinnedText>Pinned Tweet</PinnedText>
-          </Pinned>
+          <State>
+            <StateIcon alt="Pinned image" src={iconPinned} />
+            <StateText>Pinned Tweet</StateText>
+          </State>
+        )}
+        {this.props.reblog && (
+          <State>
+            <StateIcon alt="Retweet image" src={iconRetweet} />
+            <StateText>{this.props.userRetweet} retwined</StateText>
+          </State>
         )}
         <TweetContent>
           <AvatarContainer>
@@ -260,9 +287,20 @@ class Tweet extends Component {
               </PersonLink>
               <Date>
                 <Dotted> • </Dotted>
-                <Desc href={this.props.uri}>{dateFormat(this.props.date)}</Desc>
+                <Desc href={this.props.uri}>
+                  {dateFormating(this.props.date)}
+                </Desc>
               </Date>
             </Title>
+            {this.props.reply &&
+              this.props.replyUser[0] && (
+                <StateText reply>
+                  In reply{" "}
+                  <User to={`/${this.props.replyUser[0].id}`}>
+                    @{this.props.replyUser[0].username}
+                  </User>
+                </StateText>
+              )}
             {this.props.content.length > 120 ? (
               <Message
                 short

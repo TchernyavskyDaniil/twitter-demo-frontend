@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import Stat from "./Stat";
 import Button from "../UI/Button";
-import iconDotted from "./icons/dotted.svg";
+import Dropdown from "../UI/Dropdown";
 
 const Background = styled.img`
   backface-visibility: hidden;
@@ -64,29 +64,6 @@ const UserActions = styled.div`
   justify-content: flex-end;
   align-items: center;
   min-height: 36px;
-`;
-
-const Dropdown = styled.div`
-  height: 14px;
-  width: 4px;
-  cursor: pointer;
-  padding: 10px;
-  margin-left: 15px;
-  border-radius: 4px;
-
-  &:hover {
-    box-shadow: 0 0 0 2px #ffffff, 0 0 2px 4px rgba(0, 0, 0, 0.4);
-    transition: all 0.1s ease-in-out;
-  }
-
-  &:before {
-    content: "";
-    background-image: url(${iconDotted});
-    height: 100%;
-    display: block;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
 `;
 
 const Action = styled(Button)`

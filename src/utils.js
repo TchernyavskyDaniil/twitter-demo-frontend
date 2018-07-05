@@ -20,7 +20,7 @@ export const formattedTweet = tweet => {
   return numbro(tweet).format({ thousandSeparated: true });
 };
 
-export const dateFormat = type =>
+export const dateFormating = type =>
   distanceInWordsToNow(
     new Date(type),
     { addSuffix: true },

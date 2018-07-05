@@ -10,6 +10,7 @@ import Trends from "../Trends";
 import CommonFollowers from "./CommonFollowers";
 import Media from "./Media";
 import Supports from "../Supports";
+import Users from "./Users";
 import { api } from "../utils";
 import iconLocation from "./icons/location.svg";
 import iconWeb from "./icons/web.svg";
@@ -129,40 +130,55 @@ class Profile extends Component {
                   <Route component={CommonFollowers} />
                   <Route component={Media} />
                 </ProfileSideBar>
-                <div className="col-xs-6">
-                  <Switch>
-                    <Route
-                      exact
-                      path={`/${userInfo.id}/following`}
-                      render={() => <h3>This is Following</h3>}
-                    />
-                    <Route
-                      exact
-                      path={`/${userInfo.id}/followers`}
-                      render={() => <h3>This is Followers</h3>}
-                    />
-                    <Route
-                      exact
-                      path={`/${userInfo.id}/likes`}
-                      render={() => <h3>This is Likes</h3>}
-                    />
-                    <Route
-                      exact
-                      path={`/${userInfo.id}/lists`}
-                      render={() => <h3>This is Lists</h3>}
-                    />
-                    <Route path={`/${userInfo.id}`} component={Feeds} />
-                  </Switch>
-                </div>
-                <div className="col-xs-3">
-                  <Sidebar>
-                    <Recommendations userId={userInfo.id} />
-                  </Sidebar>
-                  <Sidebar>
-                    <Trends />
-                  </Sidebar>
-                  <Supports />
-                </div>
+                <Switch>
+                  <Route
+                    exact
+                    path={`/${userInfo.id}/following`}
+                    render={() => (
+                      <div className="col-xs-9">
+                        <Users id={userInfo.id} type="following" />
+                      </div>
+                    )}
+                  />
+                  <Route
+                    exact
+                    path={`/${userInfo.id}/followers`}
+                    render={() => (
+                      <div className="col-xs-9">
+                        <Users id={userInfo.id} type="followers" />
+                      </div>
+                    )}
+                  />
+                  <Route
+                    exact
+                    path={`/${userInfo.id}/likes`}
+                    render={() => <h3>This is Likes</h3>}
+                  />
+                  <Route
+                    exact
+                    path={`/${userInfo.id}/lists`}
+                    render={() => <h3>This is Lists</h3>}
+                  />
+                  <Route
+                    path={`/${userInfo.id}`}
+                    render={() => (
+                      <React.Fragment>
+                        <div className="col-xs-6">
+                          <Feeds />
+                        </div>
+                        <div className="col-xs-3">
+                          <Sidebar>
+                            <Recommendations userId={userInfo.id} />
+                          </Sidebar>
+                          <Sidebar>
+                            <Trends />
+                          </Sidebar>
+                          <Supports />
+                        </div>
+                      </React.Fragment>
+                    )}
+                  />
+                </Switch>
               </Info>
             </div>
           </Container>

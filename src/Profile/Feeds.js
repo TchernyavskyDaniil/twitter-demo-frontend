@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { api } from "../utils";
 import Tweet from "./Tweet";
@@ -16,6 +16,16 @@ class Feeds extends Component {
   };
 
   componentDidMount() {
+    this.getFeedInfo();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.url !== this.props.match.url) {
+      this.getFeedInfo();
+    }
+  }
+
+  getFeedInfo = () => {
     fetch(
       `${api}/accounts/${this.props.match.url.slice(1)}/statuses?access_token=${
         process.env.REACT_APP_KEY
@@ -23,9 +33,9 @@ class Feeds extends Component {
     )
       .then(res => res.json())
       .then(
-        result => {
+        feeds => {
           this.setState({
-            feeds: result
+            feeds
           });
         },
         error => {
@@ -34,7 +44,7 @@ class Feeds extends Component {
           });
         }
       );
-  }
+  };
 
   render() {
     const { error, feeds } = this.state;
@@ -50,23 +60,49 @@ class Feeds extends Component {
           render={() => (
             <TweetList>
               {feeds.map(feed => (
-                <Tweet
-                  key={feed.id}
-                  id={feed.id}
-                  pinned={feed.pinned}
-                  avatar={feed.account.avatar_static}
-                  personNick={feed.account.username}
-                  person={feed.account.display_name}
-                  uri={feed.uri}
-                  date={feed.created_at}
-                  content={feed.content}
-                  attachments={feed.media_attachments}
-                  comments={feed.comments}
-                  retweets={feed.reblogs_count}
-                  likes={feed.favourites_count}
-                  messages={feed.messages}
-                  activeLike={feed.activeLike}
-                />
+                <React.Fragment key={feed.id}>
+                  {!feed.reblog ? (
+                    !feed.in_reply_to_account_id && (
+                      <Tweet
+                        key={feed.id}
+                        id={feed.id}
+                        pinned={feed.pinned}
+                        avatar={feed.account.avatar_static}
+                        personNick={feed.account.username}
+                        person={feed.account.display_name}
+                        uri={feed.uri}
+                        date={feed.created_at}
+                        content={feed.content}
+                        attachments={feed.media_attachments}
+                        comments={feed.comments}
+                        retweets={feed.reblogs_count}
+                        likes={feed.favourites_count}
+                        messages={feed.messages}
+                        activeLike={feed.activeLike}
+                      />
+                    )
+                  ) : (
+                    <Tweet
+                      reblog
+                      key={feed.reblog.id}
+                      id={feed.reblog.id}
+                      userRetweet={feed.account.display_name}
+                      pinned={feed.reblog.pinned}
+                      avatar={feed.reblog.account.avatar_static}
+                      personNick={feed.reblog.account.username}
+                      person={feed.reblog.account.display_name}
+                      uri={feed.reblog.uri}
+                      date={feed.reblog.created_at}
+                      content={feed.reblog.content}
+                      attachments={feed.reblog.media_attachments}
+                      comments={feed.reblog.comments}
+                      retweets={feed.reblog.reblogs_count}
+                      likes={feed.reblog.favourites_count}
+                      messages={feed.reblog.messages}
+                      activeLike={feed.reblog.activeLike}
+                    />
+                  )}
+                </React.Fragment>
               ))}
             </TweetList>
           )}
@@ -74,7 +110,55 @@ class Feeds extends Component {
         <Route
           exact
           path={`${this.props.match.url}/with-replies`}
-          render={() => <h3> This is With Replies </h3>}
+          render={() => (
+            <TweetList>
+              {feeds.map(feed => (
+                <React.Fragment key={feed.id}>
+                  {feed.reblog ? (
+                    <Tweet
+                      reblog
+                      key={feed.reblog.id}
+                      id={feed.reblog.id}
+                      userRetweet={feed.account.display_name}
+                      pinned={feed.reblog.pinned}
+                      avatar={feed.reblog.account.avatar_static}
+                      personNick={feed.reblog.account.username}
+                      person={feed.reblog.account.display_name}
+                      uri={feed.reblog.uri}
+                      date={feed.reblog.created_at}
+                      content={feed.reblog.content}
+                      attachments={feed.reblog.media_attachments}
+                      comments={feed.reblog.comments}
+                      retweets={feed.reblog.reblogs_count}
+                      likes={feed.reblog.favourites_count}
+                      messages={feed.reblog.messages}
+                      activeLike
+                    />
+                  ) : (
+                    <Tweet
+                      reply={feed.in_reply_to_account_id}
+                      replyUser={feed.mentions}
+                      key={feed.id}
+                      id={feed.id}
+                      pinned={feed.pinned}
+                      avatar={feed.account.avatar_static}
+                      personNick={feed.account.username}
+                      person={feed.account.display_name}
+                      uri={feed.uri}
+                      date={feed.created_at}
+                      content={feed.content}
+                      attachments={feed.media_attachments}
+                      comments={feed.comments}
+                      retweets={feed.reblogs_count}
+                      likes={feed.favourites_count}
+                      messages={feed.messages}
+                      activeLike={feed.activeLike}
+                    />
+                  )}
+                </React.Fragment>
+              ))}
+            </TweetList>
+          )}
         />
         <Route
           exact
@@ -83,8 +167,10 @@ class Feeds extends Component {
             <TweetList>
               {feeds.map(feed => (
                 <React.Fragment key={feed.id}>
-                  {feed.media_attachments.length > 0 ||
-                  feed.content.includes("href") ? (
+                  {(feed.media_attachments.length > 0 ||
+                    feed.content.includes("href")) &&
+                  !feed.in_reply_to_account_id &&
+                  !feed.reblog ? (
                     <Tweet
                       key={feed.id}
                       id={feed.id}
@@ -113,4 +199,4 @@ class Feeds extends Component {
   }
 }
 
-export default Feeds;
+export default withRouter(Feeds);
