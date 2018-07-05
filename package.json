@@ -45,8 +45,5 @@
     "*.{js,css,html}": [
       "yarn lint"
     ]
-  },
-  "env": {
-    "REACT_APP_KEY": "@acme-api-key"
   }
 }
