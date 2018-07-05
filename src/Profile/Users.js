@@ -110,9 +110,9 @@ class Users extends Component {
     )
       .then(res => res.json())
       .then(
-        result => {
+        users => {
           this.setState({
-            users: result
+            users
           });
         },
         error => {
@@ -127,7 +127,7 @@ class Users extends Component {
     const { error, users } = this.state;
 
     if (error) {
-      return <h3> Can not load, try again </h3>;
+      return <h3> Can not load Users. Error {error.message}. </h3>;
     }
 
     return (

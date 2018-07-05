@@ -88,9 +88,9 @@ class Media extends Component {
     )
       .then(res => res.json())
       .then(
-        result => {
+        media => {
           this.setState({
-            media: result
+            media
           });
         },
         error => {

@@ -232,7 +232,7 @@ const TweetSt = styled.section`
 class Tweet extends Component {
   state = {
     error: false,
-    card: []
+    preview: []
   };
 
   componentDidMount() {
@@ -243,9 +243,9 @@ class Tweet extends Component {
     )
       .then(res => res.json())
       .then(
-        result => {
+        preview => {
           this.setState({
-            card: result
+            preview
           });
         },
         error => {
@@ -257,9 +257,9 @@ class Tweet extends Component {
   }
 
   render() {
-    const { error, card } = this.state;
+    const { error, preview } = this.state;
     if (error) {
-      return <h3>Can not render Tweet</h3>;
+      return <h3>Error: {error.message}. Can not render Tweet</h3>;
     }
     return (
       <TweetSt key={this.props.id}>
@@ -332,15 +332,15 @@ class Tweet extends Component {
                   />
                 </ShortInfo>
               ))}
-            {card.url && (
+            {preview.url && (
               <ShortInfo>
-                {card.image && (
-                  <Image alt="Tweet image" src={card.image} shortImg />
+                {preview.image && (
+                  <Image alt="Tweet image" src={preview.image} shortImg />
                 )}
-                <Info href={card.url}>
-                  <InfoTitle>{card.title}</InfoTitle>
-                  <InfoText>{card.description}</InfoText>
-                  <InfoLink>{card.url}</InfoLink>
+                <Info href={preview.url}>
+                  <InfoTitle>{preview.title}</InfoTitle>
+                  <InfoText>{preview.description}</InfoText>
+                  <InfoLink>{preview.url}</InfoLink>
                 </Info>
               </ShortInfo>
             )}

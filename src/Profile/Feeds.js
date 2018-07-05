@@ -49,7 +49,7 @@ class Feeds extends Component {
   render() {
     const { error, feeds } = this.state;
     if (error) {
-      return <h3>Error: {error.message}</h3>;
+      return <h3>Error: {error.message}. Can not load Feeds</h3>;
     }
     return (
       <React.Fragment>

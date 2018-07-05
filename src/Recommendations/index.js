@@ -207,7 +207,7 @@ class Recommendations extends Component {
   render() {
     const { error, recommendations, minIndex, maxIndex } = this.state;
     if (error) {
-      return <h3>Error: {error.message}</h3>;
+      return <h3>Error: {error.message}. Can not load Recommendations</h3>;
     }
 
     return (
