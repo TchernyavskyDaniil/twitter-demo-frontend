@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Button from "../UI/Button";
-import { api } from "../utils";
+import { api, token } from "../utils";
 import iconDelete from "./icons/delete.svg";
 import iconCheck from "./icons/check.svg";
 import iconPeople from "./icons/people.svg";
@@ -159,7 +159,7 @@ const Refresh = styled.button`
 class Recommendations extends Component {
   state = {
     error: false,
-    recommendations: [],
+    following: [],
     minIndex: 0,
     maxIndex: 3
   };
@@ -176,15 +176,13 @@ class Recommendations extends Component {
 
   getCommonFollowers = () => {
     fetch(
-      `${api}/accounts/${this.props.userId}/followers?access_token=${
-        process.env.REACT_APP_KEY
-      }`
+      `${api}/accounts/${this.props.userId}/following?access_token=${token}`
     )
       .then(res => res.json())
       .then(
         result => {
           this.setState({
-            recommendations: result,
+            following: result,
             minIndex: 0,
             maxIndex: 3
           });
@@ -205,7 +203,7 @@ class Recommendations extends Component {
   };
 
   render() {
-    const { error, recommendations, minIndex, maxIndex } = this.state;
+    const { error, following, minIndex, maxIndex } = this.state;
     if (error) {
       return <h3>Error: {error.message}. Can not load Recommendations</h3>;
     }
@@ -222,23 +220,23 @@ class Recommendations extends Component {
           </Options>
         </Header>
         <Recommends>
-          {recommendations.length < minIndex ? (
+          {following.length <= minIndex ? (
             <p>No recommendations</p>
           ) : (
-            recommendations.map((rec, index) => (
-              <React.Fragment key={rec.id}>
+            following.map((user, index) => (
+              <React.Fragment key={user.id}>
                 {index >= minIndex &&
                   index < maxIndex && (
                     <Person>
                       <Recommended>
                         <Info>
-                          <PersonLink to={`/${rec.id}`}>
-                            <Avatar src={rec.avatar_static} alt="avatar" />
+                          <PersonLink to={`/${user.id}`}>
+                            <Avatar src={user.avatar_static} alt="avatar" />
                             <Fullname>
-                              <Name>{rec.display_name}</Name>
-                              {rec.status && <Status src={iconCheck} />}
+                              <Name>{user.display_name}</Name>
+                              {user.status && <Status src={iconCheck} />}
                             </Fullname>
-                            <Username>{`@${rec.username}`}</Username>
+                            <Username>{`@${user.username}`}</Username>
                           </PersonLink>
                           <Follow primary>Follow</Follow>
                         </Info>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../UI/Button";
 import Dropdown from "../UI/Dropdown";
-import { api } from "../utils";
+import { api, token } from "../utils";
 
 const UserList = styled.ul`
   margin: 0;
@@ -103,10 +103,20 @@ class Users extends Component {
   };
 
   componentDidMount() {
+    this.getUsers();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.type !== this.props.type) {
+      this.getUsers();
+    }
+  }
+
+  getUsers = () => {
     fetch(
-      `${api}/accounts/${this.props.id}/${this.props.type}?access_token=${
-        process.env.REACT_APP_KEY
-      }`
+      `${api}/accounts/${this.props.id}/${
+        this.props.type
+      }?access_token=${token}`
     )
       .then(res => res.json())
       .then(
@@ -121,7 +131,7 @@ class Users extends Component {
           });
         }
       );
-  }
+  };
 
   render() {
     const { error, users } = this.state;

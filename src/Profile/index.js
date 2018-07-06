@@ -11,7 +11,7 @@ import CommonFollowers from "./CommonFollowers";
 import Media from "./Media";
 import Supports from "../Supports";
 import Users from "./Users";
-import { api } from "../utils";
+import { api, token } from "../utils";
 import iconLocation from "./icons/location.svg";
 import iconWeb from "./icons/web.svg";
 import iconReg from "./icons/reg.svg";
@@ -60,11 +60,7 @@ class Profile extends Component {
   }
 
   getUserInfo = () => {
-    fetch(
-      `${api}/accounts/${this.props.match.params.id}?access_token=${
-        process.env.REACT_APP_KEY
-      }`
-    )
+    fetch(`${api}/accounts/${this.props.match.params.id}?access_token=${token}`)
       .then(res => res.json())
       .then(
         result => {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import styledMap from "styled-map";
 import { Link } from "react-router-dom";
-import { dateFormating, api } from "../utils";
+import { dateFormating, api, token } from "../utils";
 import Actions from "./Actions";
 import iconPinned from "./icons/pinned.svg";
 import iconRetweet from "./icons/retweet.svg";
@@ -236,11 +236,7 @@ class Tweet extends Component {
   };
 
   componentDidMount() {
-    fetch(
-      `${api}/statuses/${this.props.id}/card?access_token=${
-        process.env.REACT_APP_KEY
-      }`
-    )
+    fetch(`${api}/statuses/${this.props.id}/card?access_token=${token}`)
       .then(res => res.json())
       .then(
         preview => {
@@ -281,7 +277,7 @@ class Tweet extends Component {
           </AvatarContainer>
           <ContentContainer>
             <Title>
-              <PersonLink to={`/${this.props.personNick}`}>
+              <PersonLink to={`/${this.props.accountUrl}`}>
                 <Person>{this.props.person}</Person>
                 <Nickname>@{this.props.personNick}</Nickname>
               </PersonLink>

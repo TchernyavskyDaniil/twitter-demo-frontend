@@ -3,7 +3,7 @@ import styled from "styled-components";
 import styledMap from "styled-map";
 import { PortalWithState } from "react-portal";
 import Title from "./Title";
-import { api } from "../utils";
+import { api, token } from "../utils";
 import iconMedia from "./icons/media.svg";
 
 const Content = styled.div`
@@ -67,6 +67,7 @@ const ModalContent = styled.div`
 class Media extends Component {
   state = {
     error: false,
+    count: null,
     media: []
   };
 
@@ -80,17 +81,18 @@ class Media extends Component {
     }
   }
 
-  getMediaInfo = () => {
-    fetch(
+  getMediaInfo = async () => {
+    await fetch(
       `${api}/accounts/${
         this.props.match.params.id
-      }/statuses?only_media=yes&access_token=${process.env.REACT_APP_KEY}`
+      }/statuses?only_media=yes&access_token=${token}`
     )
       .then(res => res.json())
       .then(
-        media => {
+        result => {
           this.setState({
-            media
+            media: result,
+            count: 0
           });
         },
         error => {
@@ -99,10 +101,16 @@ class Media extends Component {
           });
         }
       );
+
+    this.state.media.map(mediaElem =>
+      this.setState(prevState => ({
+        count: prevState.count + mediaElem.media_attachments.length
+      }))
+    );
   };
 
   render() {
-    const { error, media } = this.state;
+    const { count, error, media } = this.state;
     if (error) {
       return <h3>Can not render Media</h3>;
     }
@@ -113,7 +121,7 @@ class Media extends Component {
           src={iconMedia}
           alt="media icon"
         >
-          522 Photos and videos
+          {count} Photos and videos
         </Title>
         <MediaBox>
           {media.map(mediaItem => (

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { api } from "../utils";
+import { api, token } from "../utils";
 import Tweet from "./Tweet";
 import Tabs from "./Tabs";
 
@@ -27,9 +27,9 @@ class Feeds extends Component {
 
   getFeedInfo = () => {
     fetch(
-      `${api}/accounts/${this.props.match.url.slice(1)}/statuses?access_token=${
-        process.env.REACT_APP_KEY
-      }`
+      `${api}/accounts/${this.props.match.url.slice(
+        1
+      )}/statuses?access_token=${token}`
     )
       .then(res => res.json())
       .then(
@@ -67,6 +67,7 @@ class Feeds extends Component {
                         key={feed.id}
                         id={feed.id}
                         pinned={feed.pinned}
+                        accountUrl={feed.account.id}
                         avatar={feed.account.avatar_static}
                         personNick={feed.account.username}
                         person={feed.account.display_name}
@@ -86,6 +87,7 @@ class Feeds extends Component {
                       reblog
                       key={feed.reblog.id}
                       id={feed.reblog.id}
+                      accountUrl={feed.reblog.account.id}
                       userRetweet={feed.account.display_name}
                       pinned={feed.reblog.pinned}
                       avatar={feed.reblog.account.avatar_static}
@@ -119,6 +121,7 @@ class Feeds extends Component {
                       reblog
                       key={feed.reblog.id}
                       id={feed.reblog.id}
+                      accountUrl={feed.reblog.account.id}
                       userRetweet={feed.account.display_name}
                       pinned={feed.reblog.pinned}
                       avatar={feed.reblog.account.avatar_static}
@@ -138,6 +141,7 @@ class Feeds extends Component {
                     <Tweet
                       reply={feed.in_reply_to_account_id}
                       replyUser={feed.mentions}
+                      accountUrl={feed.account.id}
                       key={feed.id}
                       id={feed.id}
                       pinned={feed.pinned}
@@ -174,6 +178,7 @@ class Feeds extends Component {
                     <Tweet
                       key={feed.id}
                       id={feed.id}
+                      accountUrl={feed.account.id}
                       pinned={feed.pinned}
                       avatar={feed.account.avatar_static}
                       personNick={feed.account.username}

@@ -31,3 +31,4 @@ export const dateReg = type =>
   format(new Date(type), "Do MMMM YYYY", { locale: enLocale });
 
 export const api = "https://twitter-demo.erodionov.ru/api/v1";
+export const token = process.env.REACT_APP_KEY;
