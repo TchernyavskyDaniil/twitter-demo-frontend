@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import styledMap from "styled-map";
 import { Link } from "react-router-dom";
-import { dateFormating, api, token } from "../utils";
-import Actions from "./Actions";
+import { formatDate, api, token } from "../../utils";
+import Actions from "../Actions";
 import iconPinned from "./icons/pinned.svg";
 import iconRetweet from "./icons/retweet.svg";
 
@@ -210,6 +210,7 @@ const ShortInfo = styled.div`
   display: flex;
   flex-direction: row;
   cursor: pointer;
+  margin-top: 5px;
 
   flex-wrap: ${styledMap({
     fewImg: "wrap",
@@ -232,11 +233,14 @@ const TweetSt = styled.section`
 class Tweet extends Component {
   state = {
     error: false,
-    preview: []
+    preview: [],
+    tweet: [],
+    reblogStatus: false,
+    userRetweet: null
   };
 
   componentDidMount() {
-    fetch(`${api}/statuses/${this.props.id}/card?access_token=${token}`)
+    fetch(`${api}/statuses/${this.props.tweet.id}/card?access_token=${token}`)
       .then(res => res.json())
       .then(
         preview => {
@@ -250,106 +254,124 @@ class Tweet extends Component {
           });
         }
       );
+
+    this.getTypeTweet();
   }
 
+  getTypeTweet = () => {
+    if (this.props.tweet.reblog !== null) {
+      this.setState({
+        userRetweet: this.props.tweet.account.display_name,
+        tweet: this.props.tweet.reblog,
+        reblogStatus: true
+      });
+    } else {
+      this.setState({
+        tweet: this.props.tweet
+      });
+    }
+  };
+
   render() {
-    const { error, preview } = this.state;
+    const { error, preview, tweet, reblogStatus, userRetweet } = this.state;
     if (error) {
       return <h3>Error: {error.message}. Can not render Tweet</h3>;
     }
     return (
-      <TweetSt key={this.props.id}>
-        {this.props.pinned && (
-          <State>
-            <StateIcon alt="Pinned image" src={iconPinned} />
-            <StateText>Pinned Tweet</StateText>
-          </State>
-        )}
-        {this.props.reblog && (
-          <State>
-            <StateIcon alt="Retweet image" src={iconRetweet} />
-            <StateText>{this.props.userRetweet} retwined</StateText>
-          </State>
-        )}
-        <TweetContent>
-          <AvatarContainer>
-            <Avatar src={this.props.avatar} />
-          </AvatarContainer>
-          <ContentContainer>
-            <Title>
-              <PersonLink to={`/${this.props.accountUrl}`}>
-                <Person>{this.props.person}</Person>
-                <Nickname>@{this.props.personNick}</Nickname>
-              </PersonLink>
-              <Date>
-                <Dotted> • </Dotted>
-                <Desc href={this.props.uri}>
-                  {dateFormating(this.props.date)}
-                </Desc>
-              </Date>
-            </Title>
-            {this.props.reply &&
-              this.props.replyUser[0] && (
-                <StateText reply>
-                  In reply{" "}
-                  <User to={`/${this.props.replyUser[0].id}`}>
-                    @{this.props.replyUser[0].username}
-                  </User>
-                </StateText>
-              )}
-            {this.props.content.length > 120 ? (
-              <Message
-                short
-                dangerouslySetInnerHTML={{ __html: this.props.content }}
-              />
-            ) : (
-              <Message
-                dangerouslySetInnerHTML={{ __html: this.props.content }}
-              />
+      <React.Fragment>
+        {tweet.id !== undefined ? (
+          <TweetSt key={tweet.id}>
+            {tweet.pinned && (
+              <State>
+                <StateIcon alt="Pinned image" src={iconPinned} />
+                <StateText>Pinned Tweet</StateText>
+              </State>
             )}
-            {this.props.attachments.length > 1 && (
-              <ShortInfo fewImg>
-                {this.props.attachments.map(attachment => (
-                  <Image
-                    key={attachment.id}
-                    alt="Tweet image"
-                    src={attachment.preview_url}
-                  />
-                ))}
-              </ShortInfo>
+            {reblogStatus && (
+              <State>
+                <StateIcon alt="Retweet image" src={iconRetweet} />
+                <StateText>{userRetweet} retwined</StateText>
+              </State>
             )}
-            {this.props.attachments.length === 1 &&
-              this.props.attachments.map(attachment => (
-                <ShortInfo key={attachment.id}>
-                  <Image
-                    alt="Tweet image"
-                    src={attachment.preview_url}
-                    maxWidth
+            <TweetContent>
+              <AvatarContainer>
+                <Avatar src={tweet.account.avatar_static} />
+              </AvatarContainer>
+              <ContentContainer>
+                <Title>
+                  <PersonLink to={`/${tweet.account.id}`}>
+                    <Person>{tweet.account.display_name}</Person>
+                    <Nickname>@{tweet.account.username}</Nickname>
+                  </PersonLink>
+                  <Date>
+                    <Dotted> • </Dotted>
+                    <Desc href={tweet.uri}>{formatDate(tweet.created_at)}</Desc>
+                  </Date>
+                </Title>
+                {tweet.in_reply_to_account_id &&
+                  tweet.mentions[0] && (
+                    <StateText reply>
+                      In reply{" "}
+                      <User to={`/${tweet.mentions[0].id}`}>
+                        @{tweet.mentions[0].username}
+                      </User>
+                    </StateText>
+                  )}
+                {tweet.content.length > 120 ? (
+                  <Message
+                    short
+                    dangerouslySetInnerHTML={{ __html: tweet.content }}
                   />
-                </ShortInfo>
-              ))}
-            {preview.url && (
-              <ShortInfo>
-                {preview.image && (
-                  <Image alt="Tweet image" src={preview.image} shortImg />
+                ) : (
+                  <Message
+                    dangerouslySetInnerHTML={{ __html: tweet.content }}
+                  />
                 )}
-                <Info href={preview.url}>
-                  <InfoTitle>{preview.title}</InfoTitle>
-                  <InfoText>{preview.description}</InfoText>
-                  <InfoLink>{preview.url}</InfoLink>
-                </Info>
-              </ShortInfo>
-            )}
-            <Actions
-              comments={this.props.comments}
-              retweets={this.props.retweets}
-              likes={this.props.likes}
-              messages={this.props.messages}
-              activeLike={this.props.activeLike}
-            />
-          </ContentContainer>
-        </TweetContent>
-      </TweetSt>
+                {tweet.media_attachments.length > 1 && (
+                  <ShortInfo fewImg>
+                    {tweet.media_attachments.map(attachment => (
+                      <Image
+                        key={attachment.id}
+                        alt="Tweet image"
+                        src={attachment.preview_url}
+                      />
+                    ))}
+                  </ShortInfo>
+                )}
+                {tweet.media_attachments.length === 1 &&
+                  tweet.media_attachments.map(attachment => (
+                    <ShortInfo key={attachment.id}>
+                      <Image
+                        alt="Tweet image"
+                        src={attachment.preview_url}
+                        maxWidth
+                      />
+                    </ShortInfo>
+                  ))}
+                {preview.url && (
+                  <ShortInfo>
+                    {preview.image && (
+                      <Image alt="Tweet image" src={preview.image} shortImg />
+                    )}
+                    <Info href={preview.url}>
+                      <InfoTitle>{preview.title}</InfoTitle>
+                      <InfoText>{preview.description}</InfoText>
+                      <InfoLink>{preview.url}</InfoLink>
+                    </Info>
+                  </ShortInfo>
+                )}
+                <Actions
+                  comments={this.props.comments}
+                  retweets={tweet.reblogs_count}
+                  likes={tweet.favourites_count}
+                  messages={this.props.messages}
+                  activeLike={this.props.activeLike}
+                />
+              </ContentContainer>
+            </TweetContent>
+          </TweetSt>
+        ) : null}
+      </React.Fragment>
     );
   }
 }

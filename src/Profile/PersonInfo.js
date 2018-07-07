@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { dateReg } from "../utils";
+import { formatReg } from "../utils";
 import iconCheck from "../Recommendations/icons/check.svg";
 import Button from "../UI/Button";
 
@@ -164,7 +164,7 @@ export default ({
       </Info>
       <Info>
         <InfoIcon alt={dateAlt} src={dateSrc} />
-        <Desc>{dateReg(date)}</Desc>
+        <Desc>{formatReg(date)}</Desc>
       </Info>
       <Actions>
         <Action>Tweet to</Action>

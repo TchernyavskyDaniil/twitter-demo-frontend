@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Stat from "./Stat";
 import Button from "../UI/Button";
 import Dropdown from "../UI/Dropdown";
@@ -39,7 +39,7 @@ const ProfileContainer = styled.div`
   width: 100%;
 `;
 
-const Profile = styled(Link)`
+const Profile = styled.a`
   position: absolute;
   border-radius: 100px;
   left: 0;
@@ -95,7 +95,7 @@ export default withRouter(
         <div className="row">
           <ProfileHeader>
             <ProfileContainer>
-              <Profile to={match.url}>
+              <Profile href={header}>
                 <Avatar src={header} />
               </Profile>
             </ProfileContainer>

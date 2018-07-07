@@ -80,7 +80,7 @@ class Profile extends Component {
 
   render() {
     const { error, isLoaded, userInfo } = this.state;
-    if (error) {
+    if (error || userInfo.error) {
       return <Redirect to="/error" />;
     } else if (!isLoaded) {
       return <h3>Loading ...</h3>;

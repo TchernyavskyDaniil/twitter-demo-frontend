@@ -20,14 +20,14 @@ export const formattedTweet = tweet => {
   return numbro(tweet).format({ thousandSeparated: true });
 };
 
-export const dateFormating = type =>
+export const formatDate = type =>
   distanceInWordsToNow(
     new Date(type),
     { addSuffix: true },
     { locale: enLocale }
   );
 
-export const dateReg = type =>
+export const formatReg = type =>
   format(new Date(type), "Do MMMM YYYY", { locale: enLocale });
 
 export const api = "https://twitter-demo.erodionov.ru/api/v1";

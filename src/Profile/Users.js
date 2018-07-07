@@ -12,7 +12,7 @@ const UserList = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 
 const User = styled.li`
@@ -20,7 +20,7 @@ const User = styled.li`
   display: flex;
   flex-direction: column;
   width: 280px;
-  margin: 3px 0;
+  margin: 0 6px 6px 0;
 `;
 
 const Background = styled.img`

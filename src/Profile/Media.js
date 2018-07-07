@@ -68,7 +68,7 @@ class Media extends Component {
   state = {
     error: false,
     count: null,
-    media: []
+    data: []
   };
 
   componentDidMount() {
@@ -91,7 +91,7 @@ class Media extends Component {
       .then(
         result => {
           this.setState({
-            media: result,
+            data: result,
             count: 0
           });
         },
@@ -102,15 +102,15 @@ class Media extends Component {
         }
       );
 
-    this.state.media.map(mediaElem =>
+    this.state.data.map(media =>
       this.setState(prevState => ({
-        count: prevState.count + mediaElem.media_attachments.length
+        count: prevState.count + media.media_attachments.length
       }))
     );
   };
 
   render() {
-    const { count, error, media } = this.state;
+    const { count, error, data } = this.state;
     if (error) {
       return <h3>Can not render Media</h3>;
     }
@@ -124,9 +124,9 @@ class Media extends Component {
           {count} Photos and videos
         </Title>
         <MediaBox>
-          {media.map(mediaItem => (
-            <React.Fragment key={mediaItem.id}>
-              {mediaItem.media_attachments.map(attachment => (
+          {data.map(media => (
+            <React.Fragment key={media.id}>
+              {media.media_attachments.map(attachment => (
                 <React.Fragment key={attachment.id}>
                   {attachment.id < 9 && (
                     <MediaSt>

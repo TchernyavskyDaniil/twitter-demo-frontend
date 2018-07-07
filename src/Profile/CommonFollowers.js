@@ -82,7 +82,7 @@ class Followers extends Component {
     return (
       <Common>
         <Title
-          to={`${this.props.match.url}/common-followers`}
+          to={`${this.props.match.url}/followers`}
           src={iconFollower}
           alt="follower icon"
         >
