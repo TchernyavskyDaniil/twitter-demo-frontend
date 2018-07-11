@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const Crumb = styled.li`
   cursor: pointer;
@@ -36,11 +36,11 @@ const Desc = styled.span`
 
 const Logo = styled.img``;
 
-export default props => (
+export default ({ to, text, src }) => (
   <Crumb>
-    <Home to={props.to} activeClassName="active" exact>
-      <Logo alt={props.alt} src={props.src} />
-      <Desc>{props.children}</Desc>
+    <Home to={to} exact>
+      <Logo alt={text} src={src} />
+      <Desc>{text}</Desc>
     </Home>
   </Crumb>
 );

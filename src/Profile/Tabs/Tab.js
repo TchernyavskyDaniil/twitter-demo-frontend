@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
-const Container = styled.li`
+const Tab = styled.li`
   font-size: 18px;
   line-height: 20px;
   padding-right: 35px;
   font-weight: 500;
 `;
 
-const Tab = styled(NavLink)`
+const TabLink = styled(NavLink)`
   text-decoration: none;
   color: black;
 
@@ -27,9 +27,9 @@ const Tab = styled(NavLink)`
 `;
 
 export default props => (
-  <Container>
-    <Tab to={props.to} activeClassName="active" exact>
+  <Tab>
+    <TabLink to={props.to} exact>
       {props.children}
-    </Tab>
-  </Container>
+    </TabLink>
+  </Tab>
 );

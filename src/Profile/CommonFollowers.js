@@ -1,8 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import iconFollower from './follower.svg';
-import Title from './Title';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { api, token } from "../utils";
+import iconFollower from "./icons/follower.svg";
+import Title from "./Title";
 
 const Common = styled.div`
   display: flex;
@@ -10,12 +11,12 @@ const Common = styled.div`
   margin-bottom: 25px;
 `;
 
-const Followers = styled.ul`
+const FollowerList = styled.ul`
   margin: -8px 0 0 -8px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0;
 `;
 
@@ -25,7 +26,7 @@ const Follower = styled.li`
 `;
 
 const Avatar = styled.img`
-  width: 48px;
+  width: 49px;
   background-color: #66757f;
 
   &:hover {
@@ -33,60 +34,79 @@ const Avatar = styled.img`
   }
 `;
 
-export default () => (
-  <Common>
-    <Title to="/followers" src={iconFollower} alt="follower icon">
-      6 Followers you now
-    </Title>
-    <Followers>
-      <Follower>
-        <Link to="/name1">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-1.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name2">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-2.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name3">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-3.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name4">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-4.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name5">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-5.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-      <Follower>
-        <Link to="/name6">
-          <Avatar
-            src={`${process.env.PUBLIC_URL}/img/avatar-person-6.png`}
-            alt="avatar"
-          />
-        </Link>
-      </Follower>
-    </Followers>
-  </Common>
-);
+const StLink = styled(Link)``;
+
+class Followers extends Component {
+  state = {
+    error: false,
+    followers: []
+  };
+
+  componentDidMount() {
+    this.getCommonFollowers();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.getCommonFollowers();
+    }
+  }
+
+  getCommonFollowers = () => {
+    fetch(
+      `${api}/accounts/${
+        this.props.match.params.id
+      }/followers?access_token=${token}`
+    )
+      .then(res => res.json())
+      .then(
+        followers => {
+          this.setState({
+            followers
+          });
+        },
+        error => {
+          this.setState({
+            error
+          });
+        }
+      );
+  };
+
+  render() {
+    const { followers, error } = this.state;
+    if (error) {
+      return <h3>Error: {error.message}. Can not load Common Followers.</h3>;
+    }
+
+    return (
+      <Common>
+        <Title
+          to={`${this.props.match.url}/followers`}
+          src={iconFollower}
+          alt="follower icon"
+        >
+          {followers.length} Followers you now
+        </Title>
+        <FollowerList>
+          {followers.map(follower => (
+            <React.Fragment key={follower.id}>
+              {followers.length <= 10 && (
+                <Follower>
+                  <StLink to={`/${follower.id}`}>
+                    <Avatar
+                      src={follower.avatar_static}
+                      alt={`avatar ${follower.username}`}
+                    />
+                  </StLink>
+                </Follower>
+              )}
+            </React.Fragment>
+          ))}
+        </FollowerList>
+      </Common>
+    );
+  }
+}
+
+export default Followers;

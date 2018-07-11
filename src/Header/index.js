@@ -1,14 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Navigation from './Navigation';
-import Search from '../UI/Search';
-import Button from '../UI/Button';
-import twitterLogo from './twitter.svg';
-import iconHome from './home.svg';
-import iconMoments from './moments.svg';
-import iconNotifications from './notifications.svg';
-import iconMessages from './messages.svg';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { animateScroll as scroll } from "react-scroll";
+import Navigation from "./Navigation";
+import Search from "../UI/Search";
+import Button from "../UI/Button";
+import twitterLogo from "./icons/twitter.svg";
+import iconHome from "./icons/home.svg";
+import iconMoment from "./icons/moment.svg";
+import iconNotification from "./icons/notification.svg";
+import iconMessage from "./icons/messages.svg";
 
 const Header = styled.header`
   position: fixed;
@@ -30,6 +31,7 @@ const Index = styled.nav`
 
 const TwitterLogo = styled.img`
   min-height: 17px;
+  cursor: pointer;
 `;
 
 const Actions = styled.div`
@@ -57,6 +59,10 @@ const Avatar = styled.img`
   border-radius: 100px;
 `;
 
+const Tweet = styled(Button)`
+  margin-left: 15px;
+`;
+
 const BreadCrumbs = styled.ul`
   display: flex;
   align-items: center;
@@ -72,30 +78,26 @@ export default () => (
     <div className="container">
       <Index>
         <BreadCrumbs>
-          <Navigation to="/" src={iconHome} alt="home page">
-            Home
-          </Navigation>
-          <Navigation to="/moments" src={iconMoments} alt="moments page">
-            Moments
-          </Navigation>
+          <Navigation to="/" src={iconHome} text="Home" />
+          <Navigation to="/moments" src={iconMoment} text="Moments" />
           <Navigation
             to="/notifications"
-            src={iconNotifications}
-            alt="notifications page"
-          >
-            Notifications
-          </Navigation>
-          <Navigation to="/messages" src={iconMessages} alt="messages page">
-            Messages
-          </Navigation>
+            src={iconNotification}
+            text="Notification"
+          />
+          <Navigation to="/messages" src={iconMessage} text="Messages" />
         </BreadCrumbs>
-        <TwitterLogo alt="Twitter logo" src={twitterLogo} />
+        <TwitterLogo
+          alt="Twitter logo"
+          src={twitterLogo}
+          onClick={() => scroll.scrollToTop()}
+        />
         <Actions>
           <Search />
-          <AvatarLink to="/EveryInteract">
+          <AvatarLink to="/">
             <Avatar src="/img/small-avatar.png" />
           </AvatarLink>
-          <Button>Tweet</Button>
+          <Tweet>Tweet</Tweet>
         </Actions>
       </Index>
     </div>

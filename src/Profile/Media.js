@@ -1,8 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import iconMedia from './media.svg';
-import Title from './Title';
+import React, { Component } from "react";
+import styled from "styled-components";
+import styledMap from "styled-map";
+import { PortalWithState } from "react-portal";
+import Title from "./Title";
+import { api, token } from "../utils";
+import iconMedia from "./icons/media.svg";
 
 const Content = styled.div`
   display: flex;
@@ -19,78 +21,148 @@ const MediaBox = styled.ul`
   padding: 0;
 `;
 
-const Media = styled.li`
+const MediaSt = styled.li`
   list-style: none;
   padding: 0;
   margin: 5px 0 0 5px;
+  cursor: pointer;
 `;
 
-const MediaLink = styled(Link)``;
-
 const Image = styled.img`
-  width: 83px;
+  width: ${styledMap({
+    increasedSize: "50%",
+    default: "83px"
+  })};
   background-color: #66757f;
   border-radius: 4px;
+  user-select: none;
 
   &:hover {
     box-shadow: 0 1px 2px 0 black;
   }
 `;
 
-export default () => (
-  <Content>
-    <Title to="/media" src={iconMedia} alt="media icon">
-      522 Photos and videos
-    </Title>
-    <MediaBox>
-      <Media>
-        <MediaLink to="/media1">
-          <Image
-            src={`${process.env.PUBLIC_URL}/img/media-1.png`}
-            alt="media"
-          />
-        </MediaLink>
-      </Media>
-      <Media>
-        <MediaLink to="/media2">
-          <Image
-            src={`${process.env.PUBLIC_URL}/img/media-2.png`}
-            alt="media"
-          />
-        </MediaLink>
-      </Media>
-      <Media>
-        <MediaLink to="/media3">
-          <Image
-            src={`${process.env.PUBLIC_URL}/img/media-3.png`}
-            alt="media"
-          />
-        </MediaLink>
-      </Media>
-      <Media>
-        <MediaLink to="/media4">
-          <Image
-            src={`${process.env.PUBLIC_URL}/img/media-4.png`}
-            alt="media"
-          />
-        </MediaLink>
-      </Media>
-      <Media>
-        <MediaLink to="/media5">
-          <Image
-            src={`${process.env.PUBLIC_URL}/img/media-5.png`}
-            alt="media"
-          />
-        </MediaLink>
-      </Media>
-      <Media>
-        <MediaLink to="/media6">
-          <Image
-            src={`${process.env.PUBLIC_URL}/img/media-6.png`}
-            alt="media"
-          />
-        </MediaLink>
-      </Media>
-    </MediaBox>
-  </Content>
-);
+const Modal = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+`;
+
+const ModalContent = styled.div`
+  margin: auto;
+  display: block;
+  width: 80%;
+  text-align: center;
+`;
+
+class Media extends Component {
+  state = {
+    error: false,
+    count: null,
+    data: []
+  };
+
+  componentDidMount() {
+    this.getMediaInfo();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.getMediaInfo();
+    }
+  }
+
+  getMediaInfo = async () => {
+    await fetch(
+      `${api}/accounts/${
+        this.props.match.params.id
+      }/statuses?only_media=yes&access_token=${token}`
+    )
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            data: result,
+            count: 0
+          });
+        },
+        error => {
+          this.setState({
+            error
+          });
+        }
+      );
+
+    this.state.data.map(media =>
+      this.setState(prevState => ({
+        count: prevState.count + media.media_attachments.length
+      }))
+    );
+  };
+
+  render() {
+    const { count, error, data } = this.state;
+    if (error) {
+      return <h3>Can not render Media</h3>;
+    }
+    return (
+      <Content>
+        <Title
+          to={`${this.props.match.url}/media`}
+          src={iconMedia}
+          alt="media icon"
+        >
+          {count} Photos and videos
+        </Title>
+        <MediaBox>
+          {data.map(media => (
+            <React.Fragment key={media.id}>
+              {media.media_attachments.map(attachment => (
+                <React.Fragment key={attachment.id}>
+                  {attachment.id < 9 && (
+                    <MediaSt>
+                      <PortalWithState closeOnOutsideClick closeOnEsc>
+                        {({ openPortal, closePortal, portal }) => (
+                          <React.Fragment>
+                            <Image
+                              src={attachment.preview_url}
+                              alt="media"
+                              onClick={openPortal}
+                            />
+                            {portal(
+                              <Modal onClick={closePortal}>
+                                <ModalContent>
+                                  <Image
+                                    src={attachment.url}
+                                    alt="media"
+                                    onClick={openPortal}
+                                    increasedSize
+                                  />
+                                </ModalContent>
+                              </Modal>
+                            )}
+                          </React.Fragment>
+                        )}
+                      </PortalWithState>
+                    </MediaSt>
+                  )}
+                </React.Fragment>
+              ))}
+            </React.Fragment>
+          ))}
+        </MediaBox>
+      </Content>
+    );
+  }
+}
+
+export default Media;

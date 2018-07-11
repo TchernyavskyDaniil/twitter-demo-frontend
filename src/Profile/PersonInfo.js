@@ -1,8 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import iconCheck from './check.svg';
-import Button from '../UI/Button';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { formatReg } from "../utils";
+import iconCheck from "../Recommendations/icons/check.svg";
+import Button from "../UI/Button";
 
 const Profile = styled.div`
   padding-top: 32px;
@@ -59,14 +60,17 @@ const FollowState = styled.span`
   padding-left: 6px;
 `;
 
-const ProfileBio = styled.p`
-  margin: 0;
-  padding-top: 12px;
+const ProfileBio = styled.div`
+  padding-top: 8px;
   font-size: 14px;
   line-height: 20px;
   color: #14171a;
   padding-bottom: 2px;
   margin-right: 10px;
+
+  p {
+    margin: 0;
+  }
 `;
 
 const ProfileInfo = styled.div`
@@ -95,6 +99,9 @@ const Ref = styled.a`
   line-height: 28px;
   text-decoration: none;
   color: #1da1f2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     text-decoration: underline;
@@ -119,13 +126,11 @@ const Action = styled(Button)`
 `;
 
 export default ({
-  to,
   name,
   verfStatus,
-  toFollow,
-  follow,
+  nickname,
   followStatus,
-  desc,
+  note,
   locAlt,
   locSrc,
   loc,
@@ -134,20 +139,20 @@ export default ({
   website,
   dateAlt,
   dateSrc,
-  date,
+  date
 }) => (
   <Profile>
     <ProfileTitle>
       <Person>
-        <Nickname to={to}>{name}</Nickname>
+        <Nickname to={`${nickname}`}>{name}</Nickname>
         {verfStatus && <Verified alt="Verified user" src={iconCheck} />}
       </Person>
       <Follow>
-        <FollowLink to={toFollow}>{follow}</FollowLink>
+        <FollowLink to={`${nickname}`}>{`@${nickname}`}</FollowLink>
         {followStatus && <FollowState>Follows you</FollowState>}
       </Follow>
     </ProfileTitle>
-    <ProfileBio>{desc}</ProfileBio>
+    <ProfileBio dangerouslySetInnerHTML={{ __html: note }} />
     <ProfileInfo>
       <Info>
         <InfoIcon alt={locAlt} src={locSrc} />
@@ -159,7 +164,7 @@ export default ({
       </Info>
       <Info>
         <InfoIcon alt={dateAlt} src={dateSrc} />
-        <Desc>{date}</Desc>
+        <Desc>{formatReg(date)}</Desc>
       </Info>
       <Actions>
         <Action>Tweet to</Action>

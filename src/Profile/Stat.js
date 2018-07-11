@@ -1,16 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-
-const Info = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 44px;
-  min-width: 75px;
-  cursor: pointer;
-`;
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const Text = styled.span`
   font-size: 12px;
@@ -52,11 +42,21 @@ const InfoLink = styled(NavLink)`
   }
 `;
 
-export default ({ link, text, count }) => (
-  <Info>
-    <InfoLink to={link} activeClassName="active" exact>
-      <Text>{text}</Text>
-      <Sub>{count}</Sub>
+const Stat = styled.li`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  min-width: 75px;
+  cursor: pointer;
+`;
+
+export default props => (
+  <Stat>
+    <InfoLink to={`${props.url}${props.to}`} isActive={props.active}>
+      <Text>{props.text}</Text>
+      <Sub>{props.count}</Sub>
     </InfoLink>
-  </Info>
+  </Stat>
 );
