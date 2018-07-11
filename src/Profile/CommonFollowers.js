@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { api, token } from "../utils";
 import iconFollower from "./icons/follower.svg";
 import Title from "./Title";
 
@@ -10,12 +11,12 @@ const Common = styled.div`
   margin-bottom: 25px;
 `;
 
-const Followers = styled.ul`
+const FollowerList = styled.ul`
   margin: -8px 0 0 -8px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0;
 `;
 
@@ -25,7 +26,7 @@ const Follower = styled.li`
 `;
 
 const Avatar = styled.img`
-  width: 48px;
+  width: 49px;
   background-color: #66757f;
 
   &:hover {
@@ -35,62 +36,77 @@ const Avatar = styled.img`
 
 const StLink = styled(Link)``;
 
-const publicUrl = process.env.PUBLIC_URL;
+class Followers extends Component {
+  state = {
+    error: false,
+    followers: []
+  };
 
-const users = [
-  {
-    id: 1,
-    name: "/mirhasanjamil75",
-    src: `${publicUrl}/img/avatar-person-1.png`
-  },
-  {
-    id: 2,
-    name: "/alexdown",
-    src: `${publicUrl}/img/avatar-person-2.png`
-  },
-  {
-    id: 3,
-    name: "/TerryCoopey",
-    src: `${publicUrl}/img/avatar-person-3.png`
-  },
-  {
-    id: 4,
-    name: "/NiamhKeaneB_ID",
-    src: `${publicUrl}/img/avatar-person-4.png`
-  },
-  {
-    id: 5,
-    name: "/venglarcik",
-    src: `${publicUrl}/img/avatar-person-5.png`
-  },
-  {
-    id: 6,
-    name: "/katzedsgn",
-    src: `${publicUrl}/img/avatar-person-6.png`
+  componentDidMount() {
+    this.getCommonFollowers();
   }
-];
 
-export default ({ match }) => (
-  <Common>
-    <Title
-      to={`${match.url}/common-followers`}
-      src={iconFollower}
-      alt="follower icon"
-    >
-      {users.length} Followers you now
-    </Title>
-    <Followers>
-      {users.map(user => (
-        <React.Fragment key={user.id}>
-          {user.id <= 10 && (
-            <Follower>
-              <StLink to={user.name}>
-                <Avatar src={user.src} alt={`avatar ${user.name.slice(1)}`} />
-              </StLink>
-            </Follower>
-          )}
-        </React.Fragment>
-      ))}
-    </Followers>
-  </Common>
-);
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.getCommonFollowers();
+    }
+  }
+
+  getCommonFollowers = () => {
+    fetch(
+      `${api}/accounts/${
+        this.props.match.params.id
+      }/followers?access_token=${token}`
+    )
+      .then(res => res.json())
+      .then(
+        followers => {
+          this.setState({
+            followers
+          });
+        },
+        error => {
+          this.setState({
+            error
+          });
+        }
+      );
+  };
+
+  render() {
+    const { followers, error } = this.state;
+    if (error) {
+      return <h3>Error: {error.message}. Can not load Common Followers.</h3>;
+    }
+
+    return (
+      <Common>
+        <Title
+          to={`${this.props.match.url}/followers`}
+          src={iconFollower}
+          alt="follower icon"
+        >
+          {followers.length} Followers you now
+        </Title>
+        <FollowerList>
+          {followers.map(follower => (
+            <React.Fragment key={follower.id}>
+              {followers.length <= 10 && (
+                <Follower>
+                  <StLink to={`/${follower.id}`}>
+                    <Avatar
+                      src={follower.avatar_static}
+                      alt={`avatar ${follower.username}`}
+                    />
+                  </StLink>
+                </Follower>
+              )}
+            </React.Fragment>
+          ))}
+        </FollowerList>
+      </Common>
+    );
+  }
+}
+
+export default Followers;

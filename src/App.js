@@ -23,8 +23,8 @@ export default () => (
         <Route exact path="/ads" component={TemplatePage} />
         <Route exact path="/search" component={TemplatePage} />
         <Route exact path="/error" component={TemplatePage} />
-        <Route path="/:user" component={Profile} />
-        <Redirect exact from="/" to="/EveryInteract" />
+        <Route path="/:id" component={Profile} />
+        <Redirect exact from="/" to="/1" />
       </Switch>
     </React.Fragment>
   </BrowserRouter>

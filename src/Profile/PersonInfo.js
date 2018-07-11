@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { formatReg } from "../utils";
 import iconCheck from "../Recommendations/icons/check.svg";
 import Button from "../UI/Button";
 
@@ -59,14 +60,17 @@ const FollowState = styled.span`
   padding-left: 6px;
 `;
 
-const ProfileBio = styled.p`
-  margin: 0;
-  padding-top: 12px;
+const ProfileBio = styled.div`
+  padding-top: 8px;
   font-size: 14px;
   line-height: 20px;
   color: #14171a;
   padding-bottom: 2px;
   margin-right: 10px;
+
+  p {
+    margin: 0;
+  }
 `;
 
 const ProfileInfo = styled.div`
@@ -95,6 +99,9 @@ const Ref = styled.a`
   line-height: 28px;
   text-decoration: none;
   color: #1da1f2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     text-decoration: underline;
@@ -123,7 +130,7 @@ export default ({
   verfStatus,
   nickname,
   followStatus,
-  desc,
+  note,
   locAlt,
   locSrc,
   loc,
@@ -145,7 +152,7 @@ export default ({
         {followStatus && <FollowState>Follows you</FollowState>}
       </Follow>
     </ProfileTitle>
-    <ProfileBio>{desc}</ProfileBio>
+    <ProfileBio dangerouslySetInnerHTML={{ __html: note }} />
     <ProfileInfo>
       <Info>
         <InfoIcon alt={locAlt} src={locSrc} />
@@ -157,7 +164,7 @@ export default ({
       </Info>
       <Info>
         <InfoIcon alt={dateAlt} src={dateSrc} />
-        <Desc>{date}</Desc>
+        <Desc>{formatReg(date)}</Desc>
       </Info>
       <Actions>
         <Action>Tweet to</Action>

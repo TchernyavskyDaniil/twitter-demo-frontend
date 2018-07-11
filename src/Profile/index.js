@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import { Route, Redirect, Switch } from "react-router-dom";
 import styled from "styled-components";
@@ -10,7 +10,8 @@ import Trends from "../Trends";
 import CommonFollowers from "./CommonFollowers";
 import Media from "./Media";
 import Supports from "../Supports";
-import { findUser } from "../utils";
+import Users from "./Users";
+import { api, token } from "../utils";
 import iconLocation from "./icons/location.svg";
 import iconWeb from "./icons/web.svg";
 import iconReg from "./icons/reg.svg";
@@ -39,84 +40,148 @@ const Sidebar = styled.div`
   background-color: white;
   padding: 12px;
   margin-bottom: 10px;
-  min-height: 290px;
 `;
 
-export default ({ match }) => (
-  <main>
-    <Helmet>
-      <title>
-        {findUser(match.params.user, "name")} (@{match.params.user})
-      </title>
-    </Helmet>
-    {match.params.user !== findUser(match.params.user, "username") ? (
-      <Redirect to="/error" />
-    ) : (
-      <React.Fragment>
-        <Header />
-        <Container>
-          <div className="container">
-            <Info>
-              <ProfileSideBar>
-                <Person>
-                  <PersonInfo
-                    name={findUser(match.params.user, "name")}
-                    verfStatus
-                    nickname={match.params.user}
-                    followStatus
-                    desc="UX Design studio focussed problem solving creativity. Design to us is how can we make things *work* amazing."
-                    locAlt="Location"
-                    locSrc={iconLocation}
-                    loc="London, UK"
-                    refAlt="Main WebSite"
-                    refSrc={iconWeb}
-                    website="https://everyinteraction.com"
-                    dateAlt="Date registration"
-                    dateSrc={iconReg}
-                    date="May 2008"
-                  />
-                </Person>
-                <Route component={CommonFollowers} />
-                <Route component={Media} />
-              </ProfileSideBar>
-              <div className="col-xs-6">
+class Profile extends Component {
+  state = {
+    error: null,
+    isLoaded: false,
+    userInfo: []
+  };
+
+  componentDidMount() {
+    this.getUserInfo();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.getUserInfo();
+    }
+  }
+
+  getUserInfo = () => {
+    fetch(`${api}/accounts/${this.props.match.params.id}?access_token=${token}`)
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            isLoaded: true,
+            userInfo: result
+          });
+        },
+        err => {
+          this.setState({
+            isLoaded: false,
+            error: err
+          });
+        }
+      );
+  };
+
+  render() {
+    const { error, isLoaded, userInfo } = this.state;
+    if (error || userInfo.error) {
+      return <Redirect to="/error" />;
+    } else if (!isLoaded) {
+      return <h3>Loading ...</h3>;
+    }
+
+    return (
+      <main>
+        <Helmet>
+          <title>
+            {userInfo.display_name} (@{userInfo.username})
+          </title>
+        </Helmet>
+        <React.Fragment>
+          <Header
+            background={userInfo.header_static}
+            header={userInfo.avatar_static}
+            followers={userInfo.followers_count}
+            following={userInfo.following_count}
+            tweets={userInfo.statuses_count}
+          />
+          <Container>
+            <div className="container">
+              <Info>
+                <ProfileSideBar>
+                  <Person>
+                    <PersonInfo
+                      name={userInfo.display_name}
+                      verfStatus={false}
+                      nickname={userInfo.username}
+                      followStatus
+                      note={userInfo.note}
+                      locAlt="Location"
+                      locSrc={iconLocation}
+                      loc="London, UK"
+                      refAlt="Main WebSite"
+                      refSrc={iconWeb}
+                      website={userInfo.url}
+                      dateAlt="Date registration"
+                      dateSrc={iconReg}
+                      date={userInfo.created_at}
+                    />
+                  </Person>
+                  <Route component={CommonFollowers} />
+                  <Route component={Media} />
+                </ProfileSideBar>
                 <Switch>
                   <Route
                     exact
-                    path={`${match.url}/following`}
-                    render={() => <h3>This is Following</h3>}
+                    path={`/${userInfo.id}/following`}
+                    render={() => (
+                      <div className="col-xs-9">
+                        <Users id={userInfo.id} type="following" />
+                      </div>
+                    )}
                   />
                   <Route
                     exact
-                    path={`${match.url}/followers`}
-                    render={() => <h3>This is Followers</h3>}
+                    path={`/${userInfo.id}/followers`}
+                    render={() => (
+                      <div className="col-xs-9">
+                        <Users id={userInfo.id} type="followers" />
+                      </div>
+                    )}
                   />
                   <Route
                     exact
-                    path={`${match.url}/likes`}
+                    path={`/${userInfo.id}/likes`}
                     render={() => <h3>This is Likes</h3>}
                   />
                   <Route
                     exact
-                    path={`${match.url}/lists`}
+                    path={`/${userInfo.id}/lists`}
                     render={() => <h3>This is Lists</h3>}
                   />
-                  <Route path={`${match.url}`} component={Feeds} />
+                  <Route
+                    path={`/${userInfo.id}`}
+                    render={() => (
+                      <React.Fragment>
+                        <div className="col-xs-6">
+                          <Feeds />
+                        </div>
+                        <div className="col-xs-3">
+                          <Sidebar>
+                            <Recommendations userId={userInfo.id} />
+                          </Sidebar>
+                          <Sidebar>
+                            <Trends />
+                          </Sidebar>
+                          <Supports />
+                        </div>
+                      </React.Fragment>
+                    )}
+                  />
                 </Switch>
-              </div>
-              <div className="col-xs-3">
-                <Sidebar>
-                  <Recommendations />
-                </Sidebar>
-                <Sidebar>
-                  <Trends />
-                </Sidebar>
-                <Supports />
-              </div>
-            </Info>
-          </div>
-        </Container>
-      </React.Fragment>
-    )}
-  </main>
-);
+              </Info>
+            </div>
+          </Container>
+        </React.Fragment>
+      </main>
+    );
+  }
+}
+
+export default Profile;

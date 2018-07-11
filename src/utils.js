@@ -1,13 +1,7 @@
 import numbro from "numbro";
-import users from "./users";
-
-export const findUser = (user, param) => {
-  try {
-    return users.find(obj => obj.username === user)[param];
-  } catch (e) {
-    return "Invalid URL";
-  }
-};
+import distanceInWordsToNow from "date-fns/distance_in_words_to_now";
+import format from "date-fns/format";
+import enLocale from "date-fns/locale/en";
 
 export const formattedTweet = tweet => {
   const longTweet = {
@@ -25,3 +19,16 @@ export const formattedTweet = tweet => {
 
   return numbro(tweet).format({ thousandSeparated: true });
 };
+
+export const formatDate = type =>
+  distanceInWordsToNow(
+    new Date(type),
+    { addSuffix: true },
+    { locale: enLocale }
+  );
+
+export const formatReg = type =>
+  format(new Date(type), "Do MMMM YYYY", { locale: enLocale });
+
+export const api = "https://twitter-demo.erodionov.ru/api/v1";
+export const token = process.env.REACT_APP_KEY;
